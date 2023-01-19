@@ -1,9 +1,9 @@
 CREATE DATABASE [Marketplace]
  CONTAINMENT = NONE
  ON  PRIMARY 
-( NAME = N'Marketplace_DB', FILENAME = N'..\Marketplace\Marketplace-Database\Marketplace-Data.mdf' , SIZE = 65536KB , FILEGROWTH = 65536KB )
+( NAME = N'Marketplace_DB', FILENAME = N'C:\project\Marketplace\MarketPlace-Database\Marketplace-Data.mdf' , SIZE = 65536KB , FILEGROWTH = 65536KB )
  LOG ON 
-( NAME = N'Marketplace_LOG', FILENAME = N'..\Marketplace\Marketplace-Database\Marketplace-Logs.ldf' , SIZE = 65536KB , FILEGROWTH = 65536KB )
+( NAME = N'Marketplace_LOG', FILENAME = N'C:\project\Marketplace\MarketPlace-Database\Marketplace-Logs.ldf' , SIZE = 65536KB , FILEGROWTH = 65536KB )
 GO
 ALTER DATABASE [Marketplace] SET COMPATIBILITY_LEVEL = 150
 GO
