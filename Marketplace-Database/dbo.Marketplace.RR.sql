@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE [dbo].[RR](
 	[RRNumber] [varchar](12) NOT NULL,
-	[Status] [varchar](6) NOT NULL,
+	[Status] [tinyint] NOT NULL,
 	[Proficiency] [varchar](25) NOT NULL,
 	[AccountName] [varchar](25) NOT NULL,
 	[ProjectName] [varchar](50) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[RR](
 	[ClientInterview] [bit] NOT NULL,
 	[MinimumExp] [int] NOT NULL,
 	[TaggedEmployee] [varchar](50) NOT NULL,
-	[Closing Remarks] [text] NOT NULL,
+	[ClosingRemarks] [text] NOT NULL,
  CONSTRAINT [PK_RR] PRIMARY KEY CLUSTERED 
 (
 	[RRNumber] ASC
