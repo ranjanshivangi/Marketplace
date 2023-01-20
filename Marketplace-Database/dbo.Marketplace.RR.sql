@@ -21,7 +21,7 @@ CREATE TABLE [dbo].[RR](
 	[ClientInterview] [bit] NOT NULL,
 	[MinimumExp] [int] NOT NULL,
 	[TaggedEmployee] [varchar](50) NOT NULL,
-	[Closing Remarks] [text] NOT NULL,
+	[ClosingRemarks] [text] NOT NULL,
  CONSTRAINT [PK_RR] PRIMARY KEY CLUSTERED 
 (
 	[RRNumber] ASC
