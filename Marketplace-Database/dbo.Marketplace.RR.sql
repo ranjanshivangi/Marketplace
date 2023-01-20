@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE [dbo].[RR](
 	[RRNumber] [varchar](12) NOT NULL,
-	[Status] [varchar](6) NOT NULL,
+	[Status] [tinyint] NOT NULL,
 	[Proficiency] [varchar](25) NOT NULL,
 	[AccountName] [varchar](25) NOT NULL,
 	[ProjectName] [varchar](50) NOT NULL,
