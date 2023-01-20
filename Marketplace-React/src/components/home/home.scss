@@ -1,0 +1,60 @@
+.jobpage{
+    width: 1600px;
+    height: 100vh;
+    background-color: #fafafa;
+    padding-top: 50px;
+    .jobs{
+        display: flex;
+        .menu{
+            border: 3px solid #e0e0e0;
+            width: 250px;
+            height: 320px; 
+            border-radius: 10px;
+            background-color: white;
+            margin-left: 9%;
+            padding: 1%;
+            .iconcss{
+                display: flex;
+                margin-bottom: 11%;
+            }
+            .icontext{
+                font-size: 22px;
+                display: flex;
+                align-items: center;
+                margin-left: 4%;
+                color: #616161;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+        .jobcontainer{
+            border: 3px solid #e0e0e0;
+            width: 400px;
+            height: auto; 
+            margin-left: 6%;
+            border-radius: 10px;
+            padding-left: 1.5%;
+            padding-top: 1.5%;
+            background-color: white;
+            .jobtitle{
+                color: #03286d;
+                font-size: 25px;
+                margin-bottom: 5px;
+            }
+            .accountName{
+                font-size: 18px;
+                margin-bottom: 2px;
+            }
+            .workLocation{
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+            .experience{
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+            }
+                
+    }
+}
+
+

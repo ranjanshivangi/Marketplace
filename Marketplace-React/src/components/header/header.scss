@@ -1,0 +1,33 @@
+.head{
+    width: auto;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    .logo{
+        height: 35px;
+    margin-left: 10%;
+    
+    }
+    .searchbar{
+        width: 350px;
+        height: 38px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        margin-left: 2%;
+        border-style: solid;
+        border-radius: 20px;
+        border-color: #e0e0e0;
+        #search{
+            outline: none;
+            border: 0px;
+            width:300px;
+            height: 30px;
+            font-size: 20px;
+        }
+
+    }
+}
