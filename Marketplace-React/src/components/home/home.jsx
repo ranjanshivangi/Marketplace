@@ -37,12 +37,9 @@ const Home = () => {
           </div>
         </Card>
         <Card className="jobcontainer">
-          {homejson.map((data) => {
+          {homejson.map((data) => {            
             return <div>
-              <Link to={{
-                pathname: `/view/${data.jdid}`,
-                state: { data }
-              }} >
+              <Link to={`/view/${data.jdid}`} state={{jobDetails: data}}>
                 <div className="jobtitle"> {data.JobTitle}</div>
               </Link>
               <div className="accountName">{data.AccountName}</div>

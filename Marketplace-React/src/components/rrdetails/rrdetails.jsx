@@ -10,19 +10,16 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
-import { useLocation } from "react-router-dom";
 
-const RRDetails = () => {
-    const data = useLocation().state;
-  
+const RRDetails = ({ jobDetails }) => {
     return (
         <Card className="rr">
             <CardContent>
                 <Typography variant="h5" component="div">
-                    {data.JobTitle}
+                    {jobDetails.JobTitle}
                 </Typography>
                 <Typography color="text.secondary" variant="p" className="text">
-                Chargebee . Bangalore, India . 1 day ago . 12 applicants
+                    Chargebee . Bangalore, India . 1 day ago . 12 applicants
                 </Typography>
                 <Typography className="rrfieldsbox">
                     <div className="rrfields">
@@ -30,19 +27,19 @@ const RRDetails = () => {
                         <div className="text2">RR/1492/2022</div>
                     </div>
                     <div className="rrfields">
-                        <CalendarMonthIcon style={{ color: 'gray' }}/>
+                        <CalendarMonthIcon style={{ color: 'gray' }} />
                         <div className="text2">Product Engineering</div>
                     </div>
                     <div className="rrfields">
-                        <PeopleIcon style={{ color: 'gray' }}/>
+                        <PeopleIcon style={{ color: 'gray' }} />
                         <div className="text2">Payer</div>
                     </div>
                     <div className="rrfields">
-                        <BusinessCenterIcon style={{ color: 'gray' }}/>
+                        <BusinessCenterIcon style={{ color: 'gray' }} />
                         <div className="text2">Exp: 4+</div>
                     </div>
                     <div className="rrfields">
-                        <PeopleIcon style={{ color: 'gray' }}/>
+                        <PeopleIcon style={{ color: 'gray' }} />
                         <div className="text2">26-Sept-2022</div>
                     </div>
                     <div className="rrfields">

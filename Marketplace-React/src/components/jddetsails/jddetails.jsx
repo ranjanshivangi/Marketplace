@@ -4,11 +4,8 @@ import jd from '../data/jd.json';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { useLocation } from "react-router-dom";
 
-const JDDetails = () => {
-    const data = useLocation().state;
-
+const JDDetails = ({ jobDetails }) => {
     return (
         <Card className="jd">
             <CardContent>
@@ -17,23 +14,23 @@ const JDDetails = () => {
                 </Typography>
                 <h5>WHO ARE WE</h5>
                 <Typography color="text.secondary" variant="p" className="text">
-                    {data.about}
+                    {jobDetails.about}
                 </Typography>
                 <h5>JOB SUMMARY</h5>
                 <Typography color="text.secondary" variant="p" className="text">
-                    {data.jobSummary}
+                    {jobDetails.jobSummary}
                 </Typography>
                 <h5>ROLES AND RESPONSIBILITIES</h5>
                 <Typography color="text.secondary" variant="p" className="text">
-                    {data.rolesandResponsiblities}
+                    {jobDetails.rolesandResponsiblities}
                 </Typography>
                 <h5>MUST HAVE SKILLS</h5>
                 <Typography color="text.secondary" variant="p" className="text">
-                    {data.mustHaveSkills}
+                    {jobDetails.mustHaveSkills}
                 </Typography>
                 <h5>GOOD TO HAVE SKILLS</h5>
                 <Typography color="text.secondary" variant="p" className="text">
-                    {data.nicetohaveSkills}
+                    {jobDetails.nicetohaveSkills}
                 </Typography>
             </CardContent>
         </Card>
