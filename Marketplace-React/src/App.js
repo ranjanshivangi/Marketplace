@@ -6,14 +6,13 @@ import {
   Route
 } from "react-router-dom"
 import Dashboard from './pages/Dashboard/dashboard.jsx';
-
 function App() {
   return (
     <div>
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard/>}></Route>
-          <Route path="/view" element={<JobDescription/>}></Route>
+          <Route path="/view/:type" element={<JobDescription/>}></Route>
         </Routes>
       </Router>
     </div>

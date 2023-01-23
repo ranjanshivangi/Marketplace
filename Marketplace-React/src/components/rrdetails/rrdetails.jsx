@@ -10,13 +10,16 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PeopleIcon from '@mui/icons-material/People';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined';
+import { useLocation } from "react-router-dom";
 
 const RRDetails = () => {
+    const data = useLocation().state;
+  
     return (
         <Card className="rr">
             <CardContent>
                 <Typography variant="h5" component="div">
-                    Senior Software Engineer
+                    {data.JobTitle}
                 </Typography>
                 <Typography color="text.secondary" variant="p" className="text">
                 Chargebee . Bangalore, India . 1 day ago . 12 applicants
