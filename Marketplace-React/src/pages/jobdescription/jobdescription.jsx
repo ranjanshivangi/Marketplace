@@ -4,6 +4,7 @@ import RRDetails from "../../components/rrdetails/rrdetails";
 import JDDetails from "../../components/jddetsails/jddetails";
 
 
+
 const JobDescription = () => {
 return (
     <div className="container">    
