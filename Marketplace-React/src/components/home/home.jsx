@@ -1,6 +1,7 @@
 import React from "react";
 import homejson from './home.json'
 import './home.scss';
+import { Link } from "@mui/material";
 import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import FeedIcon from '@mui/icons-material/Feed';
@@ -38,7 +39,10 @@ const Home = () => {
         <Card className="jobcontainer">
           {homejson.map((data) => {
             return <div>
+              {/* <div className="jobtitle"> {data.JobTitle}</div> */}
+              <Link href="/view" underline="hover">
               <div className="jobtitle"> {data.JobTitle}</div>
+              </Link>
               <div className="accountName">{data.AccountName}</div>
               <div className="workLocation">Location :- {data.WorkLocation}</div>
               <div className="experience">Experience :-{data.Experience} Years+</div>
