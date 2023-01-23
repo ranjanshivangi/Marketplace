@@ -3,13 +3,14 @@ import '../jobdescription/jobdescription.scss';
 import RRDetails from "../../components/rrdetails/rrdetails";
 import JDDetails from "../../components/jddetsails/jddetails";
 import Header from "../../components/header/header";
+import { useLocation } from "react-router-dom";
 
 const JobDescription = () => {
     return (
         <div className="container">
             <Header />
-            <RRDetails />
-            <JDDetails />
+            <RRDetails/>
+            <JDDetails/>
         </div>
     )
 }
