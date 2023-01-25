@@ -1,31 +1,63 @@
-.head {
-  width: 100%;
-  height: 70px;
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 1px solid #e0e0e0;
-  .logo {
-    height: 35px;
-    margin-left: 10%;
-  }
-  .searchbar {
-    width: 350px;
-    height: 38px;
+.header{    
+    height: 8vh;
+    width: 100vw;    
     background-color: white;
-    display: flex;
-    align-items: center;
-    margin-left: 2%;
-    border-style: solid;
-    border-radius: 20px;
-    border-color: #e0e0e0;
-    #search {
-      outline: none;
-      border: 0px;
-      width: 300px;
-      height: 30px;
-      font-size: 20px;
-    }
-  }
 }
+.toolbar{    
+    background-color: white;
+    width: 100%; 
+           
+}
+.logo{
+    height: 45%;   
+    margin-left: 13rem; 
+}
+.searchbox {
+    border: 2px solid whitesmoke;
+    height: 60%;
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;  
+    border-radius: 5px;
+    margin-left: 3rem;
+  }
+  
+  .searchbutton {
+    width: 10%;
+    height: 90%;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+  
+  .searchfield {
+    width: 85%;
+    border: none;
+    height: 70%;
+    border: none;
+    outline: none;
+    background-color: white;
+  
+  }
+
+  .iconsbox{   
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5rem;
+  }
+  .icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .iconstext{
+    color: black;
+    font-size:small;
+  }
+  

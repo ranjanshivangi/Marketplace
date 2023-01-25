@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Dashboard/>}></Route>
-          <Route path="/view/:id" element={<JobDescription/>}></Route>
+          <Route path="view/:id" element={<JobDescription/>}></Route>
           <Route path="/employees/" element={<Employees/>}></Route>
         </Routes>
       </Router>

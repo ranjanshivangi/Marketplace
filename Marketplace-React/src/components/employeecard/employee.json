@@ -13,7 +13,7 @@
         "employeeID": "INEMP6880",
         "name"  : "Aman Gaur",
         "designation" : "Senior Software Engineer",
-        "imgURL" : "",
+        "imgURL" : "../images/avator/Pic1.jpg",
         "skills" : "Angular, NodeJs",
         "location" : "Noida",
         "status" : "Proposed"

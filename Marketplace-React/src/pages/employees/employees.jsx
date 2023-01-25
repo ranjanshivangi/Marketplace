@@ -1,9 +1,10 @@
 import React from "react";
 import '../employees/employees.scss';
+// import Header from "../../components/header/header";
 import Header from "../../components/header/header";
 import Grid from '@mui/material/Grid';
-import employeejson from "../../components/employee/employee.json";
-import EmployeeCard from "../../components/employee/employeecard";
+import employeejson from "../../components/employeecard/employee.json";
+import EmployeeCard from "../../components/employeecard/employeecard";
 
 const Employees = () => {
     return (
@@ -13,11 +14,10 @@ const Employees = () => {
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
-                style={{ width: '70%', marginTop: '1rem', padding: '.5rem' }}>                
+                style={{ width: '70%', marginTop: '5rem', padding: '.5rem' }}>                
                 {
-                    employeejson.map((emp) => (
-                        
-                        <Grid item xs={3} className="employeebox">
+                    employeejson.map((emp) => (                        
+                        <Grid item xs={12} sm={6} md={4} lg={3} className="employeebox" >
                             <EmployeeCard employeeObj={emp}/>                        
                         </Grid>
                     ))

@@ -1,5 +1,5 @@
 import React from "react";
-import '../employee/employeecard.scss';
+import './employeecard.scss';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/CardContent';
@@ -34,7 +34,8 @@ const EmployeeCard = (props) => {
                 </Typography>
             </CardContent>
             <CardActions >
-                <Button size="medium">Learn More</Button>
+                <Button size="medium">Know More</Button>
+                
             </CardActions>
 
         </Card>

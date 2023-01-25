@@ -5,11 +5,12 @@
   padding-top: 50px;
   .jobs {
     display: flex;
+    margin-top: 4rem;
     .menu {
       width: 17%;
       height: 340px;
       background-color: white;
-      margin-left: 9%;
+      margin-left: 15%;
       .iconcss {
         display: flex;
         margin-bottom: 11%;
@@ -18,7 +19,7 @@
         font-size: 20px;
         display: flex;
         align-items: center;
-        margin-left: 4%;
+        margin-left: 5%;
         color: #616161;
         font-family: Arial, Helvetica, sans-serif;
       }
@@ -26,7 +27,7 @@
     .jobcontainer {
       width: 35%;
       height: auto;
-      margin-left: 3%;
+      margin-left: 4%;
       padding-left: 1%;
       background-color: white;
       .jobtitle {
