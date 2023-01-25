@@ -1,6 +1,5 @@
 import React from "react";
 import './jddetails.scss'
-import jd from '../data/jd.json';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';

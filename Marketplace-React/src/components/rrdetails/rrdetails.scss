@@ -8,22 +8,21 @@
 .text {
   font-size: 14px;
 }
-.rrfieldsbox{
-    //border: 1px solid black;
-    height: 230px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.4rem;    
+.rrfieldsbox {  
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.4rem;
 }
-.rrfields{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
+.rrfields {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
 }
-.text2{
-    color: blue;
-    font-size: 14px;
+.text2 {
+  color: blue;
+  font-size: 14px;
 }
