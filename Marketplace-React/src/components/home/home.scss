@@ -30,6 +30,13 @@
       margin-left: 4%;
       padding-left: 1%;
       background-color: white;
+
+      .link {
+        color: white;
+        :hover {
+          color: #00f;
+        }
+      }
       .jobtitle {
         margin-top: 1%;
         color: #03286d;

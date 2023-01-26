@@ -44,7 +44,7 @@ const Home = () => {
           <CardContent>
             {homejson.map((data) => {
               return <div>
-                <Link to={`view/${data.jdid}`} state={{ jobDetails: data }} >
+                <Link to={`view/${data.jdid}`} state={{ jobDetails: data }} className="link">
                   <div className="jobtitle"> {data.JobTitle}</div>
                 </Link>
                 <div className="accountName">{data.AccountName}</div>
