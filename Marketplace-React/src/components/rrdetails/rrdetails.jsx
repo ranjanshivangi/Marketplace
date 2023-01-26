@@ -19,7 +19,7 @@ const RRDetails = ({ jobDetails }) => {
                     {jobDetails.JobTitle}
                 </Typography>
                 <Typography color="text.secondary" variant="p" className="text">
-                {jobDetails.AccountName} . Bangalore, India . 1 day ago . 12 applicants
+                    {jobDetails.AccountName} . Bangalore, India . 1 day ago . 12 applicants
                 </Typography>
                 <Typography className="rrfieldsbox">
                     <div className="rrfields">

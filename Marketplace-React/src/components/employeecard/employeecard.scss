@@ -8,26 +8,25 @@
   padding: 1.5rem;
   padding-left: 0.8rem;
   gap: 1rem;
-}
-.emp {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.empname {
-  color: #03286d;
-  font-weight: bold;
-  font-size: 18px;
-  //align-self: center;
-}
-.empdesignation {
-  color: gray;
-  font-size: 16px;
- //align-self: center;
+
+  .emp {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .empname {
+      color: #03286d;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .empdesignation {
+      color: gray;
+      font-size: 16px;
+    }
+  }
 }
 .empcontent {
   height: 20%;
 }
-

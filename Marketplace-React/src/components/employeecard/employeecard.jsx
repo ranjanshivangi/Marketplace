@@ -13,7 +13,7 @@ const EmployeeCard = (props) => {
     const img = `${props.employeeObj.imgURL}`;
 
     return (
-        <Card style={{ height: '350px', width: '300px', fontFamily: 'Arial, Helvetica, sans-serif', borderRadius: '10px' }}>
+        <Card sx={{ ':hover': { boxShadow: 10 }, height: '350px', width: '300px', fontFamily: 'Arial, Helvetica, sans-serif', borderRadius: '10px' }}>
             <Box className="cardheader">
                 <Avatar alt={props.employeeObj.name} src={img} sx={{ width: 100, height: 100 }}
                 />
@@ -35,9 +35,7 @@ const EmployeeCard = (props) => {
             </CardContent>
             <CardActions >
                 <Button size="medium">Know More</Button>
-                
             </CardActions>
-
         </Card>
     )
 }

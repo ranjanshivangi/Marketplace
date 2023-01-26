@@ -11,13 +11,13 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
     let navigate = useNavigate();
-    const onClickingHome=()=>{
-       navigate('/');
-    }
-    const onClickingJobs=()=>{
+    const onClickingHome = () => {
         navigate('/');
-     }
-    const onClickingEmployees=()=>{
+    }
+    const onClickingJobs = () => {
+        navigate('/');
+    }
+    const onClickingEmployees = () => {
         navigate('/employees');
     }
     return (
@@ -30,23 +30,23 @@ const Header = () => {
                     </button>
                     <input type="text" className="searchfield" placeholder="Search by skill or designation" />
                 </Box>
-                <Box className="iconsbox">                                       
+                <Box className="iconsbox">
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingHome}>
-                        <HomeIcon htmlColor="grey" fontSize="large" />  
-                        <span className="iconstext">Home</span>                       
-                    </IconButton>      
+                        <HomeIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">Home</span>
+                    </IconButton>
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingJobs}>
-                        <BusinessCenterIcon htmlColor="grey" fontSize="large" />  
-                        <span className="iconstext">Jobs</span>                       
-                    </IconButton>  
+                        <BusinessCenterIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">Jobs</span>
+                    </IconButton>
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingEmployees}>
-                        <PeopleAltIcon htmlColor="grey" fontSize="large" />  
-                        <span className="iconstext">Employees</span>                       
-                    </IconButton> 
+                        <PeopleAltIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">Employees</span>
+                    </IconButton>
                     <IconButton size="medium" color="inherit" className="icon">
-                        <AccountCircle htmlColor="grey" fontSize="large" />  
-                        <span className="iconstext">Me</span>                       
-                    </IconButton>   
+                        <AccountCircle htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">Me</span>
+                    </IconButton>
                 </Box>
             </Toolbar>
         </AppBar>
