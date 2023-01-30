@@ -1,7 +1,7 @@
 USE [Marketplace]
 GO
 
-/****** Object:  Table [dbo].[RR]    Script Date: 30-01-2023 17:42:02 ******/
+/****** Object:  Table [dbo].[RR]    Script Date: 30-01-2023 17:50:34 ******/
 SET ANSI_NULLS ON
 GO
 
