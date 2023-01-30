@@ -37,5 +37,5 @@ public partial class Rr
     public int Jdid { get; set; }
     [JsonIgnore]
     public virtual Job Jd { get; set; } = null!;
-   // public System.Text.Json.Serialization.ReferenceHandler? ReferenceHandler { get; set; }
+  
 }

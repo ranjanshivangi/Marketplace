@@ -24,26 +24,8 @@ namespace Marketplace
                 .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
             builder.Services.AddControllers();
-            /*builder.Services.AddDbContext<JobContext>(opt =>
-            opt.UseInMemoryDatabase("Jobs"));*/
+          
 
-
-
-//for serialization error
-  // builder.Services.AddControllers().AddJsonOptions(options =>
-  // {
- //      options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
- //  }); 
-
-/*     builder.Services.AddControllersWithViews(options =>
- {
-     options.OutputFormatters.RemoveType<SystemTextJsonOutputFormatter>();
-     options.OutputFormatters.Add(new SystemTextJsonOutputFormatter(new JsonSerializerOptions(JsonSerializerDefaults.Web)
-     {
-         ReferenceHandler = ReferenceHandler.Preserve
-     }));
- });
-   */
 
 
 

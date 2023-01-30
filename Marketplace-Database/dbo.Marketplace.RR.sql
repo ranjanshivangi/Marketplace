@@ -1,7 +1,7 @@
 USE [Marketplace]
 GO
 
-/****** Object:  Table [dbo].[RR]    Script Date: 1/19/2023 5:17:40 PM ******/
+/****** Object:  Table [dbo].[RR]    Script Date: 30-01-2023 17:42:02 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -22,11 +22,16 @@ CREATE TABLE [dbo].[RR](
 	[MinimumExp] [int] NOT NULL,
 	[TaggedEmployee] [varchar](50) NOT NULL,
 	[ClosingRemarks] [text] NOT NULL,
+	[JDID] [int] NOT NULL,
  CONSTRAINT [PK_RR] PRIMARY KEY CLUSTERED 
 (
 	[RRNumber] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[RR]  WITH CHECK ADD FOREIGN KEY([JDID])
+REFERENCES [dbo].[Job] ([JDID])
 GO
 
 

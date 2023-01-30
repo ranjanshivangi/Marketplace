@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
+
 using Marketplace.Models;
 
 namespace Marketplace.Controllers
@@ -30,8 +26,7 @@ namespace Marketplace.Controllers
               return NotFound();
           }
             return await _context.Job
-                //.ToListAsync()
-                .AsNoTracking()
+                 .AsNoTracking()
                 .AsQueryable()
                 .Include(m => m.Rrs).ToListAsync(); ;
         }

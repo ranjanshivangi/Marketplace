@@ -25,5 +25,5 @@ public partial class Job
     public int Experience { get; set; }
     
     public virtual ICollection<Rr> Rrs { get; } = new List<Rr>();
-    //public System.Text.Json.Serialization.ReferenceHandler? ReferenceHandler { get; set; }
+    
 }
