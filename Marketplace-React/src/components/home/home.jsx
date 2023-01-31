@@ -10,8 +10,24 @@ import AssignmentTurnedInOutlinedIcon from '@mui/icons-material/AssignmentTurned
 
 import Card from '@mui/material/Card';
 import { CardContent } from "@mui/material";
+import { getAllJobs } from "../../services/jobservice";
 
 const Home = () => {
+  const [jobs, setJobs] = React.useState([]);
+  const getJobs = () => {
+    getAllJobs()
+      .then((res) => {
+        setJobs(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  React.useEffect(() => {
+    getJobs()
+  }, [])
+
   return (
     <div className="jobpage">
       <div className="jobs">
@@ -42,14 +58,16 @@ const Home = () => {
         </Card>
         <Card className="jobcontainer">
           <CardContent>
-            {homejson.map((data) => {
+            {jobs.map((data) => {
               return <div>
-                <Link to={`view/${data.jdid}`} state={{ jobDetails: data }} className="link">
-                  <div className="jobtitle"> {data.JobTitle}</div>
+                <Link to={`view/${data.jdid}`} className="link">
+                  <div className="jobtitle"> {data.jobTitle}</div>
                 </Link>
-                <div className="accountName">{data.AccountName}</div>
-                <div className="workLocation">Location :- {data.WorkLocation}</div>
-                <div className="experience">Experience :-{data.Experience} Years+</div>
+                <div className="accountName">
+                  {data.rrs.map((rr) => <span>{rr.accountName}, </span> )}
+                </div>
+                <div className="workLocation">Location :- {data.rrs.map((rr) => <span>{rr.workLocation}, </span> )}</div>
+                <div className="experience">Experience :-{data.experience} Years+</div>
 
               </div>
             })}
