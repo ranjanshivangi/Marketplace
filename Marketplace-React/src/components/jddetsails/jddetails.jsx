@@ -21,7 +21,7 @@ const JDDetails = ({ jobDetails }) => {
                 </Typography>
                 <h5>ROLES AND RESPONSIBILITIES</h5>
                 <Typography color="text.secondary" variant="p" className="text">
-                    {jobDetails.rolesandResponsiblities}
+                    {jobDetails.rolesandResponsibilities}
                 </Typography>
                 <h5>MUST HAVE SKILLS</h5>
                 <Typography color="text.secondary" variant="p" className="text">
