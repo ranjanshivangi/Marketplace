@@ -11,7 +11,10 @@ import PeopleIcon from '@mui/icons-material/People';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined'
 import QuizIcon from '@mui/icons-material/Quiz';
 
-const RRDetails = ({ jobDetails }) => {    
+const RRDetails = ({ jobDetails }) => {   
+    let clientInterview=new Set();
+    jobDetails.rrs?.map((rr)=>{clientInterview.add(rr.clientInterview)})
+    
     return (
         <Card className="rr">
             <CardContent>
@@ -52,11 +55,15 @@ const RRDetails = ({ jobDetails }) => {
                     </div>
                     <div className="rrfields">
                         <QuizIcon style={{ color: 'gray' }} />
-                        <div className="text2">Client interview? True</div>
+                        <div>ClientInterview</div>
+                        {jobDetails.rrs?.map((rr) =>
+                        <div className="text2">{rr.clientInterview.toString()}</div>
+                        )}
+                       
                     </div>
                     <div className="rrfields">
                         <TrackChangesOutlinedIcon style={{ color: 'green' }} />
-                        <div className="text2">OPEN</div>
+                        <div className="text2">Open</div>
                     </div>
                 </Typography>
             </CardContent>

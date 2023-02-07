@@ -14,6 +14,7 @@ import { getAllJobs } from "../../services/jobservice";
 
 const Home = () => {
   const [jobs, setJobs] = React.useState([]);
+  
   const getJobs = () => {
     getAllJobs()
       .then((res) => {
@@ -59,16 +60,19 @@ const Home = () => {
         <Card className="jobcontainer">
           <CardContent>
             {jobs.map((data) => {
+              let location=[];
+              let accountname=[];
+              data.rrs.map((rr)=>accountname.push(rr.accountName))
+              data.rrs.map((rr)=>location.push(rr.workLocation))
               return <div>
                 <Link to={`view/${data.jdid}`} className="link">
                   <div className="jobtitle"> {data.jobTitle}</div>
                 </Link>
-                <div className="accountName">
-                  {data.rrs.map((rr) => <span>{rr.accountName}, </span> )}
+                <div className="accountName"> 
+                  <div className="workLocation">{accountname.filter((v,i) =>accountname.indexOf(v) === i)+","} </div>
                 </div>
-                <div className="workLocation">Location :- {data.rrs.map((rr) => <span>{rr.workLocation}, </span> )}</div>
+                <div className="workLocation">Location :- {location.filter((v,i) =>location.indexOf(v) === i)+","}</div>
                 <div className="experience">Experience :-{data.experience} Years+</div>
-
               </div>
             })}
           </CardContent>
