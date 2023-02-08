@@ -35,6 +35,7 @@ public partial class Rr
     public string ClosingRemarks { get; set; } = null!;
 
     public int Jdid { get; set; }
+
     [JsonIgnore]
     public virtual Job Jd { get; set; } = null!;
   
