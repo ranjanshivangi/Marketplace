@@ -1,6 +1,5 @@
 import React from "react";
-import '../employees/employees.scss';
-// import Header from "../../components/header/header";
+import './employees.scss';
 import Header from "../../components/header/header";
 import Grid from '@mui/material/Grid';
 import employeejson from "../../components/employeecard/employee.json";

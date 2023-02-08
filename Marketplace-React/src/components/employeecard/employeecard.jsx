@@ -12,6 +12,7 @@ const EmployeeCard = (props) => {
 
     const img = `${props.employeeObj.imgURL}`;
 
+
     return (
         <Card sx={{ ':hover': { boxShadow: 10 }, height: '350px', width: '300px', fontFamily: 'Arial, Helvetica, sans-serif', borderRadius: '10px' }}>
             <Box className="cardheader">
@@ -34,7 +35,7 @@ const EmployeeCard = (props) => {
                 </Typography>
             </CardContent>
             <CardActions >
-                <Button size="medium">Know More</Button>
+                <Button size="medium" >Know More</Button>
             </CardActions>
         </Card>
     )
