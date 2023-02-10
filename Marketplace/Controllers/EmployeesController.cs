@@ -12,55 +12,55 @@ namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RrsController : ControllerBase
+    public class EmployeesController : ControllerBase
     {
         private readonly MarketplaceContext _context;
 
-        public RrsController(MarketplaceContext context)
+        public EmployeesController(MarketplaceContext context)
         {
             _context = context;
         }
 
-        // GET: api/Rrs
+        // GET: api/Employees
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rr>>> GetRr()
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
-          if (_context.Rr == null)
+          if (_context.Employees == null)
           {
               return NotFound();
           }
-            return await _context.Rr.ToListAsync();
+            return await _context.Employees.ToListAsync();
         }
 
-        // GET: api/Rrs/5
+        // GET: api/Employees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Rr>> GetRr(string id)
+        public async Task<ActionResult<Employee>> GetEmployee(string id)
         {
-          if (_context.Rr == null)
+          if (_context.Employees == null)
           {
               return NotFound();
           }
-            var rr = await _context.Rr.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id);
 
-            if (rr == null)
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            return rr;
+            return employee;
         }
 
-        // PUT: api/Rrs/5
+        // PUT: api/Employees/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRr(string id, Rr rr)
+        public async Task<IActionResult> PutEmployee(string id, Employee employee)
         {
-            if (id != rr.Rrnumber)
+            if (id != employee.EmployeeId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(rr).State = EntityState.Modified;
+            _context.Entry(employee).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +68,7 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RrExists(id))
+                if (!EmployeeExists(id))
                 {
                     return NotFound();
                 }
@@ -81,23 +81,23 @@ namespace Marketplace.Controllers
             return NoContent();
         }
 
-        // POST: api/Rrs
+        // POST: api/Employees
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Rr>> PostRr(Rr rr)
+        public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
-          if (_context.Rr == null)
+          if (_context.Employees == null)
           {
-              return Problem("Entity set 'MarketplaceContext.Rr'  is null.");
+              return Problem("Entity set 'MarketplaceContext.Employees'  is null.");
           }
-            _context.Rr.Add(rr);
+            _context.Employees.Add(employee);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (RrExists(rr.Rrnumber))
+                if (EmployeeExists(employee.EmployeeId))
                 {
                     return Conflict();
                 }
@@ -107,32 +107,32 @@ namespace Marketplace.Controllers
                 }
             }
 
-            return CreatedAtAction("GetRr", new { id = rr.Rrnumber }, rr);
+            return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-        // DELETE: api/Rrs/5
+        // DELETE: api/Employees/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRr(string id)
+        public async Task<IActionResult> DeleteEmployee(string id)
         {
-            if (_context.Rr == null)
+            if (_context.Employees == null)
             {
                 return NotFound();
             }
-            var rr = await _context.Rr.FindAsync(id);
-            if (rr == null)
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
             {
                 return NotFound();
             }
 
-            _context.Rr.Remove(rr);
+            _context.Employees.Remove(employee);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool RrExists(string id)
+        private bool EmployeeExists(string id)
         {
-            return (_context.Rr?.Any(e => e.Rrnumber == id)).GetValueOrDefault();
+            return (_context.Employees?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Marketplace.Models
 {
@@ -7,10 +8,8 @@ namespace Marketplace.Models
         [Key]
         public string skillId { get; set; }
         public string SkillName { get; set; }
-        public string Proficiency { get; set; }
-
-        public string LastUsed { get; set; }
-        public string Experience { get; set; }
+                
+        [JsonIgnore]
         public ICollection<EmployeeSkills> EmployeeSkills { get; set; }
     }
 }

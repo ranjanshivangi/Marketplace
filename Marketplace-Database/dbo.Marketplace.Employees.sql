@@ -9,16 +9,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Employees](
-	[EmployeeId] [nvarchar](450) NOT NULL,
-	[Designation] [nvarchar](max) NOT NULL,
-	[CurrentProject] [nvarchar](max) NOT NULL,
-	[CurrentManager] [nvarchar](max) NOT NULL,
-	[Status] [nvarchar](max) NOT NULL,
-	[EmailId] [nvarchar](max) NOT NULL,
-	[PhoneNumber] [nvarchar](max) NOT NULL,
-	[Location] [nvarchar](max) NOT NULL,
-	[About] [nvarchar](max) NOT NULL,
-	[ProfilePicture] [nvarchar](max) NOT NULL,
+	[EmployeeId] [varchar](50) NOT NULL,
+	[Designation] [varchar](50) NOT NULL,
+	[CurrentProject] [varchar](100) NOT NULL,
+	[CurrentManager] [varchar](100) NOT NULL,
+	[Status] [bit] NOT NULL,
+	[EmailId] [varchar](60) NOT NULL,
+	[PhoneNumber] [nvarchar](14) NOT NULL,
+	[Location] [varchar](50) NOT NULL,
+	[About] [varchar](1500) NOT NULL,
+	[ProfilePicture] [varchar](200) NOT NULL,
  CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED 
 (
 	[EmployeeId] ASC

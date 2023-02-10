@@ -1,23 +1,27 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using Marketplace.Data;
 using Marketplace.Models;
 
 namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobController : ControllerBase
+    public class JobsController : ControllerBase
     {
-        private readonly Data.MarketplaceContext _context;
+        private readonly MarketplaceContext _context;
 
-        public JobController(Data.MarketplaceContext context)
+        public JobsController(MarketplaceContext context)
         {
             _context = context;
         }
 
-        // GET: api/Job
+        // GET: api/Jobs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Job>>> GetJob()
         {
@@ -26,12 +30,12 @@ namespace Marketplace.Controllers
               return NotFound();
           }
             return await _context.Job
-                 .AsNoTracking()
-                .AsQueryable()
-                .Include(m => m.Rrs).ToListAsync(); ;
+                .AsNoTracking()
+               .AsQueryable()
+               .Include(m => m.Rrs).ToListAsync(); ;
         }
 
-        // GET: api/Job/5
+        // GET: api/Jobs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Job>> GetJob(int id)
         {
@@ -39,9 +43,6 @@ namespace Marketplace.Controllers
           {
               return NotFound();
           }
-           // var job = await _context.Job
-            //    .FindAsync(id);
-
             var job = await _context.Job
                 .Include(aa => aa.Rrs)
                 .FirstOrDefaultAsync(aa => aa.Jdid == id);
@@ -54,7 +55,7 @@ namespace Marketplace.Controllers
             return job;
         }
 
-        // PUT: api/Job/5
+        // PUT: api/Jobs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutJob(int id, Job job)
@@ -85,7 +86,7 @@ namespace Marketplace.Controllers
             return NoContent();
         }
 
-        // POST: api/Job
+        // POST: api/Jobs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Job>> PostJob(Job job)
@@ -100,7 +101,7 @@ namespace Marketplace.Controllers
             return CreatedAtAction("GetJob", new { id = job.Jdid }, job);
         }
 
-        // DELETE: api/Job/5
+        // DELETE: api/Jobs/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJob(int id)
         {

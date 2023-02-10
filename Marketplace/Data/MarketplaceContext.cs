@@ -65,7 +65,7 @@ namespace Marketplace.Data
                 .WithOne(c => c.Employee);
 
             modelBuilder.Entity<EmployementHistory>()
-                .HasKey(a=>new {a.Company,a.Role,a.Project});
+                .HasKey(a=>new {a.CompanyName,a.Role,a.ProjectName});
 
         }
     }

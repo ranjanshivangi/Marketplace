@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Marketplace.Models
 {
@@ -9,9 +10,8 @@ namespace Marketplace.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CertificationID { get; set; }
         public string CertificationsName { get; set; }
-        public DateTime CertificationsCompletionDate { get; set; }
-        public string CertificationsFrom { get; set; }
-        public string CertificationsType { get; set; }
+       
+        [JsonIgnore]
         public ICollection<EmployeeCertification> EmployeeCertification { get; set; }
     }
 }

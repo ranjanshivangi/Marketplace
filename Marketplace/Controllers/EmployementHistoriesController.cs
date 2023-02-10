@@ -55,7 +55,7 @@ namespace Marketplace.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployementHistory(string id, EmployementHistory employementHistory)
         {
-            if (id != employementHistory.Company)
+            if (id != employementHistory.CompanyName)
             {
                 return BadRequest();
             }
@@ -97,7 +97,7 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EmployementHistoryExists(employementHistory.Company))
+                if (EmployementHistoryExists(employementHistory.CompanyName))
                 {
                     return Conflict();
                 }
@@ -107,7 +107,7 @@ namespace Marketplace.Controllers
                 }
             }
 
-            return CreatedAtAction("GetEmployementHistory", new { id = employementHistory.Company }, employementHistory);
+            return CreatedAtAction("GetEmployementHistory", new { id = employementHistory.CompanyName }, employementHistory);
         }
 
         // DELETE: api/EmployementHistories/5
@@ -132,7 +132,7 @@ namespace Marketplace.Controllers
 
         private bool EmployementHistoryExists(string id)
         {
-            return (_context.EmployementHistories?.Any(e => e.Company == id)).GetValueOrDefault();
+            return (_context.EmployementHistories?.Any(e => e.CompanyName == id)).GetValueOrDefault();
         }
     }
 }
