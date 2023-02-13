@@ -35,7 +35,7 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployeeCertifications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Employeecertification>>> GetEmployeeCertification(string id)
+        public async Task<ActionResult<IEnumerable<EmployeeCertificationDTO>>> GetEmployeeCertification(string id)
         {
           if (_context.EmployeeCertifications == null)
           {
@@ -44,7 +44,7 @@ namespace Marketplace.Controllers
             var data = await (from t1 in _context.EmployeeCertifications
                               join t2 in _context.Certifications on t1.CertificationID equals t2.CertificationID
                               where t1.EmployeeId == id
-                              select new Employeecertification
+                              select new EmployeeCertificationDTO
                               {
                                   CertificationID = t1.CertificationID,
                                   CertificationsName = t2.CertificationsName,

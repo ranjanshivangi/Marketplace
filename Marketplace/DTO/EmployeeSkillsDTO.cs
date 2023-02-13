@@ -1,6 +1,6 @@
 ﻿namespace Marketplace.DTO
 {
-    public class Employeeskills
+    public class EmployeeSkillsDTO
     {
         public string skillId { get; set; }
         public string SkillName { get; set; }
