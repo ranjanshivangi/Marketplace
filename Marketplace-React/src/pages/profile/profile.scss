@@ -1,80 +1,99 @@
-.Profile{
-    border: '5px solid black';
-    width:'80vh';
-    height: 'auto';
-    margin-left: 2%;
-    .prpfilrPic{
-        border-radius: 30%;
-        margin-left: 15%;
-        margin-top: 6%;
-    }
+.profile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  .prpfilrPic {
+    border-radius: 40px;
+    width: 60%;
+    height: 90%;
+  }
 }
-.Name{
-    margin-left: 12%;
-    .name-header{
-        font-weight: bold;
-        font-size: 36px;
-        margin-bottom: 1%;
-    }
-    .des{
-        margin-left: 5%;
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .para-containter{
-    margin-top: -2%;
-    padding-left: 8%;
-    padding-bottom: 1%;
-    .para{
-        display: flex;
-        margin-bottom: -5%;
-        
-    }
-    }
-    
-}
-.p{
-    margin-left: 5%;
-    padding-top: 1%;
-    text-align: end;
-    font-size: 16px;
-}
-.contact{
-    //padding-bottom: 1%;
-    padding-left: 3%;
-    margin-bottom: -5%;
-    .e-logo{
-        width: 80%;
-        margin-top: 5%;
-        margin-bottom: 10%;
-    }
-    .contact-icon-con{
-        margin-top: 2%;
-        display: flex;
-        
-        margin-bottom: -3%;
-        .contact-icon{
-            margin: 1%;
-        }
-       
-    }
-    
-}
-.grid{
-    border: '1px solid black';
-    height: 'auto';
-}
-.tittle{
-    font-size: 18px;
+.Name {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  .name-header {
+    width: 100%;
+    text-align: center;
     font-weight: bold;
-}
-.skilldetail{
-    color: grey;
-    text-align: justify;
-    }
-.about{
-    //border: 1px solid black;
-        text-align: justify;
-        margin-left: -4%;
+    font-size: 36px;   
+  }
+  .des {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .para-containter {
+    width: 40%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    .para {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+      .p1 {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .p2 {
         font-size: 16px;
+      }
     }
+  }
+}
+
+.contact {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  .e-logo {
+    width: 70%;
+    height: 5vh;   
+  }
+  .icon-container{
+    display: flex;
+    padding: 3%;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    .icons{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+    }
+  }
+  
+}
+
+.tittle {
+  font-size: 18px;
+  font-weight: bold;
+}
+.about {
+    text-align: justify;
+    padding: 3%;
+    font-size: 16px;
+  }
+.skilldetail {
+  color: grey;
+  text-align: justify;
+  font-size: 16px;
+}
+

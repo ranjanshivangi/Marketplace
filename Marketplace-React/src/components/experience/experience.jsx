@@ -14,80 +14,45 @@ const Experience = () => {
     const [text] = React.useState("This project is basically a customer managment app in which we can add customers with their respective name, email, city, state and can perform CRUD operation and we can add individual orders for each customers.")
     return (
         <div className="expbox">
-            <h3>EMIDS</h3>
-            <p>02/15-02/23</p>
-            <List disablePadding>
-                <ListItem disablePadding >
-                    <ListItemButton disableGutters alignItems="flex-start">
-                        <ListItemIcon>
-                            <RadioButtonCheckedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Senior Software Engineer"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="div"
-                                        variant="h8"
-                                        color="rgb(24, 24, 145)"
-                                    >
-                                        ERIKA
-                                    </Typography >
-                                   
-                                    {showMore ? text : `${text.substring(0, 100)}`}
-                                    
-                                    <span className="seemore" onClick={() => setShowMore(!showMore)
-                                    }>
-                                        {showMore ? "...see less" : "...see more"}
-                                    </span>
-                                </React.Fragment>
-                            } />
+            <div className="company">Emids</div>
+            <div className="date">02/15-02/23</div>
+            <List dense={true}>
+                <ListItemButton alignItems="flex-start">
+                    <ListItemIcon>
+                        <RadioButtonCheckedIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        primary="Senior Software Engineer"
+                        secondary={<div className="project">
+                            <span className="project-name">Erika</span>
+                            {showMore ? text : `${text.substring(0, 100)}`}
 
-                    </ListItemButton>
-                </ListItem>
-            </List>
-            <List disablePadding>
-                <ListItem disablePadding >
-                    <ListItemButton disableGutters alignItems="flex-start">
-                        <ListItemIcon>
-                            <RadioButtonCheckedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Software Engineer"
-                            secondary={
-                                <React.Fragment>
-                                    <Typography
-                                        component="div"
-                                        variant="body2"
-                                        color="rgb(24, 24, 145)"
-                                    >
-                                        TALENT MARKETPLACE
-                                    </Typography>
-                                    {showMore ? text : `${text.substring(0, 100)}`}
-                                    
-                                    <span className="seemore" onClick={() => setShowMore(!showMore)
-                                    }>
-                                        {showMore ? "...see less" : "...see more"}
-                                    </span>
-                                    <Typography
-                                        component="div"
-                                        variant="body2"
-                                        color="rgb(24, 24, 145)"
-                                    >
-                                        CUSTOMER MANAGEMENT SYSTEM
-                                    </Typography>
-                                    {showMore ? text : `${text.substring(0, 100)}`}
-                                    
-                                    <span className="seemore" onClick={() => setShowMore(!showMore)
-                                    }>
-                                        {showMore ? "...see less" : "...see more"}
-                                    </span>
-                                </React.Fragment>
-                            } />
+                            <span className="seemore" onClick={() => setShowMore(!showMore)
+                            }>
+                                {showMore ? "...see less" : "...see more"}
+                            </span>
+                        </div>} />
+                        
+                </ListItemButton>
+                <ListItemButton alignItems="flex-start">
+                    <ListItemIcon>
+                        <RadioButtonCheckedIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                        primary="Software Engineer"
+                        secondary={<div className="project">
+                           <span className="project-name">Talent Market Place</span>
+                            {showMore ? text : `${text.substring(0, 100)}`}
 
-                    </ListItemButton>
-                </ListItem>
-            </List>
-        </div>
-    )
-
+                            <span className="seemore" onClick={() => setShowMore(!showMore)
+                            }>
+                                {showMore ? "...see less" : "...see more"}
+                            </span>
+                            
+                        </div>} />
+                        
+                </ListItemButton>
+            </List>            
+        </div> )
 }
 export default Experience;

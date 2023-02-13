@@ -3,7 +3,7 @@ import JobDescription from './pages/jobdescription/jobdescription.jsx';
 import Dashboard from './pages/Dashboard/dashboard.jsx';
 import Employees from './pages/employees/employees.jsx';
 import Profile from './pages/profile/profile.jsx';
-import Experience from './components/experience/experience.jsx';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,7 +20,7 @@ function App() {
           <Route path="view/:id" element={<JobDescription/>}></Route>
           <Route path="/employees/" element={<Employees/>}></Route>
           <Route path="/profile/:id" element={<Profile/>}></Route>
-          <Route path="/exp" element={<Experience/>}></Route>
+          
         </Routes>
       </Router>
     </div>
