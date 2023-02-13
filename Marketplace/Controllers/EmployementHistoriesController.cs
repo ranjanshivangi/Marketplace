@@ -34,19 +34,17 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployementHistories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmployementHistory>> GetEmployementHistory(string id)
+        public async Task<ActionResult<IEnumerable<EmployementHistory>>> GetEmployementHistory(string id)
         {
-          if (_context.EmployementHistories == null)
-          {
-              return NotFound();
-          }
-            var employementHistory = await _context.EmployementHistories.FindAsync(id);
-
-            if (employementHistory == null)
+            if (_context.EmployementHistories == null)
             {
                 return NotFound();
             }
-
+            var employementHistory = await _context.EmployementHistories
+            .Where(x => x.EmployeeId == id).ToListAsync(); if (employementHistory == null)
+            {
+                return NotFound();
+            }
             return employementHistory;
         }
 

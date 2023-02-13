@@ -21,6 +21,7 @@ function App() {
           <Route path="view/:id" element={<JobDescription/>}></Route>
           <Route path="/employees/" element={<Employees/>}></Route>
           <Route path="/profile/:id" element={<Profile/>}></Route>
+          
         </Routes>
       </Router>
     </div>
