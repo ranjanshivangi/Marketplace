@@ -13,10 +13,10 @@ const Employees = () => {
                 direction="row"
                 justifyContent="flex-start"
                 alignItems="center"
-                style={{ width: '70%', marginTop: '5rem', padding: '.5rem' }}>                
+                style={{ width: '95%', marginTop: '5rem', padding: '.5rem' }}>                
                 {
                     employeejson.map((emp) => (                        
-                        <Grid item xs={12} sm={6} md={4} lg={3} className="employeebox" >
+                        <Grid item xs={12} sm={6} md={4} lg={2.4} className="employeebox" >
                             <EmployeeCard employeeObj={emp}/>                        
                         </Grid>
                     ))
