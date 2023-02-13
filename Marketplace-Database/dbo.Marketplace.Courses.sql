@@ -1,7 +1,7 @@
 USE [Marketplace]
 GO
 
-/****** Object:  Table [dbo].[Courses]    Script Date: 10-02-2023 20:43:43 ******/
+/****** Object:  Table [dbo].[Courses]    Script Date: 13-02-2023 10:22:09 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,10 +10,7 @@ GO
 
 CREATE TABLE [dbo].[Courses](
 	[CourseID] [int] IDENTITY(1,1) NOT NULL,
-	[CourseName] [nvarchar](max) NOT NULL,
-	[CourseCompletionDate] [datetime2](7) NOT NULL,
-	[CourseFrom] [nvarchar](max) NOT NULL,
-	[CourseType] [nvarchar](max) NOT NULL,
+	[CourseName] [varchar](50) NOT NULL,
  CONSTRAINT [PK_Courses] PRIMARY KEY CLUSTERED 
 (
 	[CourseID] ASC

@@ -1,7 +1,7 @@
 USE [Marketplace]
 GO
 
-/****** Object:  Table [dbo].[Employees]    Script Date: 09-02-2023 10:22:53 ******/
+/****** Object:  Table [dbo].[Employees]    Script Date: 13-02-2023 10:26:57 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,15 +9,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Employees](
-	[EmployeeId] [varchar](50) NOT NULL,
+	[EmployeeId] [varchar](12) NOT NULL,
+	[Name] [varchar](100) NOT NULL,
 	[Designation] [varchar](50) NOT NULL,
-	[CurrentProject] [varchar](100) NOT NULL,
-	[CurrentManager] [varchar](100) NOT NULL,
-	[Status] [bit] NOT NULL,
-	[EmailId] [varchar](60) NOT NULL,
-	[PhoneNumber] [nvarchar](14) NOT NULL,
-	[Location] [varchar](50) NOT NULL,
-	[About] [varchar](1500) NOT NULL,
+	[CurrentProject] [varchar](50) NOT NULL,
+	[CurrentManager] [varchar](50) NOT NULL,
+	[Status] [varchar](12) NOT NULL,
+	[EmailId] [varchar](100) NOT NULL,
+	[PhoneNumber] [bigint] NOT NULL,
+	[Location] [varchar](20) NOT NULL,
+	[About] [varchar](2000) NOT NULL,
 	[ProfilePicture] [varchar](200) NOT NULL,
  CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED 
 (

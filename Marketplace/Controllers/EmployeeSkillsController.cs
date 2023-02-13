@@ -35,7 +35,7 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployeeSkills/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<Employeeskills>>> GetEmployeeSkills(string id)
+        public async Task<ActionResult<IEnumerable<EmployeeSkillsDTO>>> GetEmployeeSkills(string id)
         {
           if (_context.EmployeeSkills == null)
           {
@@ -44,7 +44,7 @@ namespace Marketplace.Controllers
             var data = await (from t1 in _context.EmployeeSkills
                               join t2 in _context.Skills on t1.skillId equals t2.skillId
                               where t1.EmployeeId == id
-                              select new Employeeskills
+                              select new EmployeeSkillsDTO
                               {
                                   skillId = t1.skillId,
                                   SkillName = t2.SkillName,
