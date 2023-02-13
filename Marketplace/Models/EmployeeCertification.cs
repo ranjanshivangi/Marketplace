@@ -6,6 +6,9 @@ namespace Marketplace.Models
     {
         public string EmployeeId { get; set; }
         public int CertificationID { get; set; }
+        public DateTime CertificationsCompletionDate { get; set; }
+        public string CertificationsFrom { get; set; }
+        public string CertificationsType { get; set; }
 
         [JsonIgnore]
         public virtual Employee Employee { get; set; }

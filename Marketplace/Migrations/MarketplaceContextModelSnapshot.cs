@@ -30,18 +30,7 @@ namespace Marketplace.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CertificationID"));
 
-                    b.Property<DateTime>("CertificationsCompletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CertificationsFrom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CertificationsName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CertificationsType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -58,18 +47,7 @@ namespace Marketplace.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseID"));
 
-                    b.Property<DateTime>("CourseCompletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CourseFrom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CourseName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CourseType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -107,9 +85,12 @@ namespace Marketplace.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("PhoneNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ProfilePicture")
                         .IsRequired()
@@ -132,6 +113,17 @@ namespace Marketplace.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CertificationsCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CertificationsFrom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CertificationsType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("CertificationID", "EmployeeId");
 
                     b.HasIndex("EmployeeId");
@@ -146,6 +138,17 @@ namespace Marketplace.Migrations
 
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CourseCompletionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CourseFrom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CourseType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CourseID", "EmployeeId");
 
@@ -162,6 +165,18 @@ namespace Marketplace.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Experience")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastUsed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Proficiency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("skillId", "EmployeeId");
 
                     b.HasIndex("EmployeeId");
@@ -171,13 +186,13 @@ namespace Marketplace.Migrations
 
             modelBuilder.Entity("Marketplace.Models.EmployementHistory", b =>
                 {
-                    b.Property<string>("Company")
+                    b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Project")
+                    b.Property<string>("ProjectName")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
@@ -191,14 +206,13 @@ namespace Marketplace.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("IsCurrent")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsCurrent")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Company", "Role", "Project");
+                    b.HasKey("CompanyName", "Role", "ProjectName");
 
                     b.HasIndex("EmployeeId");
 
@@ -307,18 +321,6 @@ namespace Marketplace.Migrations
                 {
                     b.Property<string>("skillId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Experience")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastUsed")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Proficiency")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SkillName")
                         .IsRequired()
