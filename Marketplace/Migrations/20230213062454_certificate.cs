@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Marketplace.Migrations
 {
     /// <inheritdoc />
-    public partial class Certifications : Migration
+    public partial class certificate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

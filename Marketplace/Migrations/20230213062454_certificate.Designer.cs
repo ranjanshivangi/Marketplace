@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Marketplace.Migrations
 {
     [DbContext(typeof(MarketplaceContext))]
-    [Migration("20230210162144_Certifications")]
-    partial class Certifications
+    [Migration("20230213062454_certificate")]
+    partial class certificate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
