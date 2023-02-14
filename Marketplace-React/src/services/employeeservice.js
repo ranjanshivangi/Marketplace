@@ -20,3 +20,8 @@ export const getEmployeeCertificates = async (id) => {
     let data = await axios.get(`${host}api/EmployeeCertifications/${id}`);
     return data
 }
+
+export const getEmployeeHistory = async (id) => {
+    let data = await axios.get(`${host}api/EmployementHistories/${id}`);
+    return data
+}

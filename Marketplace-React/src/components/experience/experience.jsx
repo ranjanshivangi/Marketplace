@@ -6,53 +6,58 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-import { Typography } from "@mui/material";
+import { getEmployeeHistory } from "../../services/employeeservice";
 
 
-const Experience = () => {
+const Experience = ({ companyName, companyData }) => {
+    console.log("companydata", companyData)
     const [showMore, setShowMore] = React.useState(false);
     const [text] = React.useState("This project is basically a customer managment app in which we can add customers with their respective name, email, city, state and can perform CRUD operation and we can add individual orders for each customers.")
+
+    const uniqueRole = companyData.reduce((acc, cur) => {
+        if (!acc.includes(cur.role)) {
+            acc.push(cur.role);
+        }
+        return acc;
+    }, []);
+    console.log("u", uniqueRole);
     return (
         <div className="expbox">
-            <div className="company">Emids</div>
-            <div className="date">02/15-02/23</div>
-            <List dense={true}>
-                <ListItemButton alignItems="flex-start">
-                    <ListItemIcon>
-                        <RadioButtonCheckedIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                        primary="Senior Software Engineer"
-                        secondary={<div className="project">
-                            <span className="project-name">Erika</span>
-                            {showMore ? text : `${text.substring(0, 100)}`}
+            <div className="company">{companyName}</div>
+            {uniqueRole.map((role) => {
+                const roleDetails = companyData.filter(item => item.role === role);
 
-                            <span className="seemore" onClick={() => setShowMore(!showMore)
-                            }>
-                                {showMore ? "...see less" : "...see more"}
-                            </span>
-                        </div>} />
-                        
-                </ListItemButton>
-                <ListItemButton alignItems="flex-start">
-                    <ListItemIcon>
-                        <RadioButtonCheckedIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                        primary="Software Engineer"
-                        secondary={<div className="project">
-                           <span className="project-name">Talent Market Place</span>
-                            {showMore ? text : `${text.substring(0, 100)}`}
+                console.log("roleD", roleDetails);
+                return <>
+                    <List dense={true}>
+                        <ListItemButton alignItems="flex-start">
+                            <ListItemIcon>
+                                <RadioButtonCheckedIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary={role}
+                                secondary={roleDetails.map((details) => (
+                                    <div className="project">
+                                        <span className="project-name">{details.projectName}</span>
+                                        <span className="date">- 02/15-02/23</span>
+                                        {showMore ? text : `${text.substring(0, 100)}`}
 
-                            <span className="seemore" onClick={() => setShowMore(!showMore)
-                            }>
-                                {showMore ? "...see less" : "...see more"}
-                            </span>
-                            
-                        </div>} />
-                        
-                </ListItemButton>
-            </List>            
-        </div> )
+                                        <span className="seemore" onClick={() => setShowMore(!showMore)
+                                        }>
+                                            {showMore ? "...see less" : "...see more"}
+                                        </span>
+                                    </div>
+                                ))
+
+
+                                } />
+
+                        </ListItemButton>
+
+                    </List>
+                </>
+            })}
+
+        </div>)
 }
 export default Experience;

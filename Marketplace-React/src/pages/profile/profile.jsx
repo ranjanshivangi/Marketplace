@@ -14,20 +14,28 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ListItemButton from '@mui/material/ListItemButton';
 import Experience from "../../components/experience/experience";
-import { getEmployeeProfile, getEmployeeSkills, getEmployeeCertificates, getEmployeeCourses } from "../../services/employeeservice";
+import { getEmployeeProfile, getEmployeeSkills, getEmployeeCertificates, getEmployeeCourses, getEmployeeHistory } from "../../services/employeeservice";
 
 
 
 
 const Profile = () => {
-
     const [openForCourse, setOpenForCourse] = React.useState(-1);
     const [openForCertificate, setOpenForCertificate] = React.useState(-1);
     const [profile, setProfile] = React.useState([]);
     const [skills, setSkills] = React.useState([]);
     const [courses, setCourses] = React.useState([]);
     const [certificates, setCertificates] = React.useState([]);
-    const [value, setValue] = React.useState(0);
+    const [history, setHistory] = React.useState([]);
+    let value;
+
+    React.useEffect(() => {
+        getProfile();
+        getSkills();
+        getCourses();
+        getCertificates();
+        experience();
+    }, [])
 
     const getProfile = () => {
         getEmployeeProfile('INEMP6879')
@@ -71,28 +79,39 @@ const Profile = () => {
                 console.log(err);
             })
     }
+    const experience = () => {
+        getEmployeeHistory('INEMP6879')
+            .then((res) => {
+                console.log("exp", res.data);
+                setHistory(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 
-    // const ratings = ()=>{
-    //     if(skills.proficiency == "Beginner"){
-    //         setValue(1);
-    //     }
-    //     else if(skills.proficiency == "Intermediate"){
-    //         setValue(2);
-    //     }
-    //     else if(skills.proficiency == "Advance"){
-    //         setValue(3);
-    //     }
-    //     else if(skills.proficiency == "Expert"){
-    //         setValue(4);
-    //     }
-    // }    
-    console.log(value)
-    React.useEffect(() => {
-        getProfile();
-        getSkills();
-        getCourses();
-        getCertificates();
-    }, [])
+    const uniqueCompanies = history.reduce((acc, cur) => {
+        if (!acc.includes(cur.companyName)) {
+            acc.push(cur.companyName);
+        }
+        return acc;
+    }, []);
+
+    const ratings = (skills) => {
+        if (skills.proficiency == "Beginner") {
+            return 1;
+        }
+        else if (skills.proficiency == "Intermediate") {
+            return 2;
+        }
+        else if (skills.proficiency == "Advance") {
+            return 3;
+        }
+        else if (skills.proficiency == "Expert") {
+            return 4;
+        }
+    }
+
 
     return (
         <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2}>
@@ -148,7 +167,7 @@ const Profile = () => {
 
                 <List dense={true} disablePadding={true}>
                     {skills.map((skill) => (
-
+                        value = ratings(skill),
                         <ListItem secondaryAction={
                             <Rating name="read-only" size="small" value={value
                             } readOnly max={4} />}>
@@ -197,20 +216,23 @@ const Profile = () => {
                 <Grid item xs={12} sm={12} md={12} >
                     <div className="tittle">Experience</div>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
-                    <Experience />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
-                    <Experience />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
-                    <Experience />
-                </Grid>
+                {uniqueCompanies.map((company) => {
+                    const companyData = history.filter(item => item.companyName === company);
+                    return <>
+                        <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
+                            <Experience companyName={company} companyData={companyData}/>
+                        </Grid></>
+
+                })}
+
+
+
+
             </Grid>
 
 
 
-        </Grid>
+        </Grid >
     )
 }
 export default Profile
