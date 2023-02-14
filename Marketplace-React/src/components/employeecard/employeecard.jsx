@@ -7,11 +7,14 @@ import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import { Box } from "@mui/material";
-import { getEmployee } from "../../services/employeeservice";
+import { useNavigate } from "react-router";
 
-const EmployeeCard = (props) => {
-
+const EmployeeCard = (props) => {    
+    let navigate = useNavigate();
     const img = `${props.employeeObj.imgURL}`;
+    const handleKnowMore =()=>{
+        navigate(`/profile/${props.employeeObj.employeeId}`);
+    }
     
     return (            
             <Card sx={{ ':hover': { boxShadow: 10 }, height: '350px', width: '300px', fontFamily: 'Arial, Helvetica, sans-serif', borderRadius: '10px' }}>
@@ -26,17 +29,17 @@ const EmployeeCard = (props) => {
             </Box>
             <CardContent className="empcontent">
             <Typography color="text.secondary" variant="body2" component="div">
-                    Email: {props.employeeObj.emailId}
+            {props.employeeObj.emailId}
                 </Typography>
                 <Typography color="text.secondary" variant="body2" component="div">
                     Location: {props.employeeObj.location}
                 </Typography>
                 <Typography color="text.secondary" variant="body2" component="div">
-                    Status: {props.employeeObj.status}
+                Status: {props.employeeObj.status}
                 </Typography>
             </CardContent>
-            <CardActions >
-                <Button size="medium" >Know More</Button>
+            <CardActions>
+                <Button size="medium" onClick={handleKnowMore}>Know More</Button>
             </CardActions>            
         </Card>
         

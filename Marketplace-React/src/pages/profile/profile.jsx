@@ -15,11 +15,10 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import ListItemButton from '@mui/material/ListItemButton';
 import Experience from "../../components/experience/experience";
 import { getEmployeeProfile, getEmployeeSkills, getEmployeeCertificates, getEmployeeCourses, getEmployeeHistory } from "../../services/employeeservice";
-
-
-
+import { useParams } from "react-router";
 
 const Profile = () => {
+    const { id } = useParams();
     const [openForCourse, setOpenForCourse] = React.useState(-1);
     const [openForCertificate, setOpenForCertificate] = React.useState(-1);
     const [profile, setProfile] = React.useState([]);
@@ -38,7 +37,7 @@ const Profile = () => {
     }, [])
 
     const getProfile = () => {
-        getEmployeeProfile('INEMP6879')
+        getEmployeeProfile(id)
             .then((res) => {
                 console.log(res.data);
                 setProfile(res.data);
@@ -50,7 +49,7 @@ const Profile = () => {
     }
 
     const getSkills = () => {
-        getEmployeeSkills('INEMP6879')
+        getEmployeeSkills(id)
             .then((res) => {
                 console.log(res.data);
                 setSkills(res.data);
@@ -60,7 +59,7 @@ const Profile = () => {
             })
     }
     const getCertificates = () => {
-        getEmployeeCertificates('INEMP6879')
+        getEmployeeCertificates(id)
             .then((res) => {
                 console.log(res.data);
                 setCertificates(res.data);
@@ -70,7 +69,7 @@ const Profile = () => {
             })
     }
     const getCourses = () => {
-        getEmployeeCourses('INEMP6879')
+        getEmployeeCourses(id)
             .then((res) => {
                 console.log(res.data);
                 setCourses(res.data);
@@ -80,7 +79,7 @@ const Profile = () => {
             })
     }
     const experience = () => {
-        getEmployeeHistory('INEMP6879')
+        getEmployeeHistory(id)
             .then((res) => {
                 console.log("exp", res.data);
                 setHistory(res.data);
@@ -220,18 +219,11 @@ const Profile = () => {
                     const companyData = history.filter(item => item.companyName === company);
                     return <>
                         <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
-                            <Experience companyName={company} companyData={companyData}/>
-                        </Grid></>
-
+                            <Experience companyName={company} companyData={companyData} />
+                        </Grid>
+                    </>
                 })}
-
-
-
-
             </Grid>
-
-
-
         </Grid >
     )
 }
