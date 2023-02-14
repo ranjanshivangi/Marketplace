@@ -6,21 +6,28 @@
   .toolbar {
     background-color: white;
     width: 100%;
-
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    .boxone{     
+      height: 100%;      
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5%;
+    }
     .logo {
-      height: 45%;
-      margin-left: 15%;
+      height: 45%;      
     }
     .searchbox {
       border: 2px solid whitesmoke;
       height: 60%;
-      width: 30%;
+      width: 40vw;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       border-radius: 5px;
-      margin-left: 3%;
-
+     
       .searchbutton {
         width: 10%;
         height: 90%;
@@ -46,7 +53,7 @@
       height: 100%;
       display: flex;
       justify-content: space-between;
-      margin-left: 5%;
+      margin-right: 3rem;
 
       .icon {
         display: flex;

@@ -3,7 +3,7 @@
         "employeeID": "INEMP6879",
         "name": "Shivangi Ranjan",
         "designation": "Software Engineer",
-        "imgURL": "../images/avator/Me-img.jpg",
+        "imgURL": "",
         "skills": "React, ASP.Net, NodeJS, Mysql, MongoDB",
         "location": "Noida",
         "status": "Available"
@@ -32,6 +32,33 @@
         "designation": "Software Engineer",
         "imgURL": "",
         "skills": "Java, ASP.Net, NodeJS",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
         "location": "Noida",
         "status": "Available"
     },

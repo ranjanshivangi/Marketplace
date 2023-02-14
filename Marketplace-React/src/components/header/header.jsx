@@ -23,6 +23,7 @@ const Header = () => {
     return (
         <AppBar className="header">
             <Toolbar className="toolbar">
+                <Box className="boxone">
                 <img src={logo} className="logo" />
                 <Box className="searchbox">
                     <button type="submit" className='searchbutton'>
@@ -30,6 +31,8 @@ const Header = () => {
                     </button>
                     <input type="text" className="searchfield" placeholder="Search by skill or designation" />
                 </Box>
+                </Box>
+                
                 <Box className="iconsbox">
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingHome}>
                         <HomeIcon htmlColor="grey" fontSize="large" />
