@@ -1,5 +1,10 @@
 import axios from "axios";
-let host='https://localhost:44391/';
+let host='https://localhost:7239/';
+
+export const getEmployee=async()=>{
+    let data=await axios.get(`${host}api/Employees`);
+    return data
+}
 
 export const getEmployeeProfile = async (id) => {
     let data = await axios.get(`${host}api/Employees/${id}`);
