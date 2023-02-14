@@ -4,9 +4,26 @@ import Header from "../../components/header/header";
 import Grid from '@mui/material/Grid';
 import employeejson from "../../components/employeecard/employee.json";
 import EmployeeCard from "../../components/employeecard/employeecard";
+import { getEmployee } from "../../services/employeeservice";
 
 const Employees = () => {
-    return (
+    const [employee, setEmployee] = React.useState([]);
+    const getEmp = () => {
+        getEmployee()
+            .then((res) => {
+                setEmployee(res.data);
+
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    React.useEffect(() => {
+        getEmp();
+    }, [])
+
+    return (<>
+        
         <div className="container">
             <Header />
             <Grid container spacing={2}
@@ -23,6 +40,8 @@ const Employees = () => {
                 }
             </Grid>
         </div>
+    
+    </>
     )
 }
 export default Employees;
