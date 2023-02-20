@@ -30,14 +30,7 @@
     font-size: 24px;
     font-weight: bold;
   }
-  .para-containter {
-    width: 40%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 1rem;
+  
     .para {
       width: 100%;
       display: flex;
@@ -54,7 +47,7 @@
       }
     }
   }
-}
+
 
 .contact {
   width: 100%;
@@ -95,4 +88,26 @@
   color: grey;
   text-align: justify;
   font-size: 16px;
+}
+
+@media only screen and (min-width: 600px) {
+  .para-containte {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .para-containte {
+    width: 70%;
+  }
+}
+@media only screen and (min-width: 940px) {
+  .para-containter {
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
