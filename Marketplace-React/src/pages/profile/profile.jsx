@@ -19,15 +19,12 @@ import { useParams } from "react-router";
 
 const Profile = () => {
     const { id } = useParams();
-    const [openForCourse, setOpenForCourse] = React.useState(-1);
-    const [openForCertificate, setOpenForCertificate] = React.useState(-1);
     const [profile, setProfile] = React.useState([]);
     const [skills, setSkills] = React.useState([]);
     const [courses, setCourses] = React.useState([]);
     const [certificates, setCertificates] = React.useState([]);
     const [history, setHistory] = React.useState([]);
-    let value;
-
+   
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -81,13 +78,41 @@ const Profile = () => {
     const experience = () => {
         getEmployeeHistory(id)
             .then((res) => {
-                console.log("exp", res.data);
                 setHistory(res.data);
             })
             .catch((err) => {
                 console.log(err);
             })
     }
+
+    const [openForCourse, setOpenForCorse] = React.useState([]);
+    const [openForCertificate, setOpenForCertificate] = React.useState([]);
+    const handleCourse = (currentIndex) => {
+        if (openForCourse.includes(currentIndex)) {
+            const newOpen = openForCourse.filter((element) => {
+                return element !== currentIndex;
+            });
+            setOpenForCorse(newOpen);
+        } else {
+            const newOpen = [...openForCourse];
+            newOpen.push(currentIndex);
+            setOpenForCorse(newOpen);
+        }
+
+    };
+    const handleCertificate = (currentIndex) => {
+        if (openForCertificate.includes(currentIndex)) {
+            const newOpen = openForCertificate.filter((element) => {
+                return element !== currentIndex;
+            });
+            setOpenForCertificate(newOpen);
+        } else {
+            const newOpen = [...openForCertificate];
+            newOpen.push(currentIndex);
+            setOpenForCertificate(newOpen);
+        }
+
+    };
 
     const uniqueCompanies = history.reduce((acc, cur) => {
         if (!acc.includes(cur.companyName)) {
@@ -96,6 +121,7 @@ const Profile = () => {
         return acc;
     }, []);
 
+    let value;  
     const ratings = (skills) => {
         if (skills.proficiency == "Beginner") {
             return 1;
@@ -110,7 +136,6 @@ const Profile = () => {
             return 4;
         }
     }
-
 
     return (
         <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2}>
@@ -182,8 +207,8 @@ const Profile = () => {
                 <div className="tittle">Courses</div>
 
                 <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
-                    {courses.map((course, index) => (<><ListItemButton onClick={() => setOpenForCourse(openForCourse === index ? -1 : index)}>
-                        <ListItemText primary={course.courseName} />{openForCourse === index ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse === index} timeout="auto" unmountOnExit><List component="div" disablePadding> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
+                    {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
+                        <ListItemText primary={course.courseName} />{openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit><List component="div" disablePadding > <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
                             }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseCompletionDate
                                 }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- from ${course.courseFrom
                                     }`} /></List>
@@ -195,12 +220,12 @@ const Profile = () => {
                 <div className="tittle">Certificates</div>
                 <List dense={true} disableGutters disablePadding>
                     {certificates.map((certificate, index) => (<>
-                        <ListItemButton onClick={() => setOpenForCertificate(openForCertificate === index ? -1 : index)}>
+                        <ListItemButton onClick={() => handleCertificate(index)}>
                             <ListItemText primary={certificate.certificationsName
                             } />
-                            {openForCertificate === index ? <ExpandLess /> : <ExpandMore />}
+                            {openForCertificate.includes(index) ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
-                        <Collapse in={openForCertificate === index} timeout="auto" unmountOnExit>
+                        <Collapse in={openForCertificate.includes(index)} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                                 <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsType
                                     }`} />

@@ -11,22 +11,27 @@
 
   .emp {
     width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
     .empname {
+      height: auto;
       color: #03286d;
       font-weight: bold;
       font-size: 18px;
+      text-align: center;
     }
     .empdesignation {
+      height: auto;
       color: gray;
       font-size: 16px;
+      text-align: center;
     }
   }
 }
 .empcontent {
-  height: 20%;
+  height: auto;
 }
