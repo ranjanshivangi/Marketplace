@@ -4,8 +4,10 @@ import Home from "../../components/home/home.jsx";
 
 function Dashboard() {
   return <>
-    <Header />
-    <Home />
+    <div className="container">
+      <Header />
+      <Home />
+    </div>
   </>
 }
 
