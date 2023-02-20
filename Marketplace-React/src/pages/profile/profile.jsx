@@ -125,7 +125,7 @@ const Profile = () => {
                         <div className='name-header'>{profile.name
                         }</div>
                         <div className="des">{profile.designation} | {profilejson.EmployID}</div>
-                        <div className="para-containter">
+                        <div className="para-containter para-containte">
                             <div className="para"><span className="p1" >Status:</span> <span className="p2" >{profile.status}</span></div>
                             <div className="para"><span className="p1" >Manager:</span><span className="p2"> {profile.currentManager
                             }</span></div>
@@ -170,7 +170,7 @@ const Profile = () => {
                         <ListItem secondaryAction={
                             <Rating name="read-only" size="small" value={value
                             } readOnly max={4} />}>
-                            <ListItemText disableTypography primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
+                            <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
                                 } yrs, ${skill.lastUsed
                                 })`}</span>} />
                         </ListItem>
@@ -216,7 +216,7 @@ const Profile = () => {
                     <div className="tittle">Experience</div>
                 </Grid>
                 {uniqueCompanies.map((company) => {
-                    const companyData = history.filter(item => item.companyName === company);
+                    const companyData = history.filter(item => item.companyName === company).sort((a, b) => a.endDate - b.endDate);
                     return <>
                         <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
                             <Experience companyName={company} companyData={companyData} />
