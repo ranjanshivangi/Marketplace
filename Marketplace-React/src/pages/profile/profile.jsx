@@ -24,7 +24,7 @@ const Profile = () => {
     const [courses, setCourses] = React.useState([]);
     const [certificates, setCertificates] = React.useState([]);
     const [history, setHistory] = React.useState([]);
-   
+
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -121,7 +121,7 @@ const Profile = () => {
         return acc;
     }, []);
 
-    let value;  
+    let value;
     const ratings = (skills) => {
         if (skills.proficiency == "Beginner") {
             return 1;

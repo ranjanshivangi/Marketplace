@@ -11,18 +11,29 @@ import PeopleIcon from '@mui/icons-material/People';
 import TrackChangesOutlinedIcon from '@mui/icons-material/TrackChangesOutlined'
 import QuizIcon from '@mui/icons-material/Quiz';
 
-const RRDetails = ({ jobDetails }) => {   
-    let clientInterview=new Set();
-    jobDetails.rrs?.map((rr)=>{clientInterview.add(rr.clientInterview)})
-    
+const RRDetails = ({ jobDetails }) => {
+    let statusValue;
+    const status = (value) => {
+        switch (value) {
+            case 0: return 'CLOSED';
+            case 1: return 'OPEN';
+            case 2: return 'ON HOLD';
+            default: return 'UNKNOWN';
+        }
+    }
+    let interviewValue;
+    const clientInterview = (value) => {
+        switch (value) {
+            case true: return 'Yes';
+            case false: return 'No';
+            default: return 'UNKNOWN';
+        }
+    }
     return (
         <Card className="rr">
             <CardContent>
                 <Typography variant="h5" component="div">
                     {jobDetails.jobTitle}
-                </Typography>
-                <Typography color="text.secondary" variant="p" className="text">
-                    Acount Name . Bangalore, India . 1 day ago . 12 applicants
                 </Typography>
                 <Typography className="rrfieldsbox">
                     <div className="rrfields">
@@ -55,15 +66,19 @@ const RRDetails = ({ jobDetails }) => {
                     </div>
                     <div className="rrfields">
                         <QuizIcon style={{ color: 'gray' }} />
-                        <div>ClientInterview</div>
-                        {jobDetails.rrs?.map((rr) =>
-                        <div className="text2">{rr.clientInterview.toString()}</div>
+                        <div className="text2">Client Interview Required?</div>
+                        {jobDetails.rrs?.map((rr) => {
+                            interviewValue = clientInterview(rr.clientInterview);
+                            return <div className="text2">{interviewValue}, </div>
+                        }
                         )}
-                       
                     </div>
                     <div className="rrfields">
                         <TrackChangesOutlinedIcon style={{ color: 'green' }} />
-                        <div className="text2">Open</div>
+                        {jobDetails.rrs?.map((rr) => {
+                            statusValue = status(rr.status);
+                            return <div className="text2">{statusValue}, </div>
+                        })}
                     </div>
                 </Typography>
             </CardContent>

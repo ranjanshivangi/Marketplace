@@ -1,60 +1,14 @@
-.jobpage {
-  width: 100%;
-  height: 100vh;
-  background-color: #fafafa;
-  padding-top: 50px;
-  .jobs {
-    display: flex;
-    margin-top: 4rem;
-    .menu {
-      width: 17%;
-      height: 340px;
-      background-color: white;
-      margin-left: 15%;
-      .iconcss {
-        display: flex;
-        margin-bottom: 11%;
-      }
-      .icontext {
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        margin-left: 5%;
-        color: #616161;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-    }
-    .jobcontainer {
-      width: 35%;
-      height: auto;
-      margin-left: 4%;
-      padding-left: 1%;
-      background-color: white;
-
-      .link {
-        color: white;
-        :hover {
-          color: #00f;
-        }
-      }
-      .jobtitle {
-        margin-top: 1%;
-        color: #03286d;
-        font-size: 26px;
-        margin-bottom: 5px;
-      }
-      .accountName {
-        font-size: 18px;
-        margin-bottom: 2px;
-      }
-      .workLocation {
-        font-size: 16px;
-        margin-bottom: 2px;
-      }
-      .experience {
-        font-size: 16px;
-        margin-bottom: 15px;
-      }
-    }
-  }
+.jobcontainer {
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.jobtitle {
+  color: #03286d;
+  font-size: 26px;
+}
+.workLocation {
+  font-size: 16px;
 }

@@ -9,7 +9,7 @@ import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 
 const Experience = ({ companyName, companyData }) => {
-   
+
     const uniqueRole = companyData.reduce((acc, cur) => {
         if (!acc.includes(cur.role)) {
             acc.push(cur.role);
