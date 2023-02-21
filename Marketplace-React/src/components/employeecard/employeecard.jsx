@@ -11,13 +11,13 @@ import { useNavigate } from "react-router";
 
 const EmployeeCard = (props) => {    
     let navigate = useNavigate();
-    const img = `${props.employeeObj.imgURL}`;
+    const img = `https://arci.emids.com/Documents/Photos/${props.employeeObj.employeeId}.jpeg`;
     const handleKnowMore =()=>{
         navigate(`/profile/${props.employeeObj.employeeId}`);
     }
     
     return (            
-            <Card sx={{ ':hover': { boxShadow: 10 }, height: '350px', width: '300px', fontFamily: 'Arial, Helvetica, sans-serif', borderRadius: '10px' }}>
+            <Card sx={{ ':hover': { boxShadow: 10 }, height: '350px', width: '300px', borderRadius: '10px' }}>
             <Box className="cardheader">
                 <Avatar alt={props.employeeObj.name} src={img} sx={{ width: 100, height: 100 }} />
                 

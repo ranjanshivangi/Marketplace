@@ -31,6 +31,7 @@ import EmployeeModal from "../../components/modals/employeeModal";
 
 const Profile = () => {
     const { id } = useParams();
+    const img = `https://arci.emids.com/Documents/Photos/${id}.jpeg`;
     const [profile, setProfile] = React.useState([]);
     const [skills, setSkills] = React.useState([]);
     const [courses, setCourses] = React.useState([]);
@@ -199,7 +200,7 @@ const Profile = () => {
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
-                        <img className="prpfilrPic" src={require('../../resources/profilePic.jfif')} />
+                        <img className="prpfilrPic" src={img} alt="error while uploading image"/>
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>

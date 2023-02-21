@@ -2,13 +2,23 @@
   height: 15vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .5rem;
+  //font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .jobtitle {
   color: #03286d;
-  font-size: 26px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
 }
 .workLocation {
-  font-size: 16px;
+  font-size: 14px;
+  color: gray;
+  text-align: center;  
+}
+.more-button{
+  width: 100%;  
+  
 }

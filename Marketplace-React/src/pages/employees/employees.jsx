@@ -36,8 +36,7 @@ const Employees = () => {
         getEmpImg();
     }, [])
 
-    return (<>
-        
+    return (<>        
         <div className="container">
             <Header />
             <Grid container spacing={2}
