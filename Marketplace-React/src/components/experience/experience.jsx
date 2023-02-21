@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import ReactReadMoreReadLess from "react-read-more-read-less";
+import { Divider } from "@mui/material";
 
 const Experience = ({ companyName, companyData }) => {
 
@@ -32,6 +33,7 @@ const Experience = ({ companyName, companyData }) => {
                                 primary={role}
                                 secondary={roleDetails.map((details) => (
                                     <div className="project">
+                                        <Divider variant="full width"/>
                                         <span className="project-name">{details.projectName}</span>
                                         <span className="date">{details.startDate}-{details.endDate}</span>
                                         <ReactReadMoreReadLess
@@ -43,7 +45,7 @@ const Experience = ({ companyName, companyData }) => {
                                         >
                                             {details.description}
                                         </ReactReadMoreReadLess>
-
+                                        
                                     </div>
                                 ))
                                 } />

@@ -22,8 +22,7 @@ const Employees = () => {
         getEmp();
     }, [])
 
-    return (<>
-        
+    return (<>        
         <div className="container">
             <Header />
             <Grid container spacing={2}
