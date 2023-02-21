@@ -1,5 +1,5 @@
 import axios from "axios";
-let host='https://localhost:44391/';
+let host='https://localhost:7239/';
 
 export const getEmployee=async()=>{
     let data=await axios.get(`${host}api/Employees`);
@@ -29,4 +29,8 @@ export const getEmployeeCertificates = async (id) => {
 export const getEmployeeHistory = async (id) => {
     let data = await axios.get(`${host}api/EmployementHistories/${id}`);
     return data
+}
+export const getImg = async(id)=>{
+    let data=await axios.get(`https://arci.emids.com/Documents/Photos/INEMP5200.jpeg`);
+    return data;
 }
