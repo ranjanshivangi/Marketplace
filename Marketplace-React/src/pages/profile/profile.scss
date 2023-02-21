@@ -78,6 +78,9 @@
 .tittle {
   font-size: 18px;
   font-weight: bold;
+  
+  display: flex;
+  justify-content: space-between;
 }
 .about {
   text-align: justify;
@@ -89,16 +92,22 @@
   text-align: justify;
   font-size: 16px;
 }
+@media only screen and (min-width: 220px) {
+  .emids-icon{display: none;}
+}
 
 @media only screen and (min-width: 600px) {
   .para-containte {
     width: 80%;
   }
+  
 }
 @media only screen and (min-width: 768px) {
   .para-containte {
     width: 70%;
   }
+  .emids-icon{display: block;}
+  
 }
 @media only screen and (min-width: 940px) {
   .para-containter {
@@ -110,4 +119,9 @@
     align-items: flex-start;
     gap: 1rem;
   }
+  .emids-icon{display:block;}
+  
+}
+.i{
+ color: gray;
 }

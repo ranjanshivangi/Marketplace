@@ -13,9 +13,21 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ListItemButton from '@mui/material/ListItemButton';
+import EditIcon from '@mui/icons-material/Edit';
 import Experience from "../../components/experience/experience";
 import { getEmployeeProfile, getEmployeeSkills, getEmployeeCertificates, getEmployeeCourses, getEmployeeHistory } from "../../services/employeeservice";
 import { useParams } from "react-router";
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Typography from '@mui/material/Typography';
+import EmployeeModal from "../../components/modals/employeeModal";
 
 const Profile = () => {
     const { id } = useParams();
@@ -24,7 +36,8 @@ const Profile = () => {
     const [courses, setCourses] = React.useState([]);
     const [certificates, setCertificates] = React.useState([]);
     const [history, setHistory] = React.useState([]);
-
+    const [open, setOpen] = React.useState(false);
+  
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -33,6 +46,50 @@ const Profile = () => {
         experience();
     }, [])
 
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+      const handleClose = () => {
+        setOpen(false);
+      };
+      const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+        '& .MuiDialogContent-root': {
+          padding: theme.spacing(2),
+        },
+        '& .MuiDialogActions-root': {
+          padding: theme.spacing(1),
+        },
+      }));
+      
+      function BootstrapDialogTitle(props) {
+        const { children, onClose, ...other } = props;
+      
+        return (
+          <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+            {children}
+            {onClose ? (
+              <IconButton
+                aria-label="close"
+                onClick={onClose}
+                sx={{
+                  position: 'absolute',
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+            ) : null}
+          </DialogTitle>
+        );
+      }
+      
+      BootstrapDialogTitle.propTypes = {
+        children: PropTypes.node,
+        onClose: PropTypes.func.isRequired,
+      };
+      
     const getProfile = () => {
         getEmployeeProfile(id)
             .then((res) => {
@@ -159,8 +216,10 @@ const Profile = () => {
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }}>
+                <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
+                
                     <div className="contact" >
-                        <img className="e-logo" src={require('../../resources/emlogo.jfif')} />
+                        
                         <div className="icon-container">
                             <div className="icons">
                                 <EmailIcon />
@@ -187,8 +246,9 @@ const Profile = () => {
                 <div className="about">{profile.about}</div>
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Skills</div>
-
+                <div className="tittle">Skills 
+                <EditIcon className="i" onClick={handleClickOpen}/></div>
+                
                 <List dense={true} disablePadding={true}>
                     {skills.map((skill) => (
                         value = ratings(skill),
@@ -204,7 +264,8 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Courses</div>
+                <div className="tittle">Courses<EditIcon className="i" onClick={handleClickOpen}/>
+                </div>
 
                 <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
                     {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
@@ -217,7 +278,7 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Certificates</div>
+                <div className="tittle">Certificates <EditIcon className="i" onClick={handleClickOpen}/></div>
                 <List dense={true} disableGutters disablePadding>
                     {certificates.map((certificate, index) => (<>
                         <ListItemButton onClick={() => handleCertificate(index)}>
@@ -249,7 +310,27 @@ const Profile = () => {
                     </>
                 })}
             </Grid>
+            <div>
+       
+        <BootstrapDialog
+          onClose={handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={open}
+        >
+          
+          <DialogContent dividers>
+          <EmployeeModal></EmployeeModal>
+          </DialogContent>
+          <DialogActions>
+            <Button autoFocus onClick={handleClose}>
+              Save changes
+            </Button>
+          </DialogActions>
+          
+        </BootstrapDialog> 
+      </div>
         </Grid >
+        
     )
 }
 export default Profile
