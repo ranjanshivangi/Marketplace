@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 
 const EmployeeCard = (props) => {    
     let navigate = useNavigate();
-    const img = `${props.employeeObj.imgURL}`;
+    const img = `https://arci.emids.com/Documents/Photos/${props.employeeObj.employeeId}.jpeg`;
     const handleKnowMore =()=>{
         navigate(`/profile/${props.employeeObj.employeeId}`);
     }
