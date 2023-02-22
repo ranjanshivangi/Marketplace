@@ -3,6 +3,8 @@ import Select,{ components }from 'react-select';
 import { useParams } from "react-router";
 import { getAllSkills } from '../../services/skillService';
 import {getEmployeeHistory} from '../../services/employeeservice'
+import { grey } from '@mui/material/colors';
+import './addSkill.scss'
 
 const proficiencyOptions = [
     { value: 'beginner', label: 'Beginner' },
@@ -57,22 +59,26 @@ const AddSkills = () => {
       };
     return (
     <div>
-      <Select
+        <div className='sill-select' >Skill*
+      <Select 
         id="skill-select"
         options={skills}
         value={selectedSkill}
         onChange={setSelectedSkill}
-      />
+      /></div>
+      <div> Proficiency
        <Select
         id="proficiency-select"
         options={proficiencyOptions}
         value={selectedProficiency}
         onChange={setSelectedProficiency}
-      />
+      /></div>
        <div>
       <h2>{skills.skillName}</h2>
      
-      <h3>Acquired from:</h3>
+      <h3>Tell us where you put this skill to use:</h3>
+      <p className='p-skill'>Select any item where this skill applies</p>
+      <p className='p-experience'>Experience</p>
       {employementHistory.map((company) => (
         <div key={company.companyName}>
           <input
@@ -87,6 +93,7 @@ const AddSkills = () => {
         </div>
       ))}
       <p>Selected companies: {selectedCompanies.join(', ')}</p>
+      
     </div>
     </div>      
     );

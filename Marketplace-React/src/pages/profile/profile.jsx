@@ -202,7 +202,7 @@ const Profile = () => {
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
-                        <Avatar variant="square" className="prpfilrPic" src={empProfileImgPath} alt={profile.name}/>
+                        <Avatar variant="square" className="prpfilrPic" src={empProfileImgPath} alt={profile.name} />
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>
@@ -252,7 +252,7 @@ const Profile = () => {
                 <div className="tittle">Skills
                     <div className="edit-add-icon-wrap">
                         <AddIcon className="edit-add-icon" onClick={handleClickOpen} ></AddIcon>
-                        <EditIcon className="edit-add-icon"  />
+                        <EditIcon className="edit-add-icon" />
                     </div>
                 </div>
 
@@ -289,11 +289,11 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                
+
                 <div className="tittle">Certificates
                     <div className="edit-add-icon-wrap">
                         <AddIcon className="edit-add-icon"></AddIcon>
-                        <EditIcon className="edit-add-icon"  />
+                        <EditIcon className="edit-add-icon" />
                     </div>
                 </div>
                 <List dense={true} disableGutters disablePadding>
@@ -333,17 +333,17 @@ const Profile = () => {
                     onClose={handleClose}
                     aria-labelledby="customized-dialog-title"
                     open={open}
-                ><BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}> Add Skills </BootstrapDialogTitle>
-                
-                    <DialogContent dividers style={{ width: '400px', height: '300px' }}>
+                >
+                    
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}> Add Skills </BootstrapDialogTitle>
+                    <DialogContent dividers style={{ width: '550px', height: '340px'}}>
                         <AddSkills></AddSkills>
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={handleClose}>
                             Save changes
                         </Button>
-                    </DialogActions>
-
+                    </DialogActions>                  
                 </BootstrapDialog>
             </div>
         </Grid >
