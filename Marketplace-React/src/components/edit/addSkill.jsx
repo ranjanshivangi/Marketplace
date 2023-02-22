@@ -1,59 +1,94 @@
-import React from 'react'
-import Select from 'react-select';
+import React,{ useState, useEffect } from 'react'
+import Select,{ components }from 'react-select';
 import { useParams } from "react-router";
 import { getAllSkills } from '../../services/skillService';
-import List from '@mui/material/List';
-// import { colourOptions } from '../data';
-const options = [
-    { value: '.net', label: '.Net' },
-    { value: 'react', label: 'React' },
-    { value: 'mysql', label: 'MySql' }];
+import {getEmployeeHistory} from '../../services/employeeservice'
+
+const proficiencyOptions = [
+    { value: 'beginner', label: 'Beginner' },
+    { value: 'intermediate', label: 'Intermediate' },
+    { value: 'expert', label: 'Expert' }];
 
 
 const AddSkills = () => {
-      
-    const [skills, setSkills] = React.useState("");
-   
-    React.useEffect(() => {
-        getSkills();        
+    const { id } = useParams();
+    const [selectedSkill, setSelectedSkill] = useState(null);
+    const [skills, setSkills] = useState([]);
+    const [selectedProficiency, setSelectedProficiency] = useState(null);
+    const [selectedCompanies, setSelectedCompanies] = useState([]);
+    const [employementHistory,setEmployementHistory]=useState([]);
+    useEffect(() => {
+        getSkills(); 
+        getEmployementHistory();       
     }, [])
 
     const getSkills = () => {
-        getAllSkills()
+        getEmployeeHistory(id)
             .then((res) => {
-                console.log(res.data);
-                setSkills(res.data);
+                console.log(res.data)
+                setEmployementHistory(res.data)
             })
             .catch((err) => {
                 console.log(err);
             })
     }
-    const handleSelectChange = (selectedOption) => {
-        setSkills(selectedOption.value);
-        console.log(selectedOption.value)
+    const getEmployementHistory = () => {
+        getAllSkills()
+            .then((res) => {
+                
+                const formattedSkills = res.data.map((skill) => ({
+                    value: skill.skillName,
+                    label: skill.skillName,
+                  }));
+                  
+                setSkills(formattedSkills);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    const handleCompanyCheckbox = (event) => {
+        const companyName = event.target.value;
+        if (event.target.checked) {
+          setSelectedCompanies([...selectedCompanies, companyName]);
+        } else {
+          setSelectedCompanies(selectedCompanies.filter((name) => name !== companyName));
+        }
       };
     return (
-        <>
-       
-            <Select
-               
-                
-                value={skills}
-                onChange={handleSelectChange}
-                options={options} />
-              
-        
-       
-        {/* <List dense={true} disablePadding={true}>
-                    {skills.map((skill) => (
-                        value = ratings(skill),
-                            <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
-                                } yrs, ${skill.lastUsed
-                                })`}</span>} />
-                    ))}
-            </List> */}
-        </>
-        
+    <div>
+      <Select
+        id="skill-select"
+        options={skills}
+        value={selectedSkill}
+        onChange={setSelectedSkill}
+      />
+       <Select
+        id="proficiency-select"
+        options={proficiencyOptions}
+        value={selectedProficiency}
+        onChange={setSelectedProficiency}
+      />
+       <div>
+      <h2>{skills.skillName}</h2>
+     
+      <h3>Acquired from:</h3>
+      {employementHistory.map((company) => (
+        <div key={company.companyName}>
+          <input
+            type="checkbox"
+            id={company.companyName}
+            name={company.companyName}
+            value={company.companyName}
+            checked={selectedCompanies.includes(company.companyName)}
+            onChange={handleCompanyCheckbox}
+          />
+          <label htmlFor={company.companyName}>{company.companyName}</label>
+        </div>
+      ))}
+      <p>Selected companies: {selectedCompanies.join(', ')}</p>
+    </div>
+    </div>      
     );
 }
 export default AddSkills

@@ -8,7 +8,6 @@ import { getEmployee } from "../../services/employeeservice";
 
 const Employees = () => {
     const [employee, setEmployee] = React.useState([]);
-    const[img,setImg]=React.useState();
     const getEmp = () => {
         getEmployee()
             .then((res) => {

@@ -1,8 +1,6 @@
 import React from 'react'
 import './skillModal.scss'
-import { InputBase } from '@mui/material';
-import TextField from '@mui/material/TextField';
-import { FormGroup,FormControl,InputLabel,Input } from '@mui/material';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 const EmployeeModal = () => {
