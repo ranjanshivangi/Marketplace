@@ -78,9 +78,17 @@
 .tittle {
   font-size: 18px;
   font-weight: bold;
-  
   display: flex;
   justify-content: space-between;
+  .edit-add-icon-wrap{
+    display: flex;
+    justify-content: space-between;
+   }
+  .edit-add-icon{
+    color: gray;
+    margin-right: 12px;
+   }
+   
 }
 .about {
   text-align: justify;
@@ -121,7 +129,4 @@
   }
   .emids-icon{display:block;}
   
-}
-.i{
- color: gray;
 }

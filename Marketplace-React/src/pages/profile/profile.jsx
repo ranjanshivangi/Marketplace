@@ -25,9 +25,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import EmployeeModal from "../../components/modals/employeeModal";
+import EmployeeModal from "../../components/edit/skillModal";
+import EditSkills from "../../components/edit/editSkill";
+import AddSkills from "../../components/edit/addSkill";
 
 const Profile = () => {
     const { id } = useParams();
@@ -38,7 +41,7 @@ const Profile = () => {
     const [certificates, setCertificates] = React.useState([]);
     const [history, setHistory] = React.useState([]);
     const [open, setOpen] = React.useState(false);
-  
+
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -49,48 +52,48 @@ const Profile = () => {
 
     const handleClickOpen = () => {
         setOpen(true);
-      };
-      const handleClose = () => {
+    };
+    const handleClose = () => {
         setOpen(false);
-      };
-      const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    };
+    const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
-          padding: theme.spacing(2),
+            padding: theme.spacing(2),
         },
         '& .MuiDialogActions-root': {
-          padding: theme.spacing(1),
+            padding: theme.spacing(1),
         },
-      }));
-      
-      function BootstrapDialogTitle(props) {
+    }));
+
+    function BootstrapDialogTitle(props) {
         const { children, onClose, ...other } = props;
-      
+
         return (
-          <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-            {children}
-            {onClose ? (
-              <IconButton
-                aria-label="close"
-                onClick={onClose}
-                sx={{
-                  position: 'absolute',
-                  right: 8,
-                  top: 8,
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            ) : null}
-          </DialogTitle>
+            <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+                {children}
+                {onClose ? (
+                    <IconButton
+                        aria-label="close"
+                        onClick={onClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                ) : null}
+            </DialogTitle>
         );
-      }
-      
-      BootstrapDialogTitle.propTypes = {
+    }
+
+    BootstrapDialogTitle.propTypes = {
         children: PropTypes.node,
         onClose: PropTypes.func.isRequired,
-      };
-      
+    };
+
     const getProfile = () => {
         getEmployeeProfile(id)
             .then((res) => {
@@ -200,7 +203,7 @@ const Profile = () => {
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
-                        <img className="prpfilrPic" src={img} alt="error while uploading image"/>
+                        <img className="prpfilrPic" src={img} alt="error while uploading image" />
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>
@@ -217,10 +220,10 @@ const Profile = () => {
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }}>
-                <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
-                
+                    <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
+
                     <div className="contact" >
-                        
+
                         <div className="icon-container">
                             <div className="icons">
                                 <EmailIcon />
@@ -247,9 +250,13 @@ const Profile = () => {
                 <div className="about">{profile.about}</div>
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Skills 
-                <EditIcon className="i" onClick={handleClickOpen}/></div>
-                
+                <div className="tittle">Skills
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={handleClickOpen} ></AddIcon>
+                        <EditIcon className="edit-add-icon"  />
+                    </div>
+                </div>
+
                 <List dense={true} disablePadding={true}>
                     {skills.map((skill) => (
                         value = ratings(skill),
@@ -265,7 +272,11 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Courses<EditIcon className="i" onClick={handleClickOpen}/>
+                <div className="tittle">Courses
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon"></AddIcon>
+                        <EditIcon className="edit-add-icon" />
+                    </div>
                 </div>
 
                 <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
@@ -279,7 +290,13 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Certificates <EditIcon className="i" onClick={handleClickOpen}/></div>
+                
+                <div className="tittle">Certificates
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon"></AddIcon>
+                        <EditIcon className="edit-add-icon"  />
+                    </div>
+                </div>
                 <List dense={true} disableGutters disablePadding>
                     {certificates.map((certificate, index) => (<>
                         <ListItemButton onClick={() => handleCertificate(index)}>
@@ -312,26 +329,25 @@ const Profile = () => {
                 })}
             </Grid>
             <div>
-       
-        <BootstrapDialog
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          
-          <DialogContent dividers>
-          <EmployeeModal></EmployeeModal>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Save changes
-            </Button>
-          </DialogActions>
-          
-        </BootstrapDialog> 
-      </div>
+
+                <BootstrapDialog
+                    onClose={handleClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={open}
+                >
+                    <DialogContent style={{ width: '400px', height: '300px' }}>
+                        <AddSkills></AddSkills>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>
+
+                </BootstrapDialog>
+            </div>
         </Grid >
-        
+
     )
 }
 export default Profile

@@ -30,7 +30,3 @@ export const getEmployeeHistory = async (id) => {
     let data = await axios.get(`${host}api/EmployementHistories/${id}`);
     return data
 }
-export const getImg = async(id)=>{
-    let data=await axios.get(`https://arci.emids.com/Documents/Photos/INEMP5200.jpeg`);
-    return data;
-}
