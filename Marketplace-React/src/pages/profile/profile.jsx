@@ -28,9 +28,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import EmployeeModal from "../../components/edit/skillModal";
-import EditSkills from "../../components/edit/editSkill";
+
 import AddSkills from "../../components/edit/addSkill";
 
 const Profile = () => {
@@ -185,16 +183,16 @@ const Profile = () => {
 
     let value;
     const ratings = (skills) => {
-        if (skills.proficiency == "Beginner") {
+        if (skills.proficiency === "Beginner") {
             return 1;
         }
-        else if (skills.proficiency == "Intermediate") {
+        else if (skills.proficiency === "Intermediate") {
             return 2;
         }
-        else if (skills.proficiency == "Advance") {
+        else if (skills.proficiency === "Advance") {
             return 3;
         }
-        else if (skills.proficiency == "Expert") {
+        else if (skills.proficiency === "Expert") {
             return 4;
         }
     }
@@ -335,8 +333,9 @@ const Profile = () => {
                     onClose={handleClose}
                     aria-labelledby="customized-dialog-title"
                     open={open}
-                >
-                    <DialogContent style={{ width: '400px', height: '300px' }}>
+                ><BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}> Add Skills </BootstrapDialogTitle>
+                
+                    <DialogContent dividers style={{ width: '400px', height: '300px' }}>
                         <AddSkills></AddSkills>
                     </DialogContent>
                     <DialogActions>
