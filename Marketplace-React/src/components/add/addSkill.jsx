@@ -80,16 +80,16 @@ const AddSkills = () => {
       <p className='p-skill'>Select any item where this skill applies</p>
       <p className='p-experience'>Experience</p>
       {employementHistory.map((company) => (
-        <div key={company.companyName}>
+        <div key={company.projectName}>
           <input
             type="checkbox"
-            id={company.companyName}
-            name={company.companyName}
-            value={company.companyName}
-            checked={selectedCompanies.includes(company.companyName)}
+            id={company.projectName}
+            name={company.projectName}
+            value={company.projectName}
+            checked={selectedCompanies.includes(company.projectName)}
             onChange={handleCompanyCheckbox}
           />
-          <label htmlFor={company.companyName}>{company.companyName}</label>
+          <label htmlFor={company.ProjectName}>{company.projectName}</label>
         </div>
       ))}
       <p>Selected companies: {selectedCompanies.join(', ')}</p>

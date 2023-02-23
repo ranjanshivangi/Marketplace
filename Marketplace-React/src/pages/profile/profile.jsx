@@ -29,7 +29,9 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar';
 
-import AddSkills from "../../components/edit/addSkill";
+import AddSkills from "../../components/add/addSkill";
+import AddCourses from "../../components/add/addCourse";
+import AddCertificate from "../../components/add/addCertificate";
 
 const Profile = () => {
     const { id } = useParams();
@@ -39,7 +41,9 @@ const Profile = () => {
     const [courses, setCourses] = React.useState([]);
     const [certificates, setCertificates] = React.useState([]);
     const [history, setHistory] = React.useState([]);
-    const [open, setOpen] = React.useState(false);
+    const [openSkill, setOpenSkill] = React.useState(false);
+    const [openCourse, setOpenCourse] = React.useState(false);
+    const [openCertificate, setOpenCertificate] = React.useState(false);
 
     React.useEffect(() => {
         getProfile();
@@ -49,11 +53,23 @@ const Profile = () => {
         experience();
     }, [])
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const skillClickOpen = () => {
+        setOpenSkill(true);
     };
-    const handleClose = () => {
-        setOpen(false);
+    const skillClose = () => {
+        setOpenSkill(false);
+    };
+    const courseClickOpen = () => {
+        setOpenCourse(true);
+    };
+    const courseClose = () => {
+        setOpenCourse(false);
+    };
+    const certificateClickOpen = () => {
+        setOpenCertificate(true);
+    };
+    const certificateClose = () => {
+        setOpenCertificate(false);
     };
     const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
@@ -96,7 +112,6 @@ const Profile = () => {
     const getProfile = () => {
         getEmployeeProfile(id)
             .then((res) => {
-                console.log(res.data);
                 setProfile(res.data);
 
             })
@@ -108,7 +123,6 @@ const Profile = () => {
     const getSkills = () => {
         getEmployeeSkills(id)
             .then((res) => {
-                console.log(res.data);
                 setSkills(res.data);
             })
             .catch((err) => {
@@ -118,7 +132,6 @@ const Profile = () => {
     const getCertificates = () => {
         getEmployeeCertificates(id)
             .then((res) => {
-                console.log(res.data);
                 setCertificates(res.data);
             })
             .catch((err) => {
@@ -128,7 +141,6 @@ const Profile = () => {
     const getCourses = () => {
         getEmployeeCourses(id)
             .then((res) => {
-                console.log(res.data);
                 setCourses(res.data);
             })
             .catch((err) => {
@@ -251,7 +263,7 @@ const Profile = () => {
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
                 <div className="tittle">Skills
                     <div className="edit-add-icon-wrap">
-                        <AddIcon className="edit-add-icon" onClick={handleClickOpen} ></AddIcon>
+                        <AddIcon className="edit-add-icon" onClick={skillClickOpen} ></AddIcon>
                         <EditIcon className="edit-add-icon" />
                     </div>
                 </div>
@@ -273,7 +285,7 @@ const Profile = () => {
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
                 <div className="tittle">Courses
                     <div className="edit-add-icon-wrap">
-                        <AddIcon className="edit-add-icon"></AddIcon>
+                        <AddIcon className="edit-add-icon" onClick={courseClickOpen}></AddIcon>
                         <EditIcon className="edit-add-icon" />
                     </div>
                 </div>
@@ -292,7 +304,7 @@ const Profile = () => {
 
                 <div className="tittle">Certificates
                     <div className="edit-add-icon-wrap">
-                        <AddIcon className="edit-add-icon"></AddIcon>
+                        <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
                         <EditIcon className="edit-add-icon" />
                     </div>
                 </div>
@@ -328,23 +340,53 @@ const Profile = () => {
                 })}
             </Grid>
             <div>
-
                 <BootstrapDialog
-                    onClose={handleClose}
+                    onClose={skillClose}
                     aria-labelledby="customized-dialog-title"
-                    open={open}
+                    open={openSkill}
                 >
-                    
-                    <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}> Add Skills </BootstrapDialogTitle>
-                    <DialogContent dividers style={{ width: '550px', height: '340px'}}>
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={skillClose}> Add Skills </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent'>
                         <AddSkills></AddSkills>
                     </DialogContent>
                     <DialogActions>
-                        <Button autoFocus onClick={handleClose}>
+                        <Button variant="contained" href="#contained-buttons" onClick={skillClose}>
                             Save changes
                         </Button>
                     </DialogActions>                  
                 </BootstrapDialog>
+                <BootstrapDialog
+                    onClose={courseClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openCourse}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={courseClose}> Add Couress </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent'>
+                        <AddCourses></AddCourses>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={courseClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+
+                <BootstrapDialog
+                    onClose={certificateClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openCertificate}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={certificateClose}> Add Certificates </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent'>
+                        <AddCertificate></AddCertificate>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={certificateClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+                
             </div>
         </Grid >
 
