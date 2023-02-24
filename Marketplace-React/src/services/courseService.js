@@ -9,3 +9,4 @@ export const getEmployeeCourses = async (id) => {
     let data = await axios.get(`${host}api/EmployeeCourses/${id}`);
     return data
 }
+
