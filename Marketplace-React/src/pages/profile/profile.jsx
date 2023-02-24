@@ -346,7 +346,7 @@ const Profile = () => {
                     open={openSkill}
                 >
                     <BootstrapDialogTitle id="customized-dialog-title" onClose={skillClose}> Add Skills </BootstrapDialogTitle>
-                    <DialogContent dividers className='dialogContent'>
+                    <DialogContent dividers className='dialogContent1'>
                         <AddSkills></AddSkills>
                     </DialogContent>
                     <DialogActions>
@@ -361,7 +361,7 @@ const Profile = () => {
                     open={openCourse}
                 >
                     <BootstrapDialogTitle id="customized-dialog-title" onClose={courseClose}> Add Couress </BootstrapDialogTitle>
-                    <DialogContent dividers className='dialogContent'>
+                    <DialogContent dividers className='dialogContent2'>
                         <AddCourses></AddCourses>
                     </DialogContent>
                     <DialogActions>
@@ -377,7 +377,7 @@ const Profile = () => {
                     open={openCertificate}
                 >
                     <BootstrapDialogTitle id="customized-dialog-title" onClose={certificateClose}> Add Certificates </BootstrapDialogTitle>
-                    <DialogContent dividers className='dialogContent'>
+                    <DialogContent dividers className='dialogContent2'>
                         <AddCertificate></AddCertificate>
                     </DialogContent>
                     <DialogActions>

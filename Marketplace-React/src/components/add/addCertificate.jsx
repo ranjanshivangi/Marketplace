@@ -2,7 +2,7 @@ import React,{ useState, useEffect } from 'react'
 import Select from 'react-select';
 import { useParams } from "react-router";
 import { getAllCertificate } from '../../services/certificateService';
-import './addSkill.scss'
+import './addCertificate.scss'
 import {getEmployeeCertificates} from '../../services/employeeservice'; 
 
 const AddCertificate = () => {
@@ -11,12 +11,15 @@ const AddCertificate = () => {
     const [certificate, setCertificate] = useState([]);
     const [SelectedEmployeeCertification, setSelectedEmployeeCertification] = useState([]);
     const [EmployeeCertificate,setEmployeeCertificate]=useState([]);
+    const [selectedOption, setSelectedOption] = useState('');
 
     useEffect(() => {
         getCertificates(); 
         getEmployeeCertificate();       
     }, [])
-
+    const handleOptionChange = (event) => {
+      setSelectedOption(event.target.value);
+    };
     const getEmployeeCertificate = () => {
       getEmployeeCertificates(id)
             .then((res) => {
@@ -51,17 +54,39 @@ const AddCertificate = () => {
 
     return (
     <div>
-        <div className='course-select' >Certificate*
+        <div className='padding-bottom' >Certificate*
       <Select 
         id="course-select"
         options={certificate}
         value={selectedCertificate}
         onChange={setSelectedCertificate}
       /></div>
-       
-      <h4>Tell us where you put this skill to use:</h4>
-      <p className='p-skill'>Select any item where this skill applies</p>
-      <p className='p-experience'>Experience</p>
+       <div className='padding-bottom'>Certificate Type :  
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="Internal"
+            checked={selectedOption === 'Internal'}
+            onChange={handleOptionChange}
+          />
+          Internal
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="External"
+            checked={selectedOption === 'External'}
+            onChange={handleOptionChange}
+          />
+          External
+        </label>
+      </div>
+      </div>
+      <div>Assosiated with : </div>
+      
       {EmployeeCertificate.map((company) => (
         <div key={company.certificationsFrom}>
           <input
@@ -75,7 +100,7 @@ const AddCertificate = () => {
           <label htmlFor={company.certificationsFrom}>{company.certificationsFrom}</label>
         </div>
       ))}
-      <p>Selected organisation: {SelectedEmployeeCertification.join(', ')}</p>
+      
     </div>      
     );
 }
