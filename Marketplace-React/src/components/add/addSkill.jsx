@@ -3,7 +3,6 @@ import Select,{ components }from 'react-select';
 import { useParams } from "react-router";
 import { getAllSkills } from '../../services/skillService';
 import {getEmployeeHistory} from '../../services/employeeservice'
-import { grey } from '@mui/material/colors';
 import './addSkill.scss'
 
 const proficiencyOptions = [
@@ -20,11 +19,11 @@ const AddSkills = () => {
     const [selectedCompanies, setSelectedCompanies] = useState([]);
     const [employementHistory,setEmployementHistory]=useState([]);
     useEffect(() => {
-        getSkills(); 
-        getEmployementHistory();       
+      getEmployeeHistories(); 
+        getAllSkill();     
     }, [])
 
-    const getSkills = () => {
+    const getEmployeeHistories = () => {
         getEmployeeHistory(id)
             .then((res) => {
                 console.log(res.data)
@@ -34,7 +33,7 @@ const AddSkills = () => {
                 console.log(err);
             })
     }
-    const getEmployementHistory = () => {
+    const getAllSkill = () => {
         getAllSkills()
             .then((res) => {
                 

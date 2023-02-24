@@ -28,12 +28,13 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar';
-
+import { useNavigate } from "react-router";
 import AddSkills from "../../components/add/addSkill";
 import AddCourses from "../../components/add/addCourse";
 import AddCertificate from "../../components/add/addCertificate";
-
+import AddExperience from "../../components/add/addExperiece";
 const Profile = () => {
+    let navigate = useNavigate();
     const { id } = useParams();
     const empProfileImgPath = `https://arci.emids.com/Documents/Photos/${id}.jpeg`;
     const [profile, setProfile] = React.useState([]);
@@ -44,7 +45,8 @@ const Profile = () => {
     const [openSkill, setOpenSkill] = React.useState(false);
     const [openCourse, setOpenCourse] = React.useState(false);
     const [openCertificate, setOpenCertificate] = React.useState(false);
-
+    const [openExperience, setOpenExperience] = React.useState(false);
+    
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -71,6 +73,12 @@ const Profile = () => {
     const certificateClose = () => {
         setOpenCertificate(false);
     };
+    const experienceClickOpen=()=>{
+        setOpenExperience(true);
+    }
+    const experienceClose=()=>{
+        setOpenExperience(false);
+    }
     const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
             padding: theme.spacing(2),
@@ -208,6 +216,9 @@ const Profile = () => {
             return 4;
         }
     }
+    const handleEditSkill =()=>{
+        navigate(`/profile/skill/${id}`);
+    }
 
     return (
         <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2}>
@@ -264,7 +275,7 @@ const Profile = () => {
                 <div className="tittle">Skills
                     <div className="edit-add-icon-wrap">
                         <AddIcon className="edit-add-icon" onClick={skillClickOpen} ></AddIcon>
-                        <EditIcon className="edit-add-icon" />
+                        <EditIcon className="edit-add-icon" onClick={handleEditSkill}/>
                     </div>
                 </div>
 
@@ -328,18 +339,23 @@ const Profile = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12} sm={12} md={12} >
-                    <div className="tittle">Experience</div>
+                    <div className="title">
+                    <div className="add-icon-wrap">Experience </div>
+                    <AddIcon className="add-icon" onClick={experienceClickOpen} ></AddIcon>
+                    </div>
+                    
                 </Grid>
                 {uniqueCompanies.map((company) => {
                     const companyData = history.filter(item => item.companyName === company).sort((a, b) => a.endDate - b.endDate);
                     return <>
                         <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
+                        
                             <Experience companyName={company} companyData={companyData} />
                         </Grid>
                     </>
                 })}
             </Grid>
-            <div>
+            <div >
                 <BootstrapDialog
                     onClose={skillClose}
                     aria-labelledby="customized-dialog-title"
@@ -382,6 +398,23 @@ const Profile = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button variant="contained" href="#contained-buttons" onClick={certificateClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+
+                <BootstrapDialog
+                    onClose={experienceClose}
+                    aria-labelledby="customized-dialog-title2"
+                    size="xxxl" style={{ maxWidth: '1200px' }}
+                    open={openExperience}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={experienceClose}> Add Experience </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <AddExperience></AddExperience>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={experienceClose}>
                             Save changes
                         </Button>
                     </DialogActions>                  

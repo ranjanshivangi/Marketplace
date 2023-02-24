@@ -89,6 +89,22 @@
    }
    
 }
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  
+  .add-icon-wrap{
+    display: flex;
+    justify-content: space-between;
+   }
+  .add-icon{
+    color: gray;
+    margin-right: 12px;
+    padding-left: 25%;
+   }
+   
+}
 .about {
   text-align: justify;
   padding: 3%;
@@ -104,10 +120,12 @@
   width: 550px;
   height:340px;
 }
-.dialogContent{
+.dialogContent1{
   width: 550px;
-  height: 340px;
+  height:550px;
 }
+
+
 
 @media only screen and (min-width: 220px) {
   .emids-icon {
