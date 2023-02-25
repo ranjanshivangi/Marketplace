@@ -6,9 +6,38 @@
 }
 .containers{
     width: 800px;
-    min-height: 300px;
+    min-height: 230px;
     height: auto;
     border: 1px solid grey;
     margin-left:17%;
     border-radius: 10px;
    }
+   .back-skill{
+    display: flex;
+    margin-top:1%;
+   }
+   .back-icon{
+    margin-left: 1%;
+   }
+   .edit-skill-header{
+    margin-left: 2%;
+    margin-top: 1%;
+   }
+   .p-skills{
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 0%;
+    margin-left:6%;
+   }
+   .skill-icon-wrap{
+   display: flex;
+   justify-content:space-between;
+   margin:3%;
+   }
+   .horizontal-line {
+    border: 1px solid rgb(156, 152, 152);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 666px;
+    
+  }
