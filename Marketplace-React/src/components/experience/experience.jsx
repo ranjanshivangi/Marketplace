@@ -1,14 +1,13 @@
 import React from "react";
 import '../experience/experience.scss';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import { Divider } from "@mui/material";
-
+import AddIcon from '@mui/icons-material/Add';
 const Experience = ({ companyName, companyData }) => {
 
     const uniqueRole = companyData.reduce((acc, cur) => {
@@ -19,7 +18,9 @@ const Experience = ({ companyName, companyData }) => {
     }, []);
 
     return (
+        
         <div className="expbox">
+             
             <div className="company">{companyName}</div>
             {uniqueRole.map((role) => {
                 const roleDetails = companyData.filter(item => item.role === role);

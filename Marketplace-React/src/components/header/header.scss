@@ -1,33 +1,32 @@
 .header {
-  height: 8vh;
+  height: 10vh;
   width: 100vw;
   background-color: white;
 
   .toolbar {
     background-color: white;
     width: 100%;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    .boxone{     
-      height: 100%;      
+
+    .boxone {
+      height: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 5%;
+      gap: 7%;
     }
-    .logo {
-      height: 45%;      
-    }
+
     .searchbox {
       border: 2px solid whitesmoke;
-      height: 60%;
+
       width: 40vw;
       display: flex;
       justify-content: flex-start;
       align-items: center;
       border-radius: 5px;
-     
+
       .searchbutton {
         width: 10%;
         height: 90%;
@@ -50,10 +49,13 @@
 
     .iconsbox {
       width: 20%;
-      height: 100%;
+      height: auto;
       display: flex;
-      justify-content: space-between;
-      margin-right: 3rem;
+      justify-content:space-between;
+      // height: 100%;
+      // display: flex;
+      // justify-content: space-between;
+      // margin-right: 3rem;
 
       .icon {
         display: flex;
@@ -61,10 +63,63 @@
         justify-content: flex-start;
         align-items: center;
       }
+
       .iconstext {
         color: black;
         font-size: small;
       }
     }
+  }
+}
+
+@media only screen and (min-width: 300px) {
+  .boxone {
+    display: flex;
+    flex-direction: column;
+  }
+  .iconsbox {
+    width: 10%;
+    margin-right: 40%;
+  }
+  .logo {
+    height: 26%;
+    margin-top: 4px;
+  }
+  .searchbox {
+    height: 42%;
+    margin-top: 4px;
+  }
+  .searchfield {
+    display: none;
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+  .boxone {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .iconsbox {
+    width: 25%;
+    margin-right: 20%;
+  }
+  .logo {
+    height: 45%;
+  }
+  .searchbox {
+    
+    height: 60%;
+  }
+  .searchfield {
+    font-size: 14px;
+    display: block;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .iconsbox {
+    width: 25%;
+    margin-right: 5%;
   }
 }

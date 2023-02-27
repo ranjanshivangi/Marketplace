@@ -25,12 +25,16 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
-import EmployeeModal from "../../components/modals/employeeModal";
-
+import { useNavigate } from "react-router";
+import AddSkills from "../../components/add/addSkill";
+import AddCourses from "../../components/add/addCourse";
+import AddCertificate from "../../components/add/addCertificate";
+import AddExperience from "../../components/add/addExperiece";
 const Profile = () => {
+    let navigate = useNavigate();
     const { id } = useParams();
     const empProfileImgPath = `https://arci.emids.com/Documents/Photos/${id}.jpeg`;
     const [profile, setProfile] = React.useState([]);
@@ -38,8 +42,11 @@ const Profile = () => {
     const [courses, setCourses] = React.useState([]);
     const [certificates, setCertificates] = React.useState([]);
     const [history, setHistory] = React.useState([]);
-    const [open, setOpen] = React.useState(false);
-  
+    const [openSkill, setOpenSkill] = React.useState(false);
+    const [openCourse, setOpenCourse] = React.useState(false);
+    const [openCertificate, setOpenCertificate] = React.useState(false);
+    const [openExperience, setOpenExperience] = React.useState(false);
+    
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -48,54 +55,71 @@ const Profile = () => {
         experience();
     }, [])
 
-    const handleClickOpen = () => {
-        setOpen(true);
-      };
-      const handleClose = () => {
-        setOpen(false);
-      };
-      const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    const skillClickOpen = () => {
+        setOpenSkill(true);
+    };
+    const skillClose = () => {
+        setOpenSkill(false);
+    };
+    const courseClickOpen = () => {
+        setOpenCourse(true);
+    };
+    const courseClose = () => {
+        setOpenCourse(false);
+    };
+    const certificateClickOpen = () => {
+        setOpenCertificate(true);
+    };
+    const certificateClose = () => {
+        setOpenCertificate(false);
+    };
+    const experienceClickOpen=()=>{
+        setOpenExperience(true);
+    }
+    const experienceClose=()=>{
+        setOpenExperience(false);
+    }
+    const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
-          padding: theme.spacing(2),
+            padding: theme.spacing(2),
         },
         '& .MuiDialogActions-root': {
-          padding: theme.spacing(1),
+            padding: theme.spacing(1),
         },
-      }));
-      
-      function BootstrapDialogTitle(props) {
+    }));
+
+    function BootstrapDialogTitle(props) {
         const { children, onClose, ...other } = props;
-      
+
         return (
-          <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-            {children}
-            {onClose ? (
-              <IconButton
-                aria-label="close"
-                onClick={onClose}
-                sx={{
-                  position: 'absolute',
-                  right: 8,
-                  top: 8,
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
-            ) : null}
-          </DialogTitle>
+            <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+                {children}
+                {onClose ? (
+                    <IconButton
+                        aria-label="close"
+                        onClick={onClose}
+                        sx={{
+                            position: 'absolute',
+                            right: 8,
+                            top: 8,
+                            color: (theme) => theme.palette.grey[500],
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                ) : null}
+            </DialogTitle>
         );
-      }
-      
-      BootstrapDialogTitle.propTypes = {
+    }
+
+    BootstrapDialogTitle.propTypes = {
         children: PropTypes.node,
         onClose: PropTypes.func.isRequired,
-      };
-      
+    };
+
     const getProfile = () => {
         getEmployeeProfile(id)
             .then((res) => {
-                console.log(res.data);
                 setProfile(res.data);
 
             })
@@ -107,7 +131,6 @@ const Profile = () => {
     const getSkills = () => {
         getEmployeeSkills(id)
             .then((res) => {
-                console.log(res.data);
                 setSkills(res.data);
             })
             .catch((err) => {
@@ -117,7 +140,6 @@ const Profile = () => {
     const getCertificates = () => {
         getEmployeeCertificates(id)
             .then((res) => {
-                console.log(res.data);
                 setCertificates(res.data);
             })
             .catch((err) => {
@@ -127,7 +149,6 @@ const Profile = () => {
     const getCourses = () => {
         getEmployeeCourses(id)
             .then((res) => {
-                console.log(res.data);
                 setCourses(res.data);
             })
             .catch((err) => {
@@ -182,18 +203,21 @@ const Profile = () => {
 
     let value;
     const ratings = (skills) => {
-        if (skills.proficiency == "Beginner") {
+        if (skills.proficiency === "Beginner") {
             return 1;
         }
-        else if (skills.proficiency == "Intermediate") {
+        else if (skills.proficiency === "Intermediate") {
             return 2;
         }
-        else if (skills.proficiency == "Advance") {
+        else if (skills.proficiency === "Advance") {
             return 3;
         }
-        else if (skills.proficiency == "Expert") {
+        else if (skills.proficiency === "Expert") {
             return 4;
         }
+    }
+    const handleEditSkill =()=>{
+        navigate(`/profile/skill/${id}`);
     }
 
     return (
@@ -201,7 +225,7 @@ const Profile = () => {
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
-                        <Avatar variant="square" className="prpfilrPic" src={empProfileImgPath} alt={profile.name}/>
+                        <Avatar variant="square" className="prpfilrPic" src={empProfileImgPath} alt={profile.name} />
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>
@@ -218,10 +242,10 @@ const Profile = () => {
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }}>
-                <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
-                
+                    <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
+
                     <div className="contact" >
-                        
+
                         <div className="icon-container">
                             <div className="icons">
                                 <EmailIcon />
@@ -248,9 +272,13 @@ const Profile = () => {
                 <div className="about">{profile.about}</div>
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Skills 
-                <EditIcon className="i" onClick={handleClickOpen}/></div>
-                
+                <div className="tittle">Skills
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={skillClickOpen} ></AddIcon>
+                        <EditIcon className="edit-add-icon" onClick={handleEditSkill}/>
+                    </div>
+                </div>
+
                 <List dense={true} disablePadding={true}>
                     {skills.map((skill) => (
                         value = ratings(skill),
@@ -266,7 +294,11 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Courses<EditIcon className="i" onClick={handleClickOpen}/>
+                <div className="tittle">Courses
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={courseClickOpen}></AddIcon>
+                        <EditIcon className="edit-add-icon" />
+                    </div>
                 </div>
 
                 <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
@@ -280,7 +312,13 @@ const Profile = () => {
 
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                <div className="tittle">Certificates <EditIcon className="i" onClick={handleClickOpen}/></div>
+
+                <div className="tittle">Certificates
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
+                        <EditIcon className="edit-add-icon" />
+                    </div>
+                </div>
                 <List dense={true} disableGutters disablePadding>
                     {certificates.map((certificate, index) => (<>
                         <ListItemButton onClick={() => handleCertificate(index)}>
@@ -301,38 +339,90 @@ const Profile = () => {
             </Grid>
             <Grid container>
                 <Grid item xs={12} sm={12} md={12} >
-                    <div className="tittle">Experience</div>
+                    <div className="title">
+                    <div className="add-icon-wrap">Experience </div>
+                    <AddIcon className="add-icon" onClick={experienceClickOpen} ></AddIcon>
+                    </div>
+                    
                 </Grid>
                 {uniqueCompanies.map((company) => {
                     const companyData = history.filter(item => item.companyName === company).sort((a, b) => a.endDate - b.endDate);
                     return <>
                         <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
+                        
                             <Experience companyName={company} companyData={companyData} />
                         </Grid>
                     </>
                 })}
             </Grid>
-            <div>
-       
-        <BootstrapDialog
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          
-          <DialogContent dividers>
-          <EmployeeModal></EmployeeModal>
-          </DialogContent>
-          <DialogActions>
-            <Button autoFocus onClick={handleClose}>
-              Save changes
-            </Button>
-          </DialogActions>
-          
-        </BootstrapDialog> 
-      </div>
+            <div >
+                <BootstrapDialog
+                    onClose={skillClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openSkill}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={skillClose}> Add Skills </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <AddSkills></AddSkills>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={skillClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+                <BootstrapDialog
+                    onClose={courseClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openCourse}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={courseClose}> Add Couress </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent2'>
+                        <AddCourses></AddCourses>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={courseClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+
+                <BootstrapDialog
+                    onClose={certificateClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openCertificate}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={certificateClose}> Add Certificates </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent2'>
+                        <AddCertificate></AddCertificate>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={certificateClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+
+                <BootstrapDialog
+                    onClose={experienceClose}
+                    aria-labelledby="customized-dialog-title2"
+                    size="xxxl" style={{ maxWidth: '1200px' }}
+                    open={openExperience}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={experienceClose}> Add Experience </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <AddExperience></AddExperience>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={experienceClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+                
+            </div>
         </Grid >
-        
+
     )
 }
 export default Profile

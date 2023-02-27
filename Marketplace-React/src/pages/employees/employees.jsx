@@ -5,11 +5,9 @@ import Grid from '@mui/material/Grid';
 import employeejson from "../../components/employeecard/employee.json";
 import EmployeeCard from "../../components/employeecard/employeecard";
 import { getEmployee } from "../../services/employeeservice";
-import { getImg } from "../../services/employeeservice";
 
 const Employees = () => {
     const [employee, setEmployee] = React.useState([]);
-    const[img,setImg]=React.useState();
     const getEmp = () => {
         getEmployee()
             .then((res) => {
@@ -20,20 +18,10 @@ const Employees = () => {
                 console.log(err);
             })
     }
-    const getEmpImg = () => {
-        getImg()
-            .then((res) => {
-                //setImg(res);
-                console.log(res);
-
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
+    
     React.useEffect(() => {
         getEmp();
-        getEmpImg();
+        
     }, [])
 
     return (<>        
