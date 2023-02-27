@@ -8,9 +8,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from "react-router-dom";
-
+import { useParams } from "react-router";
 const Header = () => {
     let navigate = useNavigate();
+    const { id } = useParams();
     const onClickingHome = () => {
         navigate('/');
     }
@@ -19,6 +20,10 @@ const Header = () => {
     }
     const onClickingEmployees = () => {
         navigate('/employees');
+    }
+
+    const onClickingProfile =()=>{
+        navigate(`/profile/${id}`);
     }
     return (
         <AppBar className="header">
@@ -46,7 +51,7 @@ const Header = () => {
                         <PeopleAltIcon htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Employees</span>
                     </IconButton>
-                    <IconButton size="medium" color="inherit" className="icon">
+                    <IconButton size="medium" color="inherit" className="icon" onClick={onClickingProfile}>
                         <AccountCircle htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Me</span>
                     </IconButton>

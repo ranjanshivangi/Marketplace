@@ -33,6 +33,11 @@ import AddSkills from "../../components/add/addSkill";
 import AddCourses from "../../components/add/addCourse";
 import AddCertificate from "../../components/add/addCertificate";
 import AddExperience from "../../components/add/addExperiece";
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import DownloadIcon from '@mui/icons-material/Download';
+import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import Shortlist from "../../components/shortlistemployee/Shortlist";
 const Profile = () => {
     let navigate = useNavigate();
     const { id } = useParams();
@@ -46,7 +51,9 @@ const Profile = () => {
     const [openCourse, setOpenCourse] = React.useState(false);
     const [openCertificate, setOpenCertificate] = React.useState(false);
     const [openExperience, setOpenExperience] = React.useState(false);
-    
+    const [openshortList,setOpenShortList]=React.useState();
+    const [openForCourse, setOpenForCorse] = React.useState([]);
+    const [openForCertificate, setOpenForCertificate] = React.useState([]);
     React.useEffect(() => {
         getProfile();
         getSkills();
@@ -78,6 +85,12 @@ const Profile = () => {
     }
     const experienceClose=()=>{
         setOpenExperience(false);
+    }
+    const shortListClose=()=>{
+        setOpenShortList(false);
+    }
+    const shortListOpen=()=>{
+        setOpenShortList(true);
     }
     const BootstrapDialog = styled(Dialog)(({ theme }) => ({
         '& .MuiDialogContent-root': {
@@ -165,8 +178,7 @@ const Profile = () => {
             })
     }
 
-    const [openForCourse, setOpenForCorse] = React.useState([]);
-    const [openForCertificate, setOpenForCertificate] = React.useState([]);
+    
     const handleCourse = (currentIndex) => {
         if (openForCourse.includes(currentIndex)) {
             const newOpen = openForCourse.filter((element) => {
@@ -220,8 +232,21 @@ const Profile = () => {
         navigate(`/profile/skill/${id}`);
     }
 
+    const downloadPdfDocument = () => {
+        const input = document.getElementById("pdf-container");
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF("p","pt","a1");
+                pdf.addImage(imgData, 'JPEG', 0, 0);
+                pdf.save(`resume.pdf`);
+            })
+    }
+   
     return (
-        <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2}>
+       
+        <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2} id="pdf-container">
+            
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
@@ -241,6 +266,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </Grid>
+                
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }}>
                     <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
 
@@ -265,7 +291,10 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
+                    <DownloadIcon fontSize="large" onClick={downloadPdfDocument}/>
+                    <AddToQueueIcon onClick={shortListOpen}/>
                 </Grid>
+                
             </Grid>
             <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
                 <div className="tittle">About</div>
@@ -419,10 +448,28 @@ const Profile = () => {
                         </Button>
                     </DialogActions>                  
                 </BootstrapDialog>
-                
-            </div>
-        </Grid >
 
+
+                <BootstrapDialog
+                    onClose={shortListClose}
+                    aria-labelledby="customized-dialog-title2"
+                    size="xxxl" style={{ maxWidth: '1200px' }}
+                    open={openshortList}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={shortListClose}> ShortList </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <Shortlist></Shortlist>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={shortListClose}>
+                            ShortList
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+            </div>
+            
+        </Grid >
+     
     )
 }
 export default Profile

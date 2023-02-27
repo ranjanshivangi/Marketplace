@@ -19,7 +19,7 @@ const EditSkill = () => {
         getEmployeeSkills(id)
             .then((res) => {
                 setSkills(res.data);
-                console.log(res.data)
+               
             })
             .catch((err) => {
                 console.log(err);
@@ -36,8 +36,7 @@ const EditSkill = () => {
                         return <>
                             <div className='skill-icon-wrap' >
                                 <p className='p-skills'>{skill.skillName}<hr className="horizontal-line" /></p>
-
-                                <EditIcon />
+                                <EditIcon  />
                             </div>
                         </>
                     })
