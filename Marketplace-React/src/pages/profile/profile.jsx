@@ -1,6 +1,5 @@
 import React from "react";
 import './profile.scss';
-import profilejson from './profile.json';
 import { Grid } from "@mui/material";
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -36,13 +35,14 @@ import AddCertificate from "../../components/add/addCertificate";
 import AddExperience from "../../components/add/addExperiece";
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import DownloadIcon from '@mui/icons-material/Download';
-import AddToQueueIcon from '@mui/icons-material/AddToQueue';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import AddCardIcon from '@mui/icons-material/AddCard';
 import Shortlist from "../../components/shortlistemployee/Shortlist";
+import Header from "../../components/header/header";
+
 const Profile = () => {
     let navigate = useNavigate();
-    const { id } = useParams();
-    const empProfileImgPath = `https://arci.emids.com/Documents/Photos/${id}.jpeg`;
+    const { id } = useParams();    
     const [profile, setProfile] = React.useState([]);
     const [skills, setSkills] = React.useState([]);
     const [courses, setCourses] = React.useState([]);
@@ -234,6 +234,8 @@ const Profile = () => {
     }
     const handleEditCourse =()=>{
         navigate(`/profile/course/${id}`);
+    const handleEditCertificate =()=>{
+        navigate(`/profile/certificate/${id}`);
     }
 
     const downloadPdfDocument = () => {
@@ -248,20 +250,21 @@ const Profile = () => {
     }
    
     return (
-       
-        <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2} id="pdf-container">
-            
+      <>
+      <Header/>
+        <Grid container style={{ height: 'auto', padding: '1rem' , marginTop: '5rem'}} rowGap={2} id="pdf-container">
+          
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
-                        <Avatar variant="square" className="prpfilrPic" src={empProfileImgPath} alt={profile.name} />
+                        <Avatar variant="square" className="prpfilrPic" src={`https://arci.emids.com/Documents/Photos/${id}.jpeg`}/>
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>
                     <div className="Name">
                         <div className='name-header'>{profile.name
                         }</div>
-                        <div className="des">{profile.designation} | {profilejson.EmployID}</div>
+                        <div className="des">{profile.designation} | {profile.employeeId}</div>
                         <div className="para-containter para-containte">
                             <div className="para"><span className="p1" >Status:</span> <span className="p2" >{profile.status}</span></div>
                             <div className="para"><span className="p1" >Manager:</span><span className="p2"> {profile.currentManager
@@ -272,8 +275,15 @@ const Profile = () => {
                 </Grid>
                 
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }}>
-                    <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
-
+                    {/* <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} /> */}
+                    <div className="profile-action-icon-box">
+                            <IconButton>
+                                <FileDownloadOutlinedIcon fontSize="large" color="action" onClick={downloadPdfDocument} />
+                            </IconButton>
+                            <IconButton>
+                                <AddCardIcon fontSize="large" color="action" onClick={shortListOpen} />
+                            </IconButton>
+                        </div>
                     <div className="contact" >
 
                         <div className="icon-container">
@@ -295,8 +305,6 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <DownloadIcon fontSize="large" onClick={downloadPdfDocument}/>
-                    <AddToQueueIcon onClick={shortListOpen}/>
                 </Grid>
                 
             </Grid>
@@ -349,7 +357,7 @@ const Profile = () => {
                 <div className="tittle">Certificates
                     <div className="edit-add-icon-wrap">
                         <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
-                        <EditIcon className="edit-add-icon" />
+                        <EditIcon className="edit-add-icon" onClick={handleEditCertificate}/>
                     </div>
                 </div>
                 <List dense={true} disableGutters disablePadding>
@@ -473,7 +481,9 @@ const Profile = () => {
             </div>
             
         </Grid >
-     
+        
+        </>
     )
+}
 }
 export default Profile

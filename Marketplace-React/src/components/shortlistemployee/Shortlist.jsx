@@ -52,12 +52,13 @@ const Shortlist = () => {
           value={selectedRR}
           onChange={setSelectedRR}
         /></div>
-      <div className='pad-buttom' >Required Skill*
+      <div className='pad-buttom' >Skills,the candidate is selected for*
         <Select
           id="skill-select"
           options={skills}
           value={selectedSkill}
           onChange={setSelectedSkill}
+          isMulti
         /></div>
         
       </>

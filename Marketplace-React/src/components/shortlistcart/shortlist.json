@@ -1,0 +1,39 @@
+[
+    {
+        "RR": "RR/12/2022",
+        "Employee": [
+            {
+                "EmpID": "INEMP6879",
+                "EmpName": "Shivangi Ranjan",
+                "SkillAssigned": "React"
+            },
+            {
+                "EmpID": "INEMP6880",
+                "EmpName": "Shruthin Sateesh",
+                "SkillAssigned": "ASP.Net Web Api"
+            },
+            {
+                "EmpID": "INEMP6881",
+                "EmpName": "Shubham Das",
+                "SkillAssigned": "Mysql"
+            }
+        ]
+    },
+    {
+        "RR": "RR/13/2022",
+        "Employee": [
+            {
+                "EmpID": "INEMP6661",
+                "EmpName": "Antara Chaudhary",
+                "SkillAssigned": "Angular"
+            },
+            {
+                "EmpID": "INEMP6662",
+                "EmpName": "Aman Gaur",
+                "SkillAssigned": "NodeJS"
+            }
+           
+        ]
+    }
+    
+]

@@ -1,0 +1,16 @@
+
+.cart {
+  width: 70%;
+  height: auto;
+  margin-top: 7rem;
+  .cart-rr {
+    font-size: 20px;
+    font-weight: bold;
+    color: #03286d;
+  }
+  .cart-acion {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
