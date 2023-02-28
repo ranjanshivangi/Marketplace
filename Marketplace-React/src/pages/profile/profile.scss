@@ -47,6 +47,14 @@
     }
   }
 }
+.profile-action-icon-box{
+  height: 20%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+}
 
 .contact {
   width: 100%;
@@ -55,10 +63,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 2rem;
-  .e-logo {
-    width: 70%;
-    height: 5vh;
-  }
+  
   .icon-container {
     display: flex;
     padding: 3%;
