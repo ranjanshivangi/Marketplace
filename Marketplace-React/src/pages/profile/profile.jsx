@@ -38,6 +38,8 @@ import html2canvas from 'html2canvas';
 import DownloadIcon from '@mui/icons-material/Download';
 import AddToQueueIcon from '@mui/icons-material/AddToQueue';
 import Shortlist from "../../components/shortlistemployee/Shortlist";
+import Header from "../../components/header/header";
+
 const Profile = () => {
     let navigate = useNavigate();
     const { id } = useParams();
@@ -231,6 +233,9 @@ const Profile = () => {
     const handleEditSkill =()=>{
         navigate(`/profile/skill/${id}`);
     }
+    const handleEditCertificate =()=>{
+        navigate(`/profile/certificate/${id}`);
+    }
 
     const downloadPdfDocument = () => {
         const input = document.getElementById("pdf-container");
@@ -244,7 +249,11 @@ const Profile = () => {
     }
    
     return (
-       
+        <div>
+            <div >
+            <Header/>
+            </div>
+            <div className="profile-container">
         <Grid container style={{ height: 'auto', padding: '1rem' }} rowGap={2} id="pdf-container">
             
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
@@ -268,7 +277,7 @@ const Profile = () => {
                 </Grid>
                 
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }}>
-                    <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} />
+                    {/* <img className="e-logo emids-icon" src={require('../../resources/emlogo.jfif')} /> */}
 
                     <div className="contact" >
 
@@ -345,7 +354,7 @@ const Profile = () => {
                 <div className="tittle">Certificates
                     <div className="edit-add-icon-wrap">
                         <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
-                        <EditIcon className="edit-add-icon" />
+                        <EditIcon className="edit-add-icon" onClick={handleEditCertificate}/>
                     </div>
                 </div>
                 <List dense={true} disableGutters disablePadding>
@@ -469,7 +478,8 @@ const Profile = () => {
             </div>
             
         </Grid >
-     
+        </div>
+        </div>
     )
 }
 export default Profile
