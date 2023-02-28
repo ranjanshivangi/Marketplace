@@ -93,6 +93,14 @@ const AddExperiece = () => {
                 id="outlined-required"
                 placeholder="Ex: Microsoft"
             />
+             <div className='company-name' >Project Name*
+            </div>
+            <TextField
+                style={{ width: '100%' }}
+                required
+                id="outlined-required"
+                
+            />
             <div  className='location'>Location
             </div>
             <TextField

@@ -29,7 +29,7 @@ const AddSkills = () => {
 
   useEffect(() => {
     getSkills();
-    getEmployementHistory();  
+    getAllSkill();  
   }, [])
   const getSkills = () => {
     getEmployeeHistory(id)
@@ -59,7 +59,7 @@ const AddSkills = () => {
         console.log(err);
       })
   }
-  const getEmployementHistory = () => {
+  const getAllSkill = () => {
     getAllSkills()
       .then((res) => {
         const formattedSkills = res.data.map((skill) => ({
