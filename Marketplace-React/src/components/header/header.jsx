@@ -9,6 +9,8 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 const Header = () => {
     let navigate = useNavigate();
     const { id } = useParams();
@@ -20,6 +22,9 @@ const Header = () => {
     }
     const onClickingEmployees = () => {
         navigate('/employees');
+    }
+    const onClickingShortlist = () => {
+        navigate('/shortlist');
     }
 
     const onClickingProfile =()=>{
@@ -50,6 +55,10 @@ const Header = () => {
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingEmployees}>
                         <PeopleAltIcon htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Employees</span>
+                    </IconButton>
+                    <IconButton size="medium" color="inherit" className="icon" onClick={onClickingShortlist}>
+                        <ShoppingCartIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">Shortlist</span>
                     </IconButton>
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingProfile}>
                         <AccountCircle htmlColor="grey" fontSize="large" />
