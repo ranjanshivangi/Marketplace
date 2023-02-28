@@ -15,7 +15,7 @@ import { useParams } from "react-router";
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import { useNavigate } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
-import EditSkillDialog from './editDialog';
+import EditSkillDialog from './editSkillDialog';
    
 
 const EditSkill = () => {
@@ -88,7 +88,7 @@ const EditSkill = () => {
                         skills.map((skill) => {
                             return <>
                                 <div className='skill-icon-wrap' >
-                                    <p className='p-skills'>{skill.skillName}<hr className="horizontal-line" /></p>
+                                    <p className='p-skills'>{skill.skillName}</p>
                                     <EditIcon onClick={()=>handleEachSkillEdit(skill.skillName)} />
                                 </div>
                             </>
@@ -106,7 +106,7 @@ const EditSkill = () => {
                     >
                         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleEachSkillEditClose}> Edit {selectedSkill} </BootstrapDialogTitle>
                         <DialogContent dividers className='dialogContent1'>
-                            <EditSkillDialog></EditSkillDialog>
+                            <EditSkillDialog/>
                         </DialogContent>
                         <DialogActions>
                             <Button variant="contained" href="#contained-buttons" onClick={handleEachSkillEditClose}>

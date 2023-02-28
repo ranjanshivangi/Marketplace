@@ -14,6 +14,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ListItemButton from '@mui/material/ListItemButton';
 import EditIcon from '@mui/icons-material/Edit';
+import EditCourse from "../../components/edit/editCourse";
 import Experience from "../../components/experience/experience";
 import { getEmployeeProfile, getEmployeeSkills, getEmployeeCertificates, getEmployeeCourses, getEmployeeHistory } from "../../services/employeeservice";
 import { useParams } from "react-router";
@@ -231,6 +232,9 @@ const Profile = () => {
     const handleEditSkill =()=>{
         navigate(`/profile/skill/${id}`);
     }
+    const handleEditCourse =()=>{
+        navigate(`/profile/course/${id}`);
+    }
 
     const downloadPdfDocument = () => {
         const input = document.getElementById("pdf-container");
@@ -326,7 +330,7 @@ const Profile = () => {
                 <div className="tittle">Courses
                     <div className="edit-add-icon-wrap">
                         <AddIcon className="edit-add-icon" onClick={courseClickOpen}></AddIcon>
-                        <EditIcon className="edit-add-icon" />
+                        <EditIcon className="edit-add-icon" onClick={handleEditCourse}/>
                     </div>
                 </div>
 

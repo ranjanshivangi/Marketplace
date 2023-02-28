@@ -10,6 +10,7 @@ import {
   Routes,
   Route
 } from "react-router-dom"
+import EditCourse from './components/edit/editCourse.jsx';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/employees/" element={<Employees/>}></Route>
           <Route path="/profile/:id" element={<Profile/>}></Route>
           <Route path="/profile/skill/:id" element={<EditSkill/>}></Route>
+          <Route path="/profile/course/:id" element={<EditCourse/>}></Route>
         </Routes>
       </Router>
     </div>
