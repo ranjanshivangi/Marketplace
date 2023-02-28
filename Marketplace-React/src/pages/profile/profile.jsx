@@ -41,8 +41,7 @@ import Header from "../../components/header/header";
 
 const Profile = () => {
     let navigate = useNavigate();
-    const { id } = useParams();
-    const empProfileImgPath = `https://arci.emids.com/Documents/Photos/${id}.jpeg`;
+    const { id } = useParams();    
     const [profile, setProfile] = React.useState([]);
     const [skills, setSkills] = React.useState([]);
     const [courses, setCourses] = React.useState([]);
@@ -255,7 +254,7 @@ const Profile = () => {
             <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                 <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                     <div className="profile">
-                        <Avatar variant="square" className="prpfilrPic" src={empProfileImgPath} alt={profile.name} />
+                        <Avatar variant="square" className="prpfilrPic" src={`https://arci.emids.com/Documents/Photos/${id}.jpeg`}/>
                     </div>
                 </Grid>
                 <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>
