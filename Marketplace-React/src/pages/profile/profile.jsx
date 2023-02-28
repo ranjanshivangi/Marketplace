@@ -1,6 +1,5 @@
 import React from "react";
 import './profile.scss';
-import profilejson from './profile.json';
 import { Grid } from "@mui/material";
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -38,7 +37,7 @@ import html2canvas from 'html2canvas';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import Shortlist from "../../components/shortlistemployee/Shortlist";
-import Header from "../../components/header/header";
+
 const Profile = () => {
     let navigate = useNavigate();
     const { id } = useParams();
@@ -231,6 +230,9 @@ const Profile = () => {
     const handleEditSkill = () => {
         navigate(`/profile/skill/${id}`);
     }
+    const handleEditCertificate = () => {
+        navigate(`/profile/certificate/${id}`);
+    }
 
     const downloadPdfDocument = () => {
         const input = document.getElementById("pdf-container");
@@ -247,7 +249,6 @@ const Profile = () => {
         <>
             <Header />
             <Grid container style={{ height: 'auto', padding: '1rem', marginTop: '5rem' }} rowGap={2} id="pdf-container">
-
                 <Grid container style={{ borderBlockEnd: '5px solid #0FE4BD' }}>
                     <Grid item xs={12} sm={6} md={3} style={{ height: '30vh' }}>
                         <div className="profile">
@@ -303,180 +304,286 @@ const Profile = () => {
                     </Grid>
 
                 </Grid>
+<<<<<<< HEAD
                 <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
                     <div className="tittle">About</div>
                     <div className="about">{profile.about}</div>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                    <div className="tittle">Skills
-                        <div className="edit-add-icon-wrap">
-                            <AddIcon className="edit-add-icon" onClick={skillClickOpen} ></AddIcon>
-                            <EditIcon className="edit-add-icon" onClick={handleEditSkill} />
-                        </div>
-                    </div>
+=======
 
-                    <List dense={true} disablePadding={true}>
-                        {skills.map((skill) => (
-                            value = ratings(skill),
-                            <ListItem secondaryAction={
-                                <Rating name="read-only" size="small" value={value
-                                } readOnly max={4} />}>
-                                <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
-                                    } yrs, ${skill.lastUsed
-                                    })`}</span>} />
-                            </ListItem>
-                        ))}
-                    </List>
-
-                </Grid>
-                <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-                    <div className="tittle">Courses
-                        <div className="edit-add-icon-wrap">
-                            <AddIcon className="edit-add-icon" onClick={courseClickOpen}></AddIcon>
-                            <EditIcon className="edit-add-icon" />
-                        </div>
-                    </div>
-
-                    <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
-                        {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
-                            <ListItemText primary={course.courseName} />{openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit><List component="div" disablePadding > <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
-                                }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseCompletionDate
-                                    }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- from ${course.courseFrom
-                                        }`} /></List>
-                            </Collapse></>))}
-                    </List>
-
-                </Grid>
-                <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
-
-                    <div className="tittle">Certificates
-                        <div className="edit-add-icon-wrap">
-                            <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
-                            <EditIcon className="edit-add-icon" />
-                        </div>
-                    </div>
-                    <List dense={true} disableGutters disablePadding>
-                        {certificates.map((certificate, index) => (<>
-                            <ListItemButton onClick={() => handleCertificate(index)}>
-                                <ListItemText primary={certificate.certificationsName
-                                } />
-                                {openForCertificate.includes(index) ? <ExpandLess /> : <ExpandMore />}
-                            </ListItemButton>
-                            <Collapse in={openForCertificate.includes(index)} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsType
-                                        }`} />
-                                    <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsCompletionDate}`} />
-                                    <ListItemText sx={{ pl: 4 }} secondary={`- from ${certificate.certificationsFrom
-                                        }`} />
-                                </List>
-                            </Collapse> </>))}
-                    </List>
-                </Grid>
-                <Grid container>
-                    <Grid item xs={12} sm={12} md={12} >
-                        <div className="title">
-                            <div className="add-icon-wrap">Experience </div>
-                            <AddIcon className="add-icon" onClick={experienceClickOpen} ></AddIcon>
-                        </div>
-
-                    </Grid>
-                    {uniqueCompanies.map((company) => {
-                        const companyData = history.filter(item => item.companyName === company).sort((a, b) => a.endDate - b.endDate);
-                        return <>
-                            <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
-
-                                <Experience companyName={company} companyData={companyData} />
-                            </Grid>
-                        </>
-                    })}
-                </Grid>
-                <div >
-                    <BootstrapDialog
-                        onClose={skillClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={openSkill}
-                    >
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={skillClose}> Add Skills </BootstrapDialogTitle>
-                        <DialogContent dividers className='dialogContent1'>
-                            <AddSkills></AddSkills>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button variant="contained" href="#contained-buttons" onClick={skillClose}>
-                                Save changes
-                            </Button>
-                        </DialogActions>
-                    </BootstrapDialog>
-                    <BootstrapDialog
-                        onClose={courseClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={openCourse}
-                    >
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={courseClose}> Add Couress </BootstrapDialogTitle>
-                        <DialogContent dividers className='dialogContent2'>
-                            <AddCourses></AddCourses>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button variant="contained" href="#contained-buttons" onClick={courseClose}>
-                                Save changes
-                            </Button>
-                        </DialogActions>
-                    </BootstrapDialog>
-
-                    <BootstrapDialog
-                        onClose={certificateClose}
-                        aria-labelledby="customized-dialog-title"
-                        open={openCertificate}
-                    >
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={certificateClose}> Add Certificates </BootstrapDialogTitle>
-                        <DialogContent dividers className='dialogContent2'>
-                            <AddCertificate></AddCertificate>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button variant="contained" href="#contained-buttons" onClick={certificateClose}>
-                                Save changes
-                            </Button>
-                        </DialogActions>
-                    </BootstrapDialog>
-
-                    <BootstrapDialog
-                        onClose={experienceClose}
-                        aria-labelledby="customized-dialog-title2"
-                        size="xxxl" style={{ maxWidth: '1200px' }}
-                        open={openExperience}
-                    >
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={experienceClose}> Add Experience </BootstrapDialogTitle>
-                        <DialogContent dividers className='dialogContent1'>
-                            <AddExperience></AddExperience>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button variant="contained" href="#contained-buttons" onClick={experienceClose}>
-                                Save changes
-                            </Button>
-                        </DialogActions>
-                    </BootstrapDialog>
-
-
-                    <BootstrapDialog
-                        onClose={shortListClose}
-                        aria-labelledby="customized-dialog-title2"
-                        size="xxxl" style={{ maxWidth: '1200px' }}
-                        open={openshortList}
-                    >
-                        <BootstrapDialogTitle id="customized-dialog-title" onClose={shortListClose}> ShortList </BootstrapDialogTitle>
-                        <DialogContent dividers className='dialogContent1'>
-                            <Shortlist></Shortlist>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button variant="contained" href="#contained-buttons" onClick={shortListClose}>
-                                ShortList
-                            </Button>
-                        </DialogActions>
-                    </BootstrapDialog>
+            </Grid>
+        <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+            <div className="tittle">About</div>
+            <div className="about">{profile.about}</div>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+            <div className="tittle">Skills
+                <div className="edit-add-icon-wrap">
+                    <AddIcon className="edit-add-icon" onClick={skillClickOpen} ></AddIcon>
+                    <EditIcon className="edit-add-icon" onClick={handleEditSkill} />
                 </div>
+            </div>
+
+            <List dense={true} disablePadding={true}>
+                {skills.map((skill) => (
+                    value = ratings(skill),
+                    <ListItem secondaryAction={
+                        <Rating name="read-only" size="small" value={value
+                        } readOnly max={4} />}>
+                        <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
+                            } yrs, ${skill.lastUsed
+                            })`}</span>} />
+                    </ListItem>
+                ))}
+            </List>
+
+        </Grid>
+        <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+            <div className="tittle">Courses
+                <div className="edit-add-icon-wrap">
+                    <AddIcon className="edit-add-icon" onClick={courseClickOpen}></AddIcon>
+                    <EditIcon className="edit-add-icon" />
+                </div>
+            </div>
+
+            <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
+                {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
+                    <ListItemText primary={course.courseName} />{openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit><List component="div" disablePadding > <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
+                        }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseCompletionDate
+                            }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- from ${course.courseFrom
+                                }`} /></List>
+                    </Collapse></>))}
+            </List>
+
+        </Grid>
+        <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+
+            <div className="tittle">Certificates
+                <div className="edit-add-icon-wrap">
+                    <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
+                    <EditIcon className="edit-add-icon" onClick={handleEditCertificate} />
+                </div>
+            </div>
+            <List dense={true} disableGutters disablePadding>
+                {certificates.map((certificate, index) => (<>
+                    <ListItemButton onClick={() => handleCertificate(index)}>
+                        <ListItemText primary={certificate.certificationsName
+                        } />
+                        {openForCertificate.includes(index) ? <ExpandLess /> : <ExpandMore />}
+                    </ListItemButton>
+                    <Collapse in={openForCertificate.includes(index)} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsType
+                                }`} />
+                            <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsCompletionDate}`} />
+                            <ListItemText sx={{ pl: 4 }} secondary={`- from ${certificate.certificationsFrom
+                                }`} />
+                        </List>
+                    </Collapse> </>))}
+            </List>
+        </Grid>
+        <Grid container>
+            <Grid item xs={12} sm={12} md={12} >
+                <div className="title">
+                    <div className="add-icon-wrap">Experience </div>
+                    <AddIcon className="add-icon" onClick={experienceClickOpen} ></AddIcon>
+                </div>
+
+>>>>>>> 0a24612470bd35d938600170bf13ae4e83578e5d
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+                <div className="tittle">Skills
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={skillClickOpen} ></AddIcon>
+                        <EditIcon className="edit-add-icon" onClick={handleEditSkill} />
+                    </div>
+                </div>
+
+                <List dense={true} disablePadding={true}>
+                    {skills.map((skill) => (
+                        value = ratings(skill),
+                        <ListItem secondaryAction={
+                            <Rating name="read-only" size="small" value={value
+                            } readOnly max={4} />}>
+                            <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
+                                } yrs, ${skill.lastUsed
+                                })`}</span>} />
+                        </ListItem>
+                    ))}
+                </List>
+
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+                <div className="tittle">Courses
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={courseClickOpen}></AddIcon>
+                        <EditIcon className="edit-add-icon" />
+                    </div>
+                </div>
+
+                <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
+                    {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
+                        <ListItemText primary={course.courseName} />{openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit><List component="div" disablePadding > <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
+                            }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseCompletionDate
+                                }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- from ${course.courseFrom
+                                    }`} /></List>
+                        </Collapse></>))}
+                </List>
+
+            </Grid>
+            <Grid item xs={12} sm={6} md={3} style={{ height: 'auto' }} padding={1}>
+
+                <div className="tittle">Certificates
+                    <div className="edit-add-icon-wrap">
+                        <AddIcon className="edit-add-icon" onClick={certificateClickOpen}></AddIcon>
+                        <EditIcon className="edit-add-icon" />
+                    </div>
+                </div>
+                <List dense={true} disableGutters disablePadding>
+                    {certificates.map((certificate, index) => (<>
+                        <ListItemButton onClick={() => handleCertificate(index)}>
+                            <ListItemText primary={certificate.certificationsName
+                            } />
+                            {openForCertificate.includes(index) ? <ExpandLess /> : <ExpandMore />}
+                        </ListItemButton>
+                        <Collapse in={openForCertificate.includes(index)} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                                <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsType
+                                    }`} />
+                                <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsCompletionDate}`} />
+                                <ListItemText sx={{ pl: 4 }} secondary={`- from ${certificate.certificationsFrom
+                                    }`} />
+                            </List>
+                        </Collapse> </>))}
+                </List>
+            </Grid>
+            <Grid container>
+                <Grid item xs={12} sm={12} md={12} >
+                    <div className="title">
+                        <div className="add-icon-wrap">Experience </div>
+                        <AddIcon className="add-icon" onClick={experienceClickOpen} ></AddIcon>
+                    </div>
+
+                </Grid>
+                {uniqueCompanies.map((company) => {
+                    const companyData = history.filter(item => item.companyName === company).sort((a, b) => a.endDate - b.endDate);
+                    return <>
+                        <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
+
+                            <Experience companyName={company} companyData={companyData} />
+                        </Grid>
+                    </>
+                })}
+            </Grid>
+            <div >
+                <BootstrapDialog
+                    onClose={skillClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openSkill}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={skillClose}> Add Skills </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <AddSkills></AddSkills>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={skillClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>
+                </BootstrapDialog>
+                <BootstrapDialog
+                    onClose={courseClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openCourse}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={courseClose}> Add Couress </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent2'>
+                        <AddCourses></AddCourses>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={courseClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>
+                </BootstrapDialog>
+
+                <BootstrapDialog
+                    onClose={certificateClose}
+                    aria-labelledby="customized-dialog-title"
+                    open={openCertificate}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={certificateClose}> Add Certificates </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent2'>
+                        <AddCertificate></AddCertificate>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={certificateClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>
+                </BootstrapDialog>
+
+                <BootstrapDialog
+                    onClose={experienceClose}
+                    aria-labelledby="customized-dialog-title2"
+                    size="xxxl" style={{ maxWidth: '1200px' }}
+                    open={openExperience}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={experienceClose}> Add Experience </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <AddExperience></AddExperience>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={experienceClose}>
+                            Save changes
+                        </Button>
+                    </DialogActions>
+                </BootstrapDialog>
+
+
+<<<<<<< HEAD
+    <BootstrapDialog
+        onClose={shortListClose}
+        aria-labelledby="customized-dialog-title2"
+        size="xxxl" style={{ maxWidth: '1200px' }}
+        open={openshortList}
+    >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={shortListClose}> ShortList </BootstrapDialogTitle>
+        <DialogContent dividers className='dialogContent1'>
+            <Shortlist></Shortlist>
+        </DialogContent>
+        <DialogActions>
+            <Button variant="contained" href="#contained-buttons" onClick={shortListClose}>
+                ShortList
+            </Button>
+        </DialogActions>
+    </BootstrapDialog>
+                </div >
 
             </Grid >
         </>
+=======
+                <BootstrapDialog
+                    onClose={shortListClose}
+                    aria-labelledby="customized-dialog-title2"
+                    size="xxxl" style={{ maxWidth: '1200px' }}
+                    open={openshortList}
+                >
+                    <BootstrapDialogTitle id="customized-dialog-title" onClose={shortListClose}> ShortList </BootstrapDialogTitle>
+                    <DialogContent dividers className='dialogContent1'>
+                        <Shortlist></Shortlist>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button variant="contained" href="#contained-buttons" onClick={shortListClose}>
+                            ShortList
+                        </Button>
+                    </DialogActions>                  
+                </BootstrapDialog>
+            </div>
+            
+        </Grid >
+        </div>
+        </div>
+>>>>>>> 0a24612470bd35d938600170bf13ae4e83578e5d
     )
 }
 export default Profile
