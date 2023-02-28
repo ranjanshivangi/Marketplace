@@ -22,6 +22,9 @@ const Header = () => {
     const onClickingEmployees = () => {
         navigate('/employees');
     }
+    const onClickingShortlist = () => {
+        navigate('/shortlist');
+    }
 
     const onClickingProfile =()=>{
         navigate(`/profile/${id}`);
@@ -52,15 +55,15 @@ const Header = () => {
                         <PeopleAltIcon htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Employees</span>
                     </IconButton>
-                    
+                    <IconButton size="medium" color="inherit" className="icon" onClick={onClickingShortlist}>
+                        <CreditScoreIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">Shortlist</span>
+                    </IconButton>
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingProfile}>
                         <AccountCircle htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Me</span>
                     </IconButton>
-                    <IconButton size="medium" color="inherit" className="icon" onClick={onClickingProfile}>
-                        <CreditScoreIcon htmlColor="grey" fontSize="large" />
-                        <span className="iconstext">ShortList</span>
-                    </IconButton>
+                   
                 </Box>
             </Toolbar>
         </AppBar>

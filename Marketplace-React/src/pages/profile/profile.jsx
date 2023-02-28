@@ -257,7 +257,7 @@ const Profile = () => {
                     <div className="Name">
                         <div className='name-header'>{profile.name
                         }</div>
-                        <div className="des">{profile.designation} | {profilejson.EmployID}</div>
+                        <div className="des">{profile.designation} | {profile.employeeId}</div>
                         <div className="para-containter para-containte">
                             <div className="para"><span className="p1" >Status:</span> <span className="p2" >{profile.status}</span></div>
                             <div className="para"><span className="p1" >Manager:</span><span className="p2"> {profile.currentManager
