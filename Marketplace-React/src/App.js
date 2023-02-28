@@ -6,6 +6,7 @@ import Profile from './pages/profile/profile.jsx';
 import ShortList from './pages/shortlist/shortlist.jsx';
 import './App.css';
 import EditSkill from '../src/pages/editSkill/EditSkills'
+import EditCertificate from './components/edit/editCertificate.jsx';
 import {
   BrowserRouter as Router,
   Routes,
@@ -25,6 +26,7 @@ function App() {
           <Route path="/shortlist/" element={<ShortList/>}></Route>
           <Route path="/profile/:id" element={<Profile/>}></Route>
           <Route path="/profile/skill/:id" element={<EditSkill/>}></Route>
+          <Route path="/profile/certificate/:id" element={<EditCertificate/>}></Route>
         </Routes>
       </Router>
     </div>
