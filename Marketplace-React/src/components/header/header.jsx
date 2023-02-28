@@ -9,6 +9,7 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
 const Header = () => {
     let navigate = useNavigate();
     const { id } = useParams();
@@ -51,9 +52,14 @@ const Header = () => {
                         <PeopleAltIcon htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Employees</span>
                     </IconButton>
+                    
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingProfile}>
                         <AccountCircle htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Me</span>
+                    </IconButton>
+                    <IconButton size="medium" color="inherit" className="icon" onClick={onClickingProfile}>
+                        <CreditScoreIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">ShortList</span>
                     </IconButton>
                 </Box>
             </Toolbar>

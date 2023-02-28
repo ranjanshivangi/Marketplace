@@ -36,7 +36,7 @@ const Experience = ({ companyName, companyData }) => {
                                     <div className="project">
                                         <Divider variant="full width"/>
                                         <span className="project-name">{details.projectName}</span>
-                                        <span className="date">{details.startDate}-{details.endDate}</span>
+                                        <span className="date">{new Date(details.startDate).toLocaleDateString()}-{new Date(details.endDate).toLocaleDateString()}</span>
                                         <ReactReadMoreReadLess
                                             charLimit={100}
                                             readMoreText={"..see more"}
