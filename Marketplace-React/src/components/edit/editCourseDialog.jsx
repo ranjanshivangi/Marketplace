@@ -6,7 +6,8 @@ import './editCourseDialog.scss'
 import Select from 'react-select';
 import TextField from '@mui/material/TextField';
 
-const EditSkillDialog = (selectedCourseName) => {
+
+const EditCourseDialog = () => {
     
     const { id } = useParams();
     const [courseName, setCourseName] = useState([]);
@@ -17,7 +18,7 @@ const EditSkillDialog = (selectedCourseName) => {
     
     useEffect(() => {
         getEmployeeCourse();
-        setSelectedCourse(selectedCourseName.course)
+        // setSelectedCourse(selectedCourseName.course)
     }, [])
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
@@ -31,11 +32,10 @@ const EditSkillDialog = (selectedCourseName) => {
             .catch((err) => {
                 console.log(err);
             })
-    }
-    
+    } 
 
     return (
-        <div>
+        <>
             <div>
                 <div className='padding-bottom'>Course name*
                     <Select
@@ -68,10 +68,10 @@ const EditSkillDialog = (selectedCourseName) => {
                         </label>
                     </div>
                 </div>
-                <div>Assosiated with : <TextField id="outlined-basic" label="Outlined" variant="outlined" /></div>
-               
+                <div>Assosiated with :</div>
+                <TextField id="outlined-basic" variant="outlined" style={{width:'100%'}} />
             </div>
-        </div>
+        </>
     )
 }
-export default EditSkillDialog
+export default EditCourseDialog

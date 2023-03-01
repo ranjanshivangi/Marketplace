@@ -108,8 +108,8 @@ const EditCourse = () => {
                             open={openEditCourse}
                         >
                             <BootstrapDialogTitle id="customized-dialog-title" onClose={handleEachCourseEditClose}> Edit Course*</BootstrapDialogTitle>
-                            <DialogContent dividers className='dialogContent1'>
-                                <EditCourseDialog course={selectedCourse}/>
+                            <DialogContent dividers className='dialogContent4'>
+                                <EditCourseDialog />
                             </DialogContent>
                             <DialogActions>
                                 <Button variant="contained" href="#contained-buttons" onClick={handleEachCourseEditClose}>
