@@ -234,6 +234,7 @@ const Profile = () => {
     }
     const handleEditCourse =()=>{
         navigate(`/profile/course/${id}`);
+    }
     const handleEditCertificate =()=>{
         navigate(`/profile/certificate/${id}`);
     }
@@ -485,5 +486,5 @@ const Profile = () => {
         </>
     )
 }
-}
+
 export default Profile
