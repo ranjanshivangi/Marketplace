@@ -69,7 +69,7 @@ const AddExperiece = () => {
     }
 
     return (
-        <div>
+        <>
             <div  >Designation*
                 <Select
                     style={{minheight:'90px'}}
@@ -78,14 +78,14 @@ const AddExperiece = () => {
                     value={selectedJobTitle}
                     onChange={setselectedJobTitle}
                 /></div>
-            <div  className='employement-type'>Employement Type
+            <div  className='e-employement-type'>Employement Type
                 <Select
                     options={employementType}
                     value={selectedEmployementType}
                     onChange={setSelectedEmployementType}
                 /></div>
 
-            <div className='company-name' >Company Name*
+            <div className='e-company-name' >Company Name*
             </div>
             <TextField
                 style={{ width: '100%' }}
@@ -101,7 +101,7 @@ const AddExperiece = () => {
                 id="outlined-required"
                 
             />
-            <div  className='location'>Location
+            <div  className='e-location'>Location
             </div>
             <TextField
                 style={{ width: '100%' }}
@@ -110,7 +110,7 @@ const AddExperiece = () => {
                 placeholder="Ex: Noida,Banglore"
             />
 
-            <div className='checkbox'>
+            <div className='e-checkbox'>
             <FormControlLabel
                 control={<Checkbox checked={isChecked} onChange={handleCheckboxChange} />}
                 label="I am currently working in this role"
@@ -142,7 +142,7 @@ const AddExperiece = () => {
                 }
             </div>
 
-            <div className='description'>
+            <div className='e-description'>
                 <div>Description</div>
                 <TextareaAutosize
                     aria-label="empty textarea"
@@ -153,7 +153,7 @@ const AddExperiece = () => {
             <div className='skills'>
 
 
-                <div className='sill-select' >Skill*
+                <div className='e-sill-select' >Skill*
                     <div>We recommend adding your top 5 used in this role. They’ll also appear in your Skills section.</div>
                     <Select
                         id="skill-select"
@@ -163,7 +163,7 @@ const AddExperiece = () => {
                         isMulti
                     /></div>
             </div>
-        </div>
+        </>
     )
 }
 

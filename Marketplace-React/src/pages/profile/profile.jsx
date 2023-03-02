@@ -452,7 +452,7 @@ const Profile = () => {
                     open={openExperience}
                 >
                     <BootstrapDialogTitle id="customized-dialog-title" onClose={experienceClose}> Add Experience </BootstrapDialogTitle>
-                    <DialogContent dividers className='dialogContent1'>
+                    <DialogContent dividers className='dialogContent3'>
                         <AddExperience></AddExperience>
                     </DialogContent>
                     <DialogActions>
