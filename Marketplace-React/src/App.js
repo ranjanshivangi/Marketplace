@@ -5,7 +5,8 @@ import Employees from './pages/employees/employees.jsx';
 import Profile from './pages/profile/profile.jsx';
 import ShortList from './pages/shortlist/shortlist.jsx';
 import './App.css';
-import EditSkill from '../src/pages/editSkill/EditSkills'
+//import EditSkill from '../src/pages/editSkill/EditSkills'
+import EditSkill from './components/edit/editSkill.jsx';
 import EditCertificate from './components/edit/editCertificate.jsx';
 import {
   BrowserRouter as Router,

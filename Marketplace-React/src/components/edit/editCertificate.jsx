@@ -14,7 +14,7 @@ import { useParams } from "react-router";
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import { useNavigate } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
-//import EditcertificateDialog from './editCertificateDialog';
+import EditcertificateDialog from './editCertificateDialog';
 import Header from '../header/header';
 
 const EditCertificate = () => {
@@ -109,7 +109,7 @@ const EditCertificate = () => {
                     >
                         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleEachCertificateEditClose}> Edit {selectedCertificate} </BootstrapDialogTitle>
                         <DialogContent dividers className='dialogContent1'>
-                            {/* <EditcertificateDialog></EditcertificateDialog> */}
+                            <EditcertificateDialog></EditcertificateDialog>
                         </DialogContent>
                         <DialogActions>
                             <Button variant="contained" href="#contained-buttons" onClick={handleEachCertificateEditClose}>

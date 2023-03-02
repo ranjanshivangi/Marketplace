@@ -16,7 +16,31 @@ import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import { useNavigate } from "react-router";
 import EditIcon from '@mui/icons-material/Edit';
 import EditSkillDialog from './editSkillDialog';
+import Header from '../header/header';
    
+function BootstrapDialogTitle(props) {
+    const { children, onClose, ...other } = props;
+
+    return (
+        <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+            {children}
+            {onClose ? (
+                <IconButton
+                    aria-label="close"
+                    onClick={onClose}
+                    sx={{
+                        position: 'absolute',
+                        right: 8,
+                        top: 8,
+                        color: (theme) => theme.palette.grey[500],
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
+            ) : null}
+        </DialogTitle>
+    );
+}
 
 const EditSkill = () => {
         const [openEditSkill, setOpenEditSkill] = React.useState(false);
@@ -54,31 +78,10 @@ const EditSkill = () => {
             },
         }));
 
-        function BootstrapDialogTitle(props) {
-            const { children, onClose, ...other } = props;
-
-            return (
-                <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-                    {children}
-                    {onClose ? (
-                        <IconButton
-                            aria-label="close"
-                            onClick={onClose}
-                            sx={{
-                                position: 'absolute',
-                                right: 8,
-                                top: 8,
-                                color: (theme) => theme.palette.grey[500],
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                    ) : null}
-                </DialogTitle>
-            );
-        }
-
+        
         return (
+            <>
+            <Header/>
             <div className='main-container'>
                 <div className='containers'>
                     <div className='back-skill'>
@@ -116,6 +119,7 @@ const EditSkill = () => {
                     </BootstrapDialog>
                 </div>
             </div>
+            </>
         )
     }
 
