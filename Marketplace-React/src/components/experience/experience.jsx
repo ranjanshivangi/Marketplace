@@ -7,7 +7,6 @@ import ListItemText from '@mui/material/ListItemText';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import { Divider } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
 const Experience = ({ companyName, companyData }) => {
 
     const uniqueRole = companyData.reduce((acc, cur) => {
