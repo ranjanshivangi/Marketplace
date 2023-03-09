@@ -30,6 +30,7 @@ function App() {
           <Route path="/profile/skill/:id" element={<EditSkill/>}></Route>
           <Route path="/profile/course/:id" element={<EditCourse/>}></Route>
           <Route path="/profile/certificate/:id" element={<EditCertificate/>}></Route>
+
         </Routes>
       </Router>
     </div>
