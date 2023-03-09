@@ -1,13 +1,7 @@
-using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
+using Marketplace.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
-using Microsoft.Identity.Web.Resource;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Marketplace.Data;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using System.Text.Json;
 
 namespace Marketplace
 {
