@@ -1,0 +1,74 @@
+[
+    {
+        "employeeID": "INEMP6879",
+        "name": "Shivangi Ranjan",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "React, ASP.Net, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6880",
+        "name": "Aman Gaur",
+        "designation": "Senior Software Engineer",
+        "imgURL": "../images/avator/Pic1.jpg",
+        "skills": "Angular, NodeJs",
+        "location": "Noida",
+        "status": "Proposed"
+    },
+    {
+        "employeeID": "INEMP6881",
+        "name": "Antara Chaudhary",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, ASP.Net, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6882",
+        "name": "Shubham Das",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Java, ASP.Net, NodeJS",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    },
+    {
+        "employeeID": "INEMP6883",
+        "name": "Shruthin Sateesh",
+        "designation": "Software Engineer",
+        "imgURL": "",
+        "skills": "Angular, NodeJS, Mysql, MongoDB",
+        "location": "Noida",
+        "status": "Available"
+    }
+]

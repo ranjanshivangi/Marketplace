@@ -1,59 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
+import JobDescription from './pages/jobdescription/jobdescription.jsx';
+import Dashboard from './pages/Dashboard/dashboard.jsx';
+import Employees from './pages/employees/employees.jsx';
+import Profile from './pages/profile/profile.jsx';
+import ShortList from './pages/shortlist/shortlist.jsx';
+import './App.css';
+//import EditSkill from '../src/pages/editSkill/EditSkills'
+import EditSkill from './components/edit/editSkill.jsx';
+import EditCertificate from './components/edit/editCertificate.jsx';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom"
+import EditCourse from './components/edit/editCourse.jsx';
 
-export default class App extends Component {
-    static displayName = App.name;
 
-    constructor(props) {
-        super(props);
-        this.state = { forecasts: [], loading: true };
-    }
 
-    componentDidMount() {
-        this.populateWeatherData();
-    }
+function App() {
+  return (
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Dashboard/>}></Route>
+          <Route path="view/:id" element={<JobDescription/>}></Route>
+          <Route path="/employees/" element={<Employees/>}></Route>
+          <Route path="/shortlist/" element={<ShortList/>}></Route>
+          <Route path="/profile/:id" element={<Profile/>}></Route>
+          <Route path="/profile/skill/:id" element={<EditSkill/>}></Route>
+          <Route path="/profile/course/:id" element={<EditCourse/>}></Route>
+          <Route path="/profile/certificate/:id" element={<EditCertificate/>}></Route>
 
-    static renderForecastsTable(forecasts) {
-        return (
-            <table className='table table-striped' aria-labelledby="tabelLabel">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Temp. (C)</th>
-                        <th>Temp. (F)</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {forecasts.map(forecast =>
-                        <tr key={forecast.date}>
-                            <td>{forecast.date}</td>
-                            <td>{forecast.temperatureC}</td>
-                            <td>{forecast.temperatureF}</td>
-                            <td>{forecast.summary}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        );
-    }
-
-    render() {
-        let contents = this.state.loading
-            ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-            : App.renderForecastsTable(this.state.forecasts);
-
-        return (
-            <div>
-                <h1 id="tabelLabel" >Weather forecast</h1>
-                <p>This component demonstrates fetching data from the server.</p>
-                {contents}
-            </div>
-        );
-    }
-
-    async populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-        this.setState({ forecasts: data, loading: false });
-    }
+        </Routes>
+      </Router>
+    </div>
+  );
 }
+
+
+export default App;

@@ -1,0 +1,176 @@
+.profile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .prpfilrPic {
+    border-radius: 30px;
+    width: 60%;
+    height: 80%;
+  }
+}
+.Name {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  .name-header {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 36px;
+  }
+  .des {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .para {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    //gap: 1rem;
+    .p1 {
+      width: 35%;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .p2 {
+      font-size: 16px;
+    }
+  }
+}
+.profile-action-icon-box{
+  height: 20%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  
+}
+
+.contact {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2rem;
+  
+  .icon-container {
+    display: flex;
+    padding: 3%;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    .icons {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
+
+.tittle {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  .edit-add-icon-wrap{
+    display: flex;
+    justify-content: space-between;
+   }
+  .edit-add-icon{
+    color: gray;
+    margin-right: 12px;
+   }
+   
+}
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  
+  .add-icon-wrap{
+    display: flex;
+    justify-content: space-between;
+   }
+  .add-icon{
+    color: gray;
+    margin-right: 12px;
+    padding-left: 25%;
+   }
+   
+}
+.about {
+  text-align: justify;
+  padding: 3%;
+  font-size: 16px;
+}
+.skilldetail {
+  color: grey;
+  text-align: justify;
+  font-size: 16px;
+}
+
+.dialogContent1{
+  width: 550px;
+  height:340px;
+}
+.dialogContent2{
+  width: 550px;
+  height: 240px;
+}
+.dialogContent3{
+  width: 550px;
+  height: 440px;
+}
+.profile-container{
+  margin-top: 5%;
+}
+
+
+@media only screen and (min-width: 220px) {
+  .emids-icon {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .para-containte {
+    width: 80%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .para-containte {
+    width: 70%;
+  }
+  .emids-icon {
+    display: block;
+  }
+}
+@media only screen and (min-width: 940px) {
+  .para-containter {
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .emids-icon {
+    display: block;
+  }
+}
+.i {
+  color: gray;
+}

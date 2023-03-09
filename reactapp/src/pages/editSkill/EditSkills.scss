@@ -1,0 +1,11 @@
+.container-main{
+    background-color: #f7f7f9;
+    width: 100vw; 
+    min-height: 100vh;
+    max-height: auto;
+    display: flex;
+    flex-direction: column;
+    .editskill-component{
+        margin-top: 10%;
+    }
+}

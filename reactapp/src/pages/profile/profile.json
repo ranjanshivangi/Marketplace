@@ -1,0 +1,52 @@
+{
+    "Name": "Nagashree Gajendra Mahendrakar",
+    "Desigation": "Senior Software Engineer",
+     "EmployID": "INEMP6879",
+     "Status": "Available",
+     "CurrentManager": "Amy Vergis",
+    "CurrentProject": "PwD",
+    "email": "shivangi.ranjan@emids.com",
+    "Contact": "8065264463", 
+    "Location": "Noida",
+    "AboutMe": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec eratLorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec eratLorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+    "Courses": [
+        {"Name": "Full Stack Developement with MERN Stack",
+        "Date": "08-12-2022",
+        "From": "Bridgelabz",
+        "Type": "External"
+        },
+        { "Name": "Full Stack Developement with ASP.Net MVC",
+        "Date": "06/22","From": "Emids Academy",
+        "Type": "Internal"
+        }
+    ],
+    "Certification": [
+        {"Name": "AWS Certified Developer Associate",
+        "Date": "06/21",
+        "From": "Udemy",
+        "Type": "Internal"
+        },
+        {"Name": "Certified Scrum Developer",
+        "Date": "06/21",
+        "From": "Udemy",
+        "Type": "Internal"
+        }
+    ],"Skills": [
+        {"SkillName": "ASP.Net",
+        "Proficiency": 3,
+        "LastUsed": "02/2022",
+        "Experience": 5
+        },
+         {"SkillName": "React",
+         "Proficiency": 2,
+         "LastUsed": "02/2022",
+         "Experience": 2
+        },
+        {
+            "SkillName": "MySQL",
+            "Proficiency": 1,
+            "LastUsed": "02/2022",
+            "Experience": 1
+        }
+    ]
+}
