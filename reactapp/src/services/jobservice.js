@@ -1,12 +1,10 @@
 import axios from "axios";
 
-let host='https://localhost:4430/';
-
 export const getAllJobs = async () => {
-    let data = await axios.get(`${host}api/Jobs`);
+    let data = await axios.get(`${process.env.REACT_APP_HOST}api/Jobs`);
     return data
 }
 export const getJobsById = async (id) => {
-    let data = await axios.get(`${host}api/Jobs/${id}`);
+    let data = await axios.get(`${process.env.REACT_APP_HOST}api/Jobs/${id}`);
     return data
 }

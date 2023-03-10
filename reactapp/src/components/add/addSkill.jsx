@@ -34,7 +34,6 @@ const AddSkills = () => {
   const getSkills = () => {
     getEmployeeHistory(id)
       .then((res) => {
-        console.log(res.data)
         setProjectName(res.data)
       })
       .catch((err) => {
@@ -43,7 +42,6 @@ const AddSkills = () => {
 
     getEmployeeCourses(id)
       .then((res) => {
-        console.log(res.data)
         setcourseFrom(res.data)
       })
       .catch((err) => {
@@ -52,7 +50,6 @@ const AddSkills = () => {
 
     getEmployeeCertificate(id)
       .then((res) => {
-        console.log(res.data)
         setCertificateFrom(res.data)
       })
       .catch((err) => {
