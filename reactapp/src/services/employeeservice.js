@@ -1,5 +1,7 @@
 import axios from "axios";
-let host='https://localhost:44391/';
+import env from "react-dotenv";
+
+let host='https://localhost:4430/';
 
 export const getEmployee=async()=>{
     let data=await axios.get(`${host}api/Employees`);
