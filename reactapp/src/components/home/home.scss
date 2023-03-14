@@ -1,3 +1,19 @@
+
+.home-container{  
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 5rem;
+  gap: 1.5rem;
+}
+.banner{  
+  width: 99%;
+  height: auto;  
+  
+}
 .jobcontainer {
   height: 15vh;
   display: flex;
@@ -5,7 +21,7 @@
   justify-content: flex-start;
   align-items: center;
   gap: .5rem;
-  //font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
 }
 .jobtitle {
   color: #03286d;
@@ -21,4 +37,7 @@
 .more-button{
   width: 100%;  
   
+}
+.error-dialog{
+  align-self: flex-start;
 }

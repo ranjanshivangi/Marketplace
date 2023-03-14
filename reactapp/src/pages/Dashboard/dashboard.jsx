@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../../components/header/header";
 import Home from "../../components/home/home.jsx";
-import './dashboard.scss'
+import './dashboard.scss';
 
 function Dashboard() {
-  
+
   return <>
     <div className="dashcontainer">
-      <Header />
+      <Header />      
       <Home />
     </div>
   </>

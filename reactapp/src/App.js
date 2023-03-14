@@ -15,24 +15,28 @@ import {
 } from "react-router-dom"
 import EditCourse from './components/edit/editCourse.jsx';
 
+import ErrorHandler from './components/errorhandler/errorhandler.jsx';
+
 
 
 function App() {
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Dashboard/>}></Route>
-          <Route path="view/:id" element={<JobDescription/>}></Route>
-          <Route path="/employees/" element={<Employees/>}></Route>
-          <Route path="/shortlist/" element={<ShortList/>}></Route>
-          <Route path="/profile/:id" element={<Profile/>}></Route>
-          <Route path="/profile/skill/:id" element={<EditSkill/>}></Route>
-          <Route path="/profile/course/:id" element={<EditCourse/>}></Route>
-          <Route path="/profile/certificate/:id" element={<EditCertificate/>}></Route>
-
-        </Routes>
-      </Router>
+      
+        <Router>
+          <Routes>
+            <Route path="/" element={<Dashboard />}></Route>
+            <Route path="view/:id" element={<JobDescription />}></Route>
+            <Route path="/employees/" element={<Employees />}></Route>
+            <Route path="/shortlist/" element={<ShortList />}></Route>
+            <Route path="/profile/:id" element={<Profile />}></Route>
+            <Route path="/profile/skill/:id" element={<EditSkill />}></Route>
+            <Route path="/profile/course/:id" element={<EditCourse />}></Route>
+            <Route path="/profile/certificate/:id" element={<EditCertificate />}></Route>
+            <Route path="/error" element={<ErrorHandler />}></Route>
+          </Routes>
+        </Router>
+      
     </div>
   );
 }

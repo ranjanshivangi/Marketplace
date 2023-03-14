@@ -6,8 +6,7 @@ const EditSkills = () => {
   return (
     <div className='container-main'>
       <div> <Header /></div>
-      <div className='editskill-component'> <EditSkill/></div>
-       
+      <div className='editskill-component'> <EditSkill/></div>     
         
     </div>
   )
