@@ -9,3 +9,4 @@ export const SKILLS_API=`${API_BASE_URL}/Skills`
 export const RRS_API=`${API_BASE_URL}/Rrs`
 export const EMPLOYEE_API=`${API_BASE_URL}/Employees`
 export const EMPLOYEE_SKILLS_API=`${API_BASE_URL}/EmployeeSkills`
+export const EMPLOYEMENT_HISTORY_API=`${API_BASE_URL}/EmployementHistories`
