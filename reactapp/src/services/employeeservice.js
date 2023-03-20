@@ -1,32 +1,18 @@
 import axios from "axios";
-
+import { EMPLOYEE_API ,EMPLOYEMENT_HISTORY_API} from "../config"; 
 
 export const getEmployee=async()=>{
-    let data=await axios.get(`${process.env.REACT_APP_HOST}api/Employees`);
+    let data=await axios.get(`${EMPLOYEE_API}`);
     return data
 }
 
 export const getEmployeeProfile = async (id) => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/Employees/${id}`);
+    let data = await axios.get(`${EMPLOYEE_API}/${id}`);
     return data
 }
 
-export const getEmployeeSkills = async (id) => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/EmployeeSkills/${id}`);
-    return data
-}
-
-export const getEmployeeCourses = async (id) => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/EmployeeCourses/${id}`);
-    return data
-}
-
-export const getEmployeeCertificates = async (id) => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/EmployeeCertifications/${id}`);
-    return data
-}
 
 export const getEmployeeHistory = async (id) => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/EmployementHistories/${id}`);
+    let data = await axios.get(`${EMPLOYEMENT_HISTORY_API}/${id}`);
     return data
 }

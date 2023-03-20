@@ -2,7 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { getEmployeeHistory } from '../../services/employeeservice'
 import { getEmployeeCourses } from '../../services/courseService';
-import { getEmployeeCertificate } from '../../services/certificateService';
+import { getEmployeeCertificates } from '../../services/certificateService';
 import { useParams } from "react-router";
 import './editSkillDialog.scss'
 
@@ -38,7 +38,7 @@ const EditSkillDialog = () => {
         console.log(err);
       })
 
-      getEmployeeCertificate(id)
+      getEmployeeCertificates(id)
       .then((res) => {
         console.log(res.data)
         setCertificateName(res.data)

@@ -7,9 +7,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import './editCourse.scss'
-import { getEmployeeCourses } from '../../services/employeeservice'
+import { getEmployeeCourses } from '../../services/courseService'
 import { useParams } from "react-router";
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import { useNavigate } from "react-router";

@@ -8,9 +8,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import './editSkill.scss'
-import { getEmployeeSkills } from '../../services/employeeservice'
+import { getEmployeeSkills } from '../../services/skillService'
 import { useParams } from "react-router";
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import { useNavigate } from "react-router";
