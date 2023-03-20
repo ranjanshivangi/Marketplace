@@ -3,7 +3,7 @@ import Select from 'react-select';
 import { useParams } from "react-router";
 import { getAllCertificate } from '../../services/certificateService';
 import './addCertificate.scss'
-import {getEmployeeCertificates} from '../../services/employeeservice'; 
+import {getEmployeeCertificates} from '../../services/certificateService'; 
 
 const AddCertificate = () => {
     const { id } = useParams();

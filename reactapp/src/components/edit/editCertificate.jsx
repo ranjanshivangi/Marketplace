@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect } from 'react';
 import './editCertificate.scss';
-import { getEmployeeCertificates } from '../../services/employeeservice'
+import { getEmployeeCertificates } from '../../services/certificateService'
 import { useParams } from "react-router";
 import ArrowBackSharpIcon from '@mui/icons-material/ArrowBackSharp';
 import { useNavigate } from "react-router";

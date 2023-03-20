@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { getEmployeeCertificate } from '../../services/certificateService';
+import { getEmployeeCertificates } from '../../services/certificateService';
 import { useParams } from "react-router";
 import './editCertificateDialog.scss'
 import Select from 'react-select';
@@ -17,13 +17,13 @@ const EditCertificateDialog = () => {
    
     
     useEffect(() => {
-        getEmployeeCertificates();
+        getEmployeeCertificate();
     }, [])
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
       };
-    const getEmployeeCertificates = () => { 
-      getEmployeeCertificate(id)
+    const getEmployeeCertificate = () => { 
+      getEmployeeCertificates(id)
             .then((res) => {
                 console.log(res.data)
                 setCertificatesName(res.data)

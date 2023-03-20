@@ -4,7 +4,7 @@ import { useParams } from "react-router";
 import { getAllSkills } from '../../services/skillService';
 import { getEmployeeHistory } from '../../services/employeeservice'
 import { getEmployeeCourses } from '../../services/courseService';
-import { getEmployeeCertificate } from '../../services/certificateService';
+import { getEmployeeCertificates } from '../../services/certificateService';
 import './addSkill.scss'
 
 const proficiencyOptions = [
@@ -48,7 +48,7 @@ const AddSkills = () => {
         console.log(err);
       })
 
-    getEmployeeCertificate(id)
+    getEmployeeCertificates(id)
       .then((res) => {
         setCertificateFrom(res.data)
       })

@@ -1,11 +1,14 @@
 import axios from "axios";
-let host='https://localhost:4430/';
+import { CERTIFICATION_API,EMPLOYEE_CERTIFICATION_API } from "../config";
 
 export const getAllCertificate = async () => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/Certifications`);
+    let data = await axios.get(`${CERTIFICATION_API}`);
     return data
 }
-export const getEmployeeCertificate = async (id) => {
-    let data = await axios.get(`${process.env.REACT_APP_HOST}api/EmployeeCertifications/${id}`);
+
+
+
+export const getEmployeeCertificates = async (id) => {
+    let data = await axios.get(`${EMPLOYEE_CERTIFICATION_API}/${id}`);
     return data
 }
