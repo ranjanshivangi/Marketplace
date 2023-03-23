@@ -1,7 +1,7 @@
-USE [MarketplaceTest]
+USE [Marketplace]
 GO
 
-/****** Object:  Table [Profiles].[EmployeeCourses]    Script Date: 20-03-2023 18:51:39 ******/
+/****** Object:  Table [Profiles].[EmployeeCourses]    Script Date: 23-03-2023 17:23:35 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -17,6 +17,20 @@ CREATE TABLE [Profiles].[EmployeeCourses](
 	[NonEmidsCoursePlatform] [nvarchar](50) NOT NULL,
 	[NonEmidsCourseType] [tinyint] NOT NULL
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [Profiles].[EmployeeCourses]  WITH CHECK ADD  CONSTRAINT [FK_EmployeeCourses_EmidsCourses] FOREIGN KEY([EmployeeId])
+REFERENCES [Master].[Employees] ([EmployeeId])
+GO
+
+ALTER TABLE [Profiles].[EmployeeCourses] CHECK CONSTRAINT [FK_EmployeeCourses_EmidsCourses]
+GO
+
+ALTER TABLE [Profiles].[EmployeeCourses]  WITH CHECK ADD  CONSTRAINT [FK_EmployeeCourses_EmidsCourses1] FOREIGN KEY([EmidsCourseId])
+REFERENCES [Master].[EmidsCourses] ([CourseId])
+GO
+
+ALTER TABLE [Profiles].[EmployeeCourses] CHECK CONSTRAINT [FK_EmployeeCourses_EmidsCourses1]
 GO
 
 
