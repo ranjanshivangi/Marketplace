@@ -1,7 +1,7 @@
-USE [MarketplaceTest]
+USE [Marketplace]
 GO
 
-/****** Object:  Table [Master].[Skills]    Script Date: 20-03-2023 18:44:45 ******/
+/****** Object:  Table [Master].[Skills]    Script Date: 23-03-2023 17:22:32 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,7 +11,11 @@ GO
 CREATE TABLE [Master].[Skills](
 	[SkillId] [int] NOT NULL,
 	[SkillName] [nvarchar](50) NOT NULL,
-	[SkillType] [tinyint] NULL
+	[SkillType] [tinyint] NULL,
+ CONSTRAINT [PK_Skills] PRIMARY KEY CLUSTERED 
+(
+	[SkillId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 

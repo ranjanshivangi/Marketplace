@@ -1,7 +1,7 @@
-USE [MarketplaceTest]
+USE [Marketplace]
 GO
 
-/****** Object:  Table [Master].[PastEmployments]    Script Date: 20-03-2023 18:44:09 ******/
+/****** Object:  Table [Master].[PastEmployments]    Script Date: 23-03-2023 17:22:11 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,8 +16,20 @@ CREATE TABLE [Master].[PastEmployments](
 	[StartDate] [date] NOT NULL,
 	[XLastDesignation] [nvarchar](50) NOT NULL,
 	[EndDate] [date] NOT NULL,
-	[Notes] [nvarchar](1500) NOT NULL
+	[Notes] [nvarchar](1500) NOT NULL,
+ CONSTRAINT [PK_PastEmployments] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeId] ASC,
+	[XEmployeerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [Master].[PastEmployments]  WITH CHECK ADD  CONSTRAINT [FK_PastEmployments_Employees] FOREIGN KEY([EmployeeId])
+REFERENCES [Master].[Employees] ([EmployeeId])
+GO
+
+ALTER TABLE [Master].[PastEmployments] CHECK CONSTRAINT [FK_PastEmployments_Employees]
 GO
 
 

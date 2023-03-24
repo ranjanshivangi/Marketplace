@@ -1,7 +1,7 @@
-USE [MarketplaceTest]
+USE [Marketplace]
 GO
 
-/****** Object:  Table [Profiles].[Projects]    Script Date: 20-03-2023 18:52:41 ******/
+/****** Object:  Table [Profiles].[Projects]    Script Date: 23-03-2023 17:24:40 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,6 +18,13 @@ CREATE TABLE [Profiles].[Projects](
 	[EndDate] [date] NOT NULL,
 	[Notes] [nvarchar](1500) NOT NULL
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [Profiles].[Projects]  WITH CHECK ADD  CONSTRAINT [FK_Projects_Employees] FOREIGN KEY([EmployeeId])
+REFERENCES [Master].[Employees] ([EmployeeId])
+GO
+
+ALTER TABLE [Profiles].[Projects] CHECK CONSTRAINT [FK_Projects_Employees]
 GO
 
 
