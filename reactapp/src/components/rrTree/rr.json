@@ -12,11 +12,11 @@
             },
             {
                 "empName" : "Shuthin Sateesh",
-                "status" : "Proposed"
+                "status" : "Shortlist"
             },
             {
                 "empName" : "Subham Das",
-                "status" : "Proposed"
+                "status" : "Shortlist"
             }
         ]
     },
@@ -46,7 +46,7 @@
         "Employee" : [
             {
                 "empName" : "Ankur Mishra",
-                "status" : "Alloted"
+                "status" : "Allocated"
             }           
         ]
     },
@@ -57,10 +57,7 @@
         "ProjectName" : "HC Automation Launchpad",
         "LoggedTime" : "2023-10-12",
         "Employee" : [
-            {
-                "empName" : "Antara Chaudhary",
-                "status" : "Alloted"
-            }           
+                 
         ]
     },
     {
@@ -69,11 +66,7 @@
         "AccountName" : "Blue Health Intelligence",
         "ProjectName" : "HC Automation Launchpad",
         "LoggedTime" : "2023-10-12",
-        "Employee" : [
-            {
-                "empName" : "Swapnil Bamb",
-                "status" : "Alloted"
-            }           
+        "Employee" : [                   
         ]
     }
     
