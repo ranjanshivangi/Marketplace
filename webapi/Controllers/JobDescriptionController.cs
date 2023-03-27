@@ -5,31 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 
 namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobsController : ControllerBase
+    public class JobDescriptionController : ControllerBase
     {
         private readonly MarketplaceContext _context;
 
-        public JobsController(MarketplaceContext context)
+        public JobDescriptionController(MarketplaceContext context)
         {
             _context = context;
         }
 
         // GET: api/Jobs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Job>>> GetJob()
+        public async Task<ActionResult<IEnumerable<JobDescription>>> GetJob()
         {
-          if (_context.Job == null)
-          {
-              return NotFound();
-          }
-            return await _context.Job
+            if (_context.JobDescriptions == null)
+            {
+                return NotFound();
+            }
+            return await _context.JobDescriptions
                 .AsNoTracking()
                .AsQueryable()
                .Include(m => m.Rrs).ToListAsync(); ;
@@ -37,13 +37,13 @@ namespace Marketplace.Controllers
 
         // GET: api/Jobs/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Job>> GetJob(int id)
+        public async Task<ActionResult<JobDescription>> GetJob(int id)
         {
-          if (_context.Job == null)
-          {
-              return NotFound();
-          }
-            var job = await _context.Job
+            if (_context.JobDescriptions == null)
+            {
+                return NotFound();
+            }
+            var job = await _context.JobDescriptions
                 .Include(aa => aa.Rrs)
                 .FirstOrDefaultAsync(aa => aa.Jdid == id);
 
@@ -57,7 +57,7 @@ namespace Marketplace.Controllers
 
         // PUT: api/Jobs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public async Task<IActionResult> PutJob(int id, Job job)
         {
             if (id != job.Jdid)
@@ -84,25 +84,25 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Jobs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+       /* [HttpPost]
         public async Task<ActionResult<Job>> PostJob(Job job)
         {
-          if (_context.Job == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.Job'  is null.");
-          }
+            if (_context.Job == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.Job'  is null.");
+            }
             _context.Job.Add(job);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetJob", new { id = job.Jdid }, job);
-        }
+        }*/
 
         // DELETE: api/Jobs/5
-        [HttpDelete("{id}")]
+      /*  [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteJob(int id)
         {
             if (_context.Job == null)
@@ -119,11 +119,11 @@ namespace Marketplace.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool JobExists(int id)
         {
-            return (_context.Job?.Any(e => e.Jdid == id)).GetValueOrDefault();
+            return (_context.JobDescriptions?.Any(e => e.Jdid == id)).GetValueOrDefault();
         }
     }
 }

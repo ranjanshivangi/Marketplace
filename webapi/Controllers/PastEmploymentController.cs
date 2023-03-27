@@ -5,42 +5,42 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 
 namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployementHistoriesController : ControllerBase
+    public class PastEmploymentController : ControllerBase
     {
         private readonly MarketplaceContext _context;
 
-        public EmployementHistoriesController(MarketplaceContext context)
+        public PastEmploymentController(MarketplaceContext context)
         {
             _context = context;
         }
 
         // GET: api/EmployementHistories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployementHistory>>> GetEmployementHistories()
+        public async Task<ActionResult<IEnumerable<PastEmployment>>> GetEmployementHistories()
         {
-          if (_context.EmployementHistories == null)
-          {
-              return NotFound();
-          }
-            return await _context.EmployementHistories.ToListAsync();
+            if (_context.PastEmployments == null)
+            {
+                return NotFound();
+            }
+            return await _context.PastEmployments.ToListAsync();
         }
 
         // GET: api/EmployementHistories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<EmployementHistory>>> GetEmployementHistory(string id)
+        public async Task<ActionResult<IEnumerable<PastEmployment>>> GetEmployementHistory(string id)
         {
-            if (_context.EmployementHistories == null)
+            if (_context.PastEmployments == null)
             {
                 return NotFound();
             }
-            var employementHistory = await _context.EmployementHistories
+            var employementHistory = await _context.PastEmployments
             .Where(x => x.EmployeeId == id).ToListAsync(); if (employementHistory == null)
             {
                 return NotFound();
@@ -50,7 +50,7 @@ namespace Marketplace.Controllers
 
         // PUT: api/EmployementHistories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutEmployementHistory(string id, EmployementHistory employementHistory)
         {
             if (id != employementHistory.CompanyName)
@@ -77,17 +77,17 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/EmployementHistories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+       /* [HttpPost]
         public async Task<ActionResult<EmployementHistory>> PostEmployementHistory(EmployementHistory employementHistory)
         {
-          if (_context.EmployementHistories == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.EmployementHistories'  is null.");
-          }
+            if (_context.EmployementHistories == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.EmployementHistories'  is null.");
+            }
             _context.EmployementHistories.Add(employementHistory);
             try
             {
@@ -106,10 +106,10 @@ namespace Marketplace.Controllers
             }
 
             return CreatedAtAction("GetEmployementHistory", new { id = employementHistory.CompanyName }, employementHistory);
-        }
+        }*/
 
         // DELETE: api/EmployementHistories/5
-        [HttpDelete("{id}")]
+       /* [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployementHistory(string id)
         {
             if (_context.EmployementHistories == null)
@@ -126,11 +126,11 @@ namespace Marketplace.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool EmployementHistoryExists(string id)
         {
-            return (_context.EmployementHistories?.Any(e => e.CompanyName == id)).GetValueOrDefault();
+            return (_context.PastEmployments?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
         }
     }
 }

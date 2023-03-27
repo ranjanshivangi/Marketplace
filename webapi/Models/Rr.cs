@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Marketplace.Models;
+namespace MarketplaceAPI.Models;
 
 public partial class Rr
 {
-    [Key]
     public string Rrnumber { get; set; } = null!;
 
     public byte Status { get; set; }
@@ -36,6 +34,5 @@ public partial class Rr
 
     public int Jdid { get; set; }
     [JsonIgnore]
-    public virtual Job Jd { get; set; } = null!;
-  
+    public virtual JobDescription Jd { get; set; } = null!;
 }

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Marketplace.Models;
+namespace MarketplaceAPI.Models;
 
-public partial class Job
+public partial class JobDescription
 {
-    [Key]
     public int Jdid { get; set; }
 
     public string JobTitle { get; set; } = null!;
@@ -20,10 +18,13 @@ public partial class Job
 
     public string MustHaveSkills { get; set; } = null!;
 
-    public string? NicetohaveSkills { get; set; }
+    public string? NiceToHaveSkills { get; set; }
 
-    public int Experience { get; set; }
-    
+    public int ExperienceInMonths { get; set; }
+
+    public string? PrimarySkill { get; set; }
+
+    public string? SecondarySkill { get; set; }
+   
     public virtual ICollection<Rr> Rrs { get; } = new List<Rr>();
-    
 }

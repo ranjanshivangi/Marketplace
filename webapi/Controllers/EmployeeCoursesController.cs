@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 using Marketplace.DTO;
 using System.Reflection.Metadata;
 
@@ -25,12 +25,12 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployeeCourses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployeeCourses>>> GetEmployeeCourses()
+        public async Task<ActionResult<IEnumerable<EmployeeCourse>>> GetEmployeeCourses()
         {
-          if (_context.EmployeeCourses == null)
-          {
-              return NotFound();
-          }
+            if (_context.EmployeeCourses == null)
+            {
+                return NotFound();
+            }
             return await _context.EmployeeCourses.ToListAsync();
         }
 
@@ -38,27 +38,27 @@ namespace Marketplace.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<EmployeeCourseDTO>>> GetEmployeeCourses(String id)
         {
-          if (_context.EmployeeCourses == null)
-          {
-              return NotFound();
-          }
+            if (_context.EmployeeCourses == null)
+            {
+                return NotFound();
+            }
             var data = await (from t1 in _context.EmployeeCourses
-                              join t2 in _context.Courses on t1.CourseID equals t2.CourseID
+                              join t2 in _context.EmidsCourses on t1.EmidsCourseId equals t2.CourseId
                               where t1.EmployeeId == id
                               select new EmployeeCourseDTO
                               {
-                                  CourseID = t1.CourseID,
+                                  CourseID = t1.EmidsCourseId,
                                   CourseName = t2.CourseName,
                                   CourseCompletionDate = t1.CourseCompletionDate,
-                                  CourseFrom = t1.CourseFrom,
-                                  CourseType = t1.CourseType
+                                  CoursePlatform = t2.CoursePlatform,
+                                  CourseType = t2.CourseType
                               }).ToListAsync();
             return data;
         }
 
         // PUT: api/EmployeeCourses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployeeCourses(int id, EmployeeCourses employeeCourses)
         {
             if (id != employeeCourses.CourseID)
@@ -85,17 +85,17 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/EmployeeCourses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+       /* [HttpPost]
         public async Task<ActionResult<EmployeeCourses>> PostEmployeeCourses(EmployeeCourses employeeCourses)
         {
-          if (_context.EmployeeCourses == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.EmployeeCourses'  is null.");
-          }
+            if (_context.EmployeeCourses == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.EmployeeCourses'  is null.");
+            }
             _context.EmployeeCourses.Add(employeeCourses);
             try
             {
@@ -114,10 +114,10 @@ namespace Marketplace.Controllers
             }
 
             return CreatedAtAction("GetEmployeeCourses", new { id = employeeCourses.CourseID }, employeeCourses);
-        }
+        }*/
 
         // DELETE: api/EmployeeCourses/5
-        [HttpDelete("{id}")]
+       /* [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployeeCourses(int id)
         {
             if (_context.EmployeeCourses == null)
@@ -134,11 +134,11 @@ namespace Marketplace.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
-        private bool EmployeeCoursesExists(int id)
+        private bool EmployeeCoursesExists(string id)
         {
-            return (_context.EmployeeCourses?.Any(e => e.CourseID == id)).GetValueOrDefault();
+            return (_context.EmployeeCourses?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,19 +1,25 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Marketplace.Models
+namespace MarketplaceAPI.Models;
+
+public partial class EmployeeCertification
 {
-    public class EmployeeCertification
-    {
-        public string EmployeeId { get; set; }
-        public int CertificationID { get; set; }
-        public DateTime CertificationsCompletionDate { get; set; }
-        public string CertificationsFrom { get; set; }
-        public string CertificationsType { get; set; }
+    public string EmployeeId { get; set; } = null!;
 
-        [JsonIgnore]
-        public virtual Employee Employee { get; set; }
-        
-        [JsonIgnore]
-        public Certification Certification { get; set; }
-    }
+    public byte IsStandardCertificate { get; set; }
+
+    public int StandardCertificateId { get; set; }
+
+    public DateTime CertificationsCompletionDate { get; set; }
+
+    public string? NonStandardCertificateName { get; set; }
+
+    public string NonStandardIssuer { get; set; } = null!;
+
+    public byte NonStandardCertificateType { get; set; }
+
+    public virtual Employee Employee { get; set; } = null!;
+
+    public virtual StandardCertificate StandardCertificate { get; set; } = null!;
 }

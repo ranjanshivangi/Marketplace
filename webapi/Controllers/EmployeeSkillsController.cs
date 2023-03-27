@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 using Marketplace.DTO;
 
 namespace Marketplace.Controllers
@@ -24,40 +24,40 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployeeSkills
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployeeSkills>>> GetEmployeeSkills()
+        public async Task<ActionResult<IEnumerable<EmployeesSkill>>> GetEmployeeSkills()
         {
-          if (_context.EmployeeSkills == null)
-          {
-              return NotFound();
-          }
-            return await _context.EmployeeSkills.ToListAsync();
+            if (_context.EmployeesSkills == null)
+            {
+                return NotFound();
+            }
+            return await _context.EmployeesSkills.ToListAsync();
         }
 
         // GET: api/EmployeeSkills/5
         [HttpGet("{id}")]
         public async Task<ActionResult<IEnumerable<EmployeeSkillsDTO>>> GetEmployeeSkills(string id)
         {
-          if (_context.EmployeeSkills == null)
-          {
-              return NotFound();
-          }
-            var data = await (from t1 in _context.EmployeeSkills
-                              join t2 in _context.Skills on t1.skillId equals t2.skillId
+            if (_context.EmployeesSkills == null)
+            {
+                return NotFound();
+            }
+            var data = await (from t1 in _context.EmployeesSkills
+                              join t2 in _context.Skills on t1.SkillId equals t2.SkillId
                               where t1.EmployeeId == id
                               select new EmployeeSkillsDTO
                               {
-                                  skillId = t1.skillId,
+                                  skillId = t1.SkillId,
                                   SkillName = t2.SkillName,
-                                  Proficiency = t1.Proficiency,
+                                  Proficiency = t1.Proficience,
                                   LastUsed = t1.LastUsed,
-                                  Experience = t1.Experience
+                                  Experience = t1.ExperienceInMonths
                               }).ToListAsync();
             return data;
         }
 
         // PUT: api/EmployeeSkills/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutEmployeeSkills(string id, EmployeeSkills employeeSkills)
         {
             if (id != employeeSkills.skillId)
@@ -84,17 +84,17 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/EmployeeSkills
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+      /*  [HttpPost]
         public async Task<ActionResult<EmployeeSkills>> PostEmployeeSkills(EmployeeSkills employeeSkills)
         {
-          if (_context.EmployeeSkills == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.EmployeeSkills'  is null.");
-          }
+            if (_context.EmployeeSkills == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.EmployeeSkills'  is null.");
+            }
             _context.EmployeeSkills.Add(employeeSkills);
             try
             {
@@ -113,10 +113,10 @@ namespace Marketplace.Controllers
             }
 
             return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.skillId }, employeeSkills);
-        }
+        }*/
 
         // DELETE: api/EmployeeSkills/5
-        [HttpDelete("{id}")]
+        /*[HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployeeSkills(string id)
         {
             if (_context.EmployeeSkills == null)
@@ -133,11 +133,11 @@ namespace Marketplace.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
-        private bool EmployeeSkillsExists(string id)
+        private bool EmployeeSkillsExists(int id)
         {
-            return (_context.EmployeeSkills?.Any(e => e.skillId == id)).GetValueOrDefault();
+            return (_context.EmployeesSkills?.Any(e => e.SkillId == id)).GetValueOrDefault();
         }
     }
 }

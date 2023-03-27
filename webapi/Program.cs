@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
+using MarketplaceAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 
@@ -15,7 +15,7 @@ namespace Marketplace
 
             builder.Services.AddDbContext<MarketplaceContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("MarketplaceContext") ?? throw new InvalidOperationException("Connection string 'MarketplaceContext' not found.")));
-           
+
             // Add services to the container.
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
