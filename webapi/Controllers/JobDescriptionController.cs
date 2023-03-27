@@ -12,11 +12,11 @@ namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class JobsController : ControllerBase
+    public class JobDescriptionController : ControllerBase
     {
         private readonly MarketplaceContext _context;
 
-        public JobsController(MarketplaceContext context)
+        public JobDescriptionController(MarketplaceContext context)
         {
             _context = context;
         }
