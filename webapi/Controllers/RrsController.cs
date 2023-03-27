@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 
 namespace Marketplace.Controllers
 {
@@ -25,22 +25,22 @@ namespace Marketplace.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rr>>> GetRr()
         {
-          if (_context.Rr == null)
-          {
-              return NotFound();
-          }
-            return await _context.Rr.ToListAsync();
+            if (_context.Rrs == null)
+            {
+                return NotFound();
+            }
+            return await _context.Rrs.ToListAsync();
         }
 
         // GET: api/Rrs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Rr>> GetRr(string id)
         {
-          if (_context.Rr == null)
-          {
-              return NotFound();
-          }
-            var rr = await _context.Rr.FindAsync(id);
+            if (_context.Rrs == null)
+            {
+                return NotFound();
+            }
+            var rr = await _context.Rrs.FindAsync(id);
 
             if (rr == null)
             {
@@ -52,7 +52,7 @@ namespace Marketplace.Controllers
 
         // PUT: api/Rrs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public async Task<IActionResult> PutRr(string id, Rr rr)
         {
             if (id != rr.Rrnumber)
@@ -79,17 +79,17 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Rrs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+  /*      [HttpPost]
         public async Task<ActionResult<Rr>> PostRr(Rr rr)
         {
-          if (_context.Rr == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.Rr'  is null.");
-          }
+            if (_context.Rr == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.Rr'  is null.");
+            }
             _context.Rr.Add(rr);
             try
             {
@@ -108,10 +108,10 @@ namespace Marketplace.Controllers
             }
 
             return CreatedAtAction("GetRr", new { id = rr.Rrnumber }, rr);
-        }
+        }*/
 
         // DELETE: api/Rrs/5
-        [HttpDelete("{id}")]
+       /* [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRr(string id)
         {
             if (_context.Rr == null)
@@ -128,11 +128,11 @@ namespace Marketplace.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool RrExists(string id)
         {
-            return (_context.Rr?.Any(e => e.Rrnumber == id)).GetValueOrDefault();
+            return (_context.Rrs?.Any(e => e.Rrnumber == id)).GetValueOrDefault();
         }
     }
 }

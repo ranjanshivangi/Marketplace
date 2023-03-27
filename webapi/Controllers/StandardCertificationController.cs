@@ -5,42 +5,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 
 namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CertificationsController : ControllerBase
+    public class StandardCertificationController : ControllerBase
     {
         private readonly MarketplaceContext _context;
 
-        public CertificationsController(MarketplaceContext context)
+        public StandardCertificationController(MarketplaceContext context)
         {
             _context = context;
         }
 
         // GET: api/Certifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Certification>>> GetCertifications()
+        public async Task<ActionResult<IEnumerable<StandardCertificate>>> GetCertifications()
         {
-          if (_context.Certifications == null)
-          {
-              return NotFound();
-          }
-            return await _context.Certifications.ToListAsync();
+            if (_context.StandardCertificates == null)
+            {
+                return NotFound();
+            }
+            return await _context.StandardCertificates.ToListAsync();
         }
 
         // GET: api/Certifications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Certification>> GetCertification(int id)
+        public async Task<ActionResult<StandardCertificate>> GetCertification(int id)
         {
-          if (_context.Certifications == null)
-          {
-              return NotFound();
-          }
-            var certification = await _context.Certifications.FindAsync(id);
+            if (_context.StandardCertificates == null)
+            {
+                return NotFound();
+            }
+            var certification = await _context.StandardCertificates.FindAsync(id);
 
             if (certification == null)
             {
@@ -52,7 +53,7 @@ namespace Marketplace.Controllers
 
         // PUT: api/Certifications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+      /*  [HttpPut("{id}")]
         public async Task<IActionResult> PutCertification(int id, Certification certification)
         {
             if (id != certification.CertificationID)
@@ -79,25 +80,25 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Certifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+       /* [HttpPost]
         public async Task<ActionResult<Certification>> PostCertification(Certification certification)
         {
-          if (_context.Certifications == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.Certifications'  is null.");
-          }
+            if (_context.Certifications == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.Certifications'  is null.");
+            }
             _context.Certifications.Add(certification);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCertification", new { id = certification.CertificationID }, certification);
-        }
+        }*/
 
         // DELETE: api/Certifications/5
-        [HttpDelete("{id}")]
+       /* [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCertification(int id)
         {
             if (_context.Certifications == null)
@@ -115,10 +116,10 @@ namespace Marketplace.Controllers
 
             return NoContent();
         }
-
+*/
         private bool CertificationExists(int id)
         {
-            return (_context.Certifications?.Any(e => e.CertificationID == id)).GetValueOrDefault();
+            return (_context.StandardCertificates?.Any(e => e.CertificateId == id)).GetValueOrDefault();
         }
     }
 }

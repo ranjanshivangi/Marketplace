@@ -5,42 +5,42 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 
 namespace Marketplace.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class EmidsCourseController : ControllerBase
     {
         private readonly MarketplaceContext _context;
 
-        public CoursesController(MarketplaceContext context)
+        public EmidsCourseController(MarketplaceContext context)
         {
             _context = context;
         }
 
         // GET: api/Courses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Courses>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<EmidsCourse>>> GetCourses()
         {
-          if (_context.Courses == null)
-          {
-              return NotFound();
-          }
-            return await _context.Courses.ToListAsync();
+            if (_context.EmidsCourses == null)
+            {
+                return NotFound();
+            }
+            return await _context.EmidsCourses.ToListAsync();
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Courses>> GetCourses(int id)
+        public async Task<ActionResult<EmidsCourse>> GetCourses(int id)
         {
-          if (_context.Courses == null)
-          {
-              return NotFound();
-          }
-            var courses = await _context.Courses.FindAsync(id);
+            if (_context.EmidsCourses == null)
+            {
+                return NotFound();
+            }
+            var courses = await _context.EmidsCourses.FindAsync(id);
 
             if (courses == null)
             {
@@ -52,7 +52,7 @@ namespace Marketplace.Controllers
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+       /* [HttpPut("{id}")]
         public async Task<IActionResult> PutCourses(int id, Courses courses)
         {
             if (id != courses.CourseID)
@@ -79,25 +79,25 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+       /* [HttpPost]
         public async Task<ActionResult<Courses>> PostCourses(Courses courses)
         {
-          if (_context.Courses == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.Courses'  is null.");
-          }
+            if (_context.Courses == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.Courses'  is null.");
+            }
             _context.Courses.Add(courses);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCourses", new { id = courses.CourseID }, courses);
         }
-
+*/
         // DELETE: api/Courses/5
-        [HttpDelete("{id}")]
+       /* [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourses(int id)
         {
             if (_context.Courses == null)
@@ -114,11 +114,11 @@ namespace Marketplace.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
         private bool CoursesExists(int id)
         {
-            return (_context.Courses?.Any(e => e.CourseID == id)).GetValueOrDefault();
+            return (_context.EmidsCourses?.Any(e => e.CourseId == id)).GetValueOrDefault();
         }
     }
 }

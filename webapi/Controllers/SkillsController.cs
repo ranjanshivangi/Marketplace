@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Marketplace.Data;
-using Marketplace.Models;
+using MarketplaceAPI.Data;
+using MarketplaceAPI.Models;
 
 namespace Marketplace.Controllers
 {
@@ -23,23 +23,23 @@ namespace Marketplace.Controllers
 
         // GET: api/Skills
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Skills>>> GetSkills()
+        public async Task<ActionResult<IEnumerable<Skill>>> GetSkills()
         {
-          if (_context.Skills == null)
-          {
-              return NotFound();
-          }
+            if (_context.Skills == null)
+            {
+                return NotFound();
+            }
             return await _context.Skills.ToListAsync();
         }
 
         // GET: api/Skills/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Skills>> GetSkills(string id)
+        public async Task<ActionResult<Skill>> GetSkills(string id)
         {
-          if (_context.Skills == null)
-          {
-              return NotFound();
-          }
+            if (_context.Skills == null)
+            {
+                return NotFound();
+            }
             var skills = await _context.Skills.FindAsync(id);
 
             if (skills == null)
@@ -52,10 +52,10 @@ namespace Marketplace.Controllers
 
         // PUT: api/Skills/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSkills(string id, Skills skills)
+       /* [HttpPut("{id}")]
+        public async Task<IActionResult> PutSkills(int id, Skill skills)
         {
-            if (id != skills.skillId)
+            if (id != skills.SkillId)
             {
                 return BadRequest();
             }
@@ -79,18 +79,18 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Skills
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Skills>> PostSkills(Skills skills)
+     /*   [HttpPost]
+        public async Task<ActionResult<Skill>> PostSkills(Skill skills)
         {
-          if (_context.Skills == null)
-          {
-              return Problem("Entity set 'MarketplaceContext.Skills'  is null.");
-          }
-            _context.Skills.Add(skills);
+            if (_context.Skill == null)
+            {
+                return Problem("Entity set 'MarketplaceContext.Skills'  is null.");
+            }
+            _context.Skill.Add(skills);
             try
             {
                 await _context.SaveChangesAsync();
@@ -107,32 +107,32 @@ namespace Marketplace.Controllers
                 }
             }
 
-            return CreatedAtAction("GetSkills", new { id = skills.skillId }, skills);
-        }
+            return CreatedAtAction("GetSkills", new { id = skills.SkillId}, skills);
+        }*/
 
         // DELETE: api/Skills/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSkills(string id)
+      /*  [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSkills(int id)
         {
-            if (_context.Skills == null)
+            if (_context.Skill == null)
             {
                 return NotFound();
             }
-            var skills = await _context.Skills.FindAsync(id);
+            var skills = await _context.Skill.FindAsync(id);
             if (skills == null)
             {
                 return NotFound();
             }
 
-            _context.Skills.Remove(skills);
+            _context.Skill.Remove(skills);
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
+        }*/
 
-        private bool SkillsExists(string id)
+        private bool SkillsExists(int id)
         {
-            return (_context.Skills?.Any(e => e.skillId == id)).GetValueOrDefault();
+            return (_context.Skills?.Any(e => e.SkillId == id)).GetValueOrDefault();
         }
     }
 }

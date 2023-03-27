@@ -1,29 +1,35 @@
-﻿using System.Text.Json.Serialization;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace Marketplace.Models
+namespace MarketplaceAPI.Models;
+
+public partial class Employee
 {
-    public class Employee
-    {
-        [Key]
-        public string EmployeeId { get; set; }
-        public string Name { get; set; }
-        public string Designation { get; set; }
-        public string CurrentProject { get; set; }
-        public string CurrentManager { get; set; }
-        public string Status { get; set; }
-        public string EmailId  { get; set; }
-        public long PhoneNumber { get; set; }
-        public string Location { get; set; }
-        public string About { get; set; }
-        public string ProfilePicture { get; set; }
-        [JsonIgnore]
-        public ICollection<EmployeeSkills> EmployeeSkills { get; set; }
-        [JsonIgnore]
-        public ICollection<EmployeeCertification> EmployeeCertification { get; set; }
-        [JsonIgnore]
-        public ICollection<EmployeeCourses> EmployeeCourses { get; set; }
-        [JsonIgnore]
-        public ICollection<EmployementHistory> EmployeeHistory { get; set; }
-    }
+    public string EmployeeId { get; set; } = null!;
+
+    public string EmployeeName { get; set; } = null!;
+
+    public string Designation { get; set; } = null!;
+
+    public string CurrentProject { get; set; } = null!;
+
+    public string CurrentManager { get; set; } = null!;
+
+    public byte Status { get; set; }
+
+    public string EmailId { get; set; } = null!;
+
+    public string PhoneNumber { get; set; } = null!;
+
+    public string Location { get; set; } = null!;
+
+    public string About { get; set; } = null!;
+
+    public virtual ICollection<EmployeesSkill> EmployeesSkills { get; } = new List<EmployeesSkill>();
+
+    public virtual ICollection<PastEmployment> PastEmployments { get; } = new List<PastEmployment>();
+
+    public virtual ICollection<Shortlist> ShortlistManagerEmployees { get; } = new List<Shortlist>();
+
+    public virtual ICollection<Shortlist> ShortlistShortlistedEmployees { get; } = new List<Shortlist>();
 }
