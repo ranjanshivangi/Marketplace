@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MarketplaceAPI.Data;
 using MarketplaceAPI.Models;
 using Marketplace.DTO;
+using MarketplaceAPI.DAO;
 
 namespace Marketplace.Controllers
 {
@@ -41,16 +42,16 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            var data = await (from t1 in _context.EmployeesSkills
-                              join t2 in _context.Skills on t1.SkillId equals t2.SkillId
-                              where t1.EmployeeId == id
+            var data = await (from employeesSkills in _context.EmployeesSkills
+                              join skills in _context.Skills on employeesSkills.SkillId equals skills.SkillId
+                              where employeesSkills.EmployeeId == id
                               select new EmployeeSkillsDTO
                               {
-                                  skillId = t1.SkillId,
-                                  SkillName = t2.SkillName,
-                                  Proficiency = t1.Proficience,
-                                  LastUsed = t1.LastUsed,
-                                  Experience = t1.ExperienceInMonths
+                                  SkillId = employeesSkills.SkillId,
+                                  SkillName = skills.SkillName,
+                                  Proficiency = employeesSkills.Proficience,
+                                  LastUsed = employeesSkills.LastUsed,
+                                  ExperienceInMonths = employeesSkills.ExperienceInMonths
                               }).ToListAsync();
             return data;
         }
@@ -88,21 +89,44 @@ namespace Marketplace.Controllers
 
         // POST: api/EmployeeSkills
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-      /*  [HttpPost]
-        public async Task<ActionResult<EmployeeSkills>> PostEmployeeSkills(EmployeeSkills employeeSkills)
+        [HttpPost]
+        public async Task<ActionResult<EmployeesSkill>> PostEmployeeSkills(EmployeesSkillDAO employeeSkills)
         {
-            if (_context.EmployeeSkills == null)
+            if (_context.EmployeesSkills == null)
             {
                 return Problem("Entity set 'MarketplaceContext.EmployeeSkills'  is null.");
             }
-            _context.EmployeeSkills.Add(employeeSkills);
+            var employee = _context.Employees.Find(employeeSkills.EmployeeId);
+            var skill = _context.Skills.Find(employeeSkills.SkillId);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            var employeeSkill = new EmployeesSkill
+            {
+                Employee = employee,
+                Skill=skill,
+                EmployeeId=employeeSkills.EmployeeId,
+                SkillId=employeeSkills.SkillId,
+                LastUsed=employeeSkills.LastUsed,
+                ExperienceInMonths=employeeSkills.ExperienceInMonths,
+                Proficience=employeeSkills.Proficience,
+                SkillSource=employeeSkills.SkillSource,
+                SkillSourceId=employeeSkills.SkillSourceId
+            };
+
+            _context.EmployeesSkills.Add(employeeSkill);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (EmployeeSkillsExists(employeeSkills.skillId))
+                if (EmployeeSkillsExists(employeeSkills.SkillId))
                 {
                     return Conflict();
                 }
@@ -112,8 +136,8 @@ namespace Marketplace.Controllers
                 }
             }
 
-            return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.skillId }, employeeSkills);
-        }*/
+            return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.SkillId }, employeeSkills);
+        }
 
         // DELETE: api/EmployeeSkills/5
         /*[HttpDelete("{id}")]
