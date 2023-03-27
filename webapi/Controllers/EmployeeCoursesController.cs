@@ -50,8 +50,8 @@ namespace Marketplace.Controllers
                                   CourseID = t1.EmidsCourseId,
                                   CourseName = t2.CourseName,
                                   CourseCompletionDate = t1.CourseCompletionDate,
-                                  /*CourseFrom = t1.CourseFrom,
-                                  CourseType = t1.CourseType*/
+                                  CoursePlatform = t2.CoursePlatform,
+                                  CourseType = t2.CourseType
                               }).ToListAsync();
             return data;
         }

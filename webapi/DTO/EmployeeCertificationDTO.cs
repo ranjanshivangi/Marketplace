@@ -6,6 +6,6 @@
         public string CertificationsName { get; set; }
         public DateTime CertificationsCompletionDate { get; set; }
         public string CertificationsFrom { get; set; }
-        public string CertificationsType { get; set; }
+        public byte CertificationsType { get; set; }
     }
 }

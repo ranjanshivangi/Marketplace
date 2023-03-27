@@ -50,8 +50,8 @@ namespace Marketplace.Controllers
                                   CertificationID = t1.StandardCertificateId,
                                   CertificationsName = t2.CertificateName,
                                   CertificationsCompletionDate = t1.CertificationsCompletionDate,
-                               /*   CertificationsFrom = t1.CertificationsFrom,
-                                  CertificationsType = t1.CertificationsType*/
+                                  CertificationsFrom = t2.Issuer,
+                                  CertificationsType = t2.CertificateType
                               }).ToListAsync();
             return data;
         }

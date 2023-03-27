@@ -5,7 +5,7 @@
         public int CourseID { get; set; }
         public string CourseName { get; set; }
         public DateTime CourseCompletionDate { get; set; }
-        public string CourseFrom { get; set; }
-        public string CourseType { get; set; }
+        public string CoursePlatform { get; set; }
+        public byte CourseType { get; set; }
     }
 }
