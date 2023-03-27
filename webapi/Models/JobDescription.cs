@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace MarketplaceAPI.Models;
 
@@ -24,6 +25,6 @@ public partial class JobDescription
     public string? PrimarySkill { get; set; }
 
     public string? SecondarySkill { get; set; }
-
+   
     public virtual ICollection<Rr> Rrs { get; } = new List<Rr>();
 }
