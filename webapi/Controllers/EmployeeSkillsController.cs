@@ -58,13 +58,10 @@ namespace Marketplace.Controllers
 
         // PUT: api/EmployeeSkills/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployeeSkills(string id, EmployeeSkills employeeSkills)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEmployeeSkills([FromRoute] string id, [FromBody] EmployeesSkillDAO employeeSkills)
         {
-            if (id != employeeSkills.skillId)
-            {
-                return BadRequest();
-            }
+            _context.EmployeesSkills.Find(id);
 
             _context.Entry(employeeSkills).State = EntityState.Modified;
 
@@ -74,7 +71,7 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeSkillsExists(id))
+                if (!EmployeeSkillsExists(employeeSkills.SkillId))
                 {
                     return NotFound();
                 }
@@ -85,19 +82,21 @@ namespace Marketplace.Controllers
             }
 
             return NoContent();
-        }*/
+        }
 
         // POST: api/EmployeeSkills
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<EmployeesSkill>> PostEmployeeSkills(EmployeesSkillDAO employeeSkills)
+        [HttpPost("{employeeId}")]
+        public async Task<ActionResult<EmployeesSkill>> PostEmployeeSkills( string employeeId, [FromBody]EmployeesSkillDAO employeeSkills)
         {
             if (_context.EmployeesSkills == null)
             {
                 return Problem("Entity set 'MarketplaceContext.EmployeeSkills'  is null.");
             }
-            var employee = _context.Employees.Find(employeeSkills.EmployeeId);
+
+            var employee = _context.Employees.Find(employeeId);
             var skill = _context.Skills.Find(employeeSkills.SkillId);
+            var employeeSkillAvailable= _context.EmployeesSkills.Find(employeeSkills.SkillId);
             if (employee == null)
             {
                 return NotFound();
@@ -106,11 +105,16 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
+            if(employeeSkillAvailable != null)
+            {
+                return Conflict();
+
+            }
             var employeeSkill = new EmployeesSkill
             {
                 Employee = employee,
                 Skill=skill,
-                EmployeeId=employeeSkills.EmployeeId,
+                EmployeeId= employeeId,
                 SkillId=employeeSkills.SkillId,
                 LastUsed=employeeSkills.LastUsed,
                 ExperienceInMonths=employeeSkills.ExperienceInMonths,
@@ -139,25 +143,7 @@ namespace Marketplace.Controllers
             return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.SkillId }, employeeSkills);
         }
 
-        // DELETE: api/EmployeeSkills/5
-        /*[HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployeeSkills(string id)
-        {
-            if (_context.EmployeeSkills == null)
-            {
-                return NotFound();
-            }
-            var employeeSkills = await _context.EmployeeSkills.FindAsync(id);
-            if (employeeSkills == null)
-            {
-                return NotFound();
-            }
-
-            _context.EmployeeSkills.Remove(employeeSkills);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }*/
+      
 
         private bool EmployeeSkillsExists(int id)
         {
