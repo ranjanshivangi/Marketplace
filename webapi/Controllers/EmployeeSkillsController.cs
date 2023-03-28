@@ -58,13 +58,21 @@ namespace Marketplace.Controllers
 
         // PUT: api/EmployeeSkills/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployeeSkills([FromRoute] string id, [FromBody] EmployeesSkillDAO employeeSkills)
+        [HttpPut("{employeeId}")]
+        public async Task<IActionResult> PutEmployeeSkills(string employeeId, [FromBody] EmployeesSkillDAO employeeSkills)
         {
-            _context.EmployeesSkills.Find(id);
-
-            _context.Entry(employeeSkills).State = EntityState.Modified;
-
+            var employee = _context.Employees.Find(employeeId);
+            var skill = _context.Skills.Find(employeeSkills.SkillId);
+            
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            _context.EmployeesSkills.Find(employeeId);
             try
             {
                 await _context.SaveChangesAsync();
@@ -96,7 +104,10 @@ namespace Marketplace.Controllers
 
             var employee = _context.Employees.Find(employeeId);
             var skill = _context.Skills.Find(employeeSkills.SkillId);
-            var employeeSkillAvailable= _context.EmployeesSkills.Find(employeeSkills.SkillId);
+            var employeeSkillAvailable = _context.EmployeesSkills.Where(employeeskill => employeeskill.EmployeeId == employeeId 
+                                                                 && employeeskill.SkillId== employeeSkills.SkillId)
+                                                                .FirstOrDefault();
+
             if (employee == null)
             {
                 return NotFound();
@@ -105,7 +116,7 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            if(employeeSkillAvailable != null)
+            if (employeeSkillAvailable != null)
             {
                 return Conflict();
 
@@ -130,14 +141,8 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EmployeeSkillsExists(employeeSkills.SkillId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                
+                throw;
             }
 
             return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.SkillId }, employeeSkills);
