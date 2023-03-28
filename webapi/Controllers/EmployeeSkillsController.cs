@@ -50,7 +50,7 @@ namespace Marketplace.Controllers
                                   SkillId = employeesSkills.SkillId,
                                   SkillName = skills.SkillName,
                                   Proficiency = employeesSkills.Proficience,
-                                  LastUsed = employeesSkills.LastUsed,
+                                  LastUsed = (DateTime)employeesSkills.LastUsed,
                                   ExperienceInMonths = employeesSkills.ExperienceInMonths
                               }).ToListAsync();
             return data;
@@ -59,11 +59,13 @@ namespace Marketplace.Controllers
         // PUT: api/EmployeeSkills/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{employeeId}")]
-        public async Task<IActionResult> PutEmployeeSkills(string employeeId, [FromBody] EmployeesSkillDAO employeeSkills)
+        public async Task<IActionResult> PutEmployeeSkills(string employeeId, [FromBody] EmployeeSkillUpdateDAO employeeSkills)
         {
             var employee = _context.Employees.Find(employeeId);
             var skill = _context.Skills.Find(employeeSkills.SkillId);
-            
+            var employeeSkillAvailable = _context.EmployeesSkills.Where(employeeskill => employeeskill.EmployeeId == employeeId
+                                                                 && employeeskill.SkillId == employeeSkills.SkillId)
+                                                                .FirstOrDefault();
             if (employee == null)
             {
                 return NotFound();
@@ -72,21 +74,40 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            _context.EmployeesSkills.Find(employeeId);
+            if (employeeSkillAvailable == null)
+            {
+                return NotFound("EmployeeSKill not found");
+
+            }
+           
+            if (employeeSkills.ExperienceInMonths != null)
+            {
+                employeeSkillAvailable.ExperienceInMonths = (int)employeeSkills.ExperienceInMonths;
+            }
+            if (employeeSkills.Proficience != null)
+            {
+                employeeSkillAvailable.Proficience = employeeSkills.Proficience;
+            }
+            if (employeeSkills.LastUsed != null)
+            {
+                employeeSkillAvailable.LastUsed= (DateTime)employeeSkills.LastUsed;
+            }
+            if (employeeSkills.SkillSource != null)
+            {
+                employeeSkillAvailable.SkillSource = (byte)employeeSkills.SkillSource;
+            }
+            if (employeeSkills.SkillSourceId != null)
+            {
+                employeeSkillAvailable.SkillSourceId = (int)employeeSkills.SkillSourceId;
+            }
+
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeSkillsExists(employeeSkills.SkillId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
@@ -150,9 +171,6 @@ namespace Marketplace.Controllers
 
       
 
-        private bool EmployeeSkillsExists(int id)
-        {
-            return (_context.EmployeesSkills?.Any(e => e.SkillId == id)).GetValueOrDefault();
-        }
+      
     }
 }

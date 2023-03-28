@@ -3,10 +3,9 @@
     public class EmployeesSkillDAO
     {
     
-
         public int SkillId { get; set; }
 
-        public DateTime LastUsed { get; set; }
+        public DateTime? LastUsed { get; set; }
 
         public int ExperienceInMonths { get; set; }
 
