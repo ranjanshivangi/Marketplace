@@ -11,6 +11,9 @@ using MarketplaceAPI.DAO;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.InteropServices;
+using Marketplace.DTO;
+using MarketplaceAPI.DTO;
+using System.Runtime.CompilerServices;
 
 namespace MarketplaceAPI.Controllers
 {
@@ -38,20 +41,41 @@ namespace MarketplaceAPI.Controllers
 
         // GET: api/Shortlists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Shortlist>> GetShortlist(int id)
+       
+        public async Task<ActionResult<IEnumerable<ShortlistsDTO>>> GetShortlist(string id)
         {
             if (_context.Shortlists == null)
             {
                 return NotFound();
             }
-            var shortlist = await _context.Shortlists.FindAsync(id);
+            
 
-            if (shortlist == null)
-            {
-                return NotFound();
-            }
+            var data = await (from shortlist in _context.Shortlists
+                              join employee in _context.Employees on shortlist.ShortlistedEmployeeId equals employee.EmployeeId
+                              where shortlist.ManagerEmployeeId == id
+                              select new ShortlistsDTO
+                              {
+                                  ShortlistsId = shortlist.ShortlistsId,
+                                  ManagerEmployeeId = shortlist.ManagerEmployeeId,
+                                  Rrnumber = shortlist.Rrnumber,
+                                  ShortlistedEmployeeId = shortlist.ShortlistedEmployeeId,
+                                  ShortlistedEmployeeEmail = employee.EmailId,
+                                  ShortlistedEmployeeName = employee.EmployeeName,
+                                  ShortlistedEmployeeStatus = employee.Status,
+                                  ShortlistedSkills = (from t3 in _context.ShortlistedSkills
+                                                       join t2 in _context.Skills on t3.EmployeeSkillId equals t2.SkillId
+                                                       where t3.ShortlistsId == shortlist.ShortlistsId
+                                                       select new ShortlistedSkillsDTO
+                                                       {
+                                                           Id = t3.Id,
+                                                           ShortlistsId = shortlist.ShortlistsId,
+                                                           EmployeeSkillId = t3.EmployeeSkillId,
+                                                           EmployeeSkillName = t2.SkillName
+                                                       }).ToArray()
+                              }).ToListAsync();
+            return data;
 
-            return shortlist;
+
         }
 
         
