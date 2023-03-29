@@ -76,9 +76,9 @@ public partial class MarketplaceContext : DbContext
 
         modelBuilder.Entity<EmployeeCertification>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("EmployeeCertifications", "Profiles");
+
+            entity.HasKey(standardCertificate => standardCertificate.StandardCertificateId);
+            entity.ToTable("EmployeeCertifications", "Profiles");
 
             entity.Property(e => e.CertificationsCompletionDate).HasColumnType("date");
             entity.Property(e => e.EmployeeId).HasMaxLength(12);
