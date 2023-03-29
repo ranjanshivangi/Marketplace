@@ -10,6 +10,7 @@ using MarketplaceAPI.Models;
 using MarketplaceAPI.DAO;
 using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Runtime.InteropServices;
 
 namespace MarketplaceAPI.Controllers
 {
@@ -24,65 +25,36 @@ namespace MarketplaceAPI.Controllers
             _context = context;
         }
 
-        //// GET: api/Shortlists
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Shortlist>>> GetShortlists()
-        //{
-        //  if (_context.Shortlists == null)
-        //  {
-        //      return NotFound();
-        //  }
-        //    return await _context.Shortlists.ToListAsync();
-        //}
+        // GET: api/Shortlists
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Shortlist>>> GetShortlists()
+        {
+            if (_context.Shortlists == null)
+            {
+                return NotFound();
+            }
+            return await _context.Shortlists.ToListAsync();
+        }
 
-        //// GET: api/Shortlists/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Shortlist>> GetShortlist(int id)
-        //{
-        //  if (_context.Shortlists == null)
-        //  {
-        //      return NotFound();
-        //  }
-        //    var shortlist = await _context.Shortlists.FindAsync(id);            
+        // GET: api/Shortlists/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Shortlist>> GetShortlist(int id)
+        {
+            if (_context.Shortlists == null)
+            {
+                return NotFound();
+            }
+            var shortlist = await _context.Shortlists.FindAsync(id);
 
-        //    if (shortlist == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (shortlist == null)
+            {
+                return NotFound();
+            }
 
-        //    return shortlist;
-        //}
+            return shortlist;
+        }
 
-        //// PUT: api/Shortlists/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutShortlist(int id, Shortlist shortlist)
-        //{
-        //    if (id != shortlist.ShortlistsId)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _context.Entry(shortlist).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ShortlistExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
+        
 
         // POST: api/Shortlists
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -94,15 +66,15 @@ namespace MarketplaceAPI.Controllers
               return Problem("Entity set 'MarketplaceContext.Shortlists'  is null.");
           }
             var manager = _context.Employees.Find(shortlist.ManagerEmployeeId);
-            var employee = _context.Employees.Find(shortlist.ShortlistedEmployeeId);
-
-            var shortlistedEmployeeExists = _context.Shortlists.Where(e => e.ShortlistedEmployeeId == shortlist.ShortlistedEmployeeId &&  e.ManagerEmployeeId == shortlist.ManagerEmployeeId);            
+            var employee = _context.Employees.Find(shortlist.ShortlistedEmployeeId);                  
             
             if (employee == null || manager == null)
             {
                 return NotFound();
             }
-            if(shortlistedEmployeeExists != null)
+
+            var shortlistedemployeeexists = _context.Shortlists.Where(e => e.ShortlistedEmployeeId == shortlist.ShortlistedEmployeeId && e.ManagerEmployeeId == shortlist.ManagerEmployeeId).ToList();
+            if (shortlistedemployeeexists.Count != 0)
             {
                 return Conflict();
             }
@@ -142,29 +114,36 @@ namespace MarketplaceAPI.Controllers
             return CreatedAtAction("GetShortlist", new { id = shortlist.ShortlistsId }, shortlist);
         }
 
-    //    // DELETE: api/Shortlists/5
-    //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> DeleteShortlist(int id)
-    //    {
-    //        if (_context.Shortlists == null)
-    //        {
-    //            return NotFound();
-    //        }
-    //        var shortlist = await _context.Shortlists.FindAsync(id);
-    //        if (shortlist == null)
-    //        {
-    //            return NotFound();
-    //        }
+        // DELETE: api/Shortlists/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteShortlist(int id)
+        {
+            if (_context.Shortlists == null)
+            {
+                return NotFound();
+            }
+            var shortlist = await _context.Shortlists.FindAsync(id);
+            if (shortlist == null)
+            {
+                return NotFound();
+            }
+            var shortlistedSkills = _context.ShortlistedSkills.Where(e=>e.ShortlistsId == id).ToList();
+            if (shortlistedSkills.Count == 0)
+            {
+                return NotFound();
+            }
+            _context.ShortlistedSkills.RemoveRange(shortlistedSkills);
+            await _context.SaveChangesAsync();
 
-    //        _context.Shortlists.Remove(shortlist);
-    //        await _context.SaveChangesAsync();
+            _context.Shortlists.Remove(shortlist);
+            await _context.SaveChangesAsync();
 
-    //        return NoContent();
-    //    }
+            return NoContent();
+        }
 
-    //    private bool ShortlistExists(int id)
-    //    {
-    //        return (_context.Shortlists?.Any(e => e.ShortlistsId == id)).GetValueOrDefault();
-    //    }
+        private bool ShortlistExists(int id)
+        {
+            return (_context.Shortlists?.Any(e => e.ShortlistsId == id)).GetValueOrDefault();
+        }
     }
 }
