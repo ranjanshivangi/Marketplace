@@ -62,15 +62,15 @@ namespace MarketplaceAPI.Controllers
                                   ShortlistedEmployeeEmail = employee.EmailId,
                                   ShortlistedEmployeeName = employee.EmployeeName,
                                   ShortlistedEmployeeStatus = employee.Status,
-                                  ShortlistedSkills = (from t3 in _context.ShortlistedSkills
-                                                       join t2 in _context.Skills on t3.EmployeeSkillId equals t2.SkillId
-                                                       where t3.ShortlistsId == shortlist.ShortlistsId
+                                  ShortlistedSkills = (from shortlistedskills in _context.ShortlistedSkills
+                                                       join skill in _context.Skills on shortlistedskills.EmployeeSkillId equals skill.SkillId
+                                                       where shortlistedskills.ShortlistsId == shortlist.ShortlistsId
                                                        select new ShortlistedSkillsDTO
                                                        {
-                                                           Id = t3.Id,
+                                                           Id = shortlistedskills.Id,
                                                            ShortlistsId = shortlist.ShortlistsId,
-                                                           EmployeeSkillId = t3.EmployeeSkillId,
-                                                           EmployeeSkillName = t2.SkillName
+                                                           EmployeeSkillId = shortlistedskills.EmployeeSkillId,
+                                                           EmployeeSkillName = skill.SkillName
                                                        }).ToArray()
                               }).ToListAsync();
             return data;
@@ -100,7 +100,7 @@ namespace MarketplaceAPI.Controllers
             var shortlistedemployeeexists = _context.Shortlists.Where(e => e.ShortlistedEmployeeId == shortlist.ShortlistedEmployeeId && e.ManagerEmployeeId == shortlist.ManagerEmployeeId).ToList();
             if (shortlistedemployeeexists.Count != 0)
             {
-                return Conflict();
+                return Problem("Employee already shorlisted");
             }
 
             var newShortlist = new Shortlist
