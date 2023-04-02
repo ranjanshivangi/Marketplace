@@ -98,9 +98,9 @@ public partial class MarketplaceContext : DbContext
 
         modelBuilder.Entity<EmployeeCourse>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("EmployeeCourses", "Profiles");
+
+            entity.HasKey(e => e.EmidsCourseId);
+            entity.ToTable("EmployeeCourses", "Profiles");
 
             entity.Property(e => e.CourseCompletionDate).HasColumnType("date");
             entity.Property(e => e.EmployeeId).HasMaxLength(12);

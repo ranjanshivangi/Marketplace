@@ -9,6 +9,7 @@ using MarketplaceAPI.Data;
 using MarketplaceAPI.Models;
 using Marketplace.DTO;
 using System.Reflection.Metadata;
+using MarketplaceAPI.DAO;
 
 namespace Marketplace.Controllers
 {
@@ -25,7 +26,7 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployeeCourses
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmployeeCourse>>> GetEmployeeCourses()
+        public async Task<ActionResult<IEnumerable<EmployeeCourse>>> GetEmployeeCourse()
         {
             if (_context.EmployeeCourses == null)
             {
@@ -36,74 +37,129 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployeeCourses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<EmployeeCourseDTO>>> GetEmployeeCourses(String id)
+        public async Task<ActionResult<IEnumerable<EmployeeCourseDTO>>> GetEmployeeCourse(String id)
         {
             if (_context.EmployeeCourses == null)
             {
                 return NotFound();
             }
-            var data = await (from t1 in _context.EmployeeCourses
-                              join t2 in _context.EmidsCourses on t1.EmidsCourseId equals t2.CourseId
-                              where t1.EmployeeId == id
+            var data = await (from employeeCourses in _context.EmployeeCourses
+                              join emidsCourses in _context.EmidsCourses on employeeCourses.EmidsCourseId equals emidsCourses.CourseId
+                              where employeeCourses.EmployeeId == id
                               select new EmployeeCourseDTO
                               {
-                                  CourseID = t1.EmidsCourseId,
-                                  CourseName = t2.CourseName,
-                                  CourseCompletionDate = t1.CourseCompletionDate,
-                                  CoursePlatform = t2.CoursePlatform,
-                                  CourseType = t2.CourseType
+                                  CourseID = employeeCourses.EmidsCourseId,
+                                  CourseName = emidsCourses.CourseName,
+                                  CourseCompletionDate = employeeCourses.CourseCompletionDate,
+                                  CoursePlatform = emidsCourses.CoursePlatform,
+                                  CourseType = emidsCourses.CourseType
                               }).ToListAsync();
             return data;
         }
 
         // PUT: api/EmployeeCourses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       /* [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployeeCourses(int id, EmployeeCourses employeeCourses)
+        [HttpPut("{employeeId}")]
+        public async Task<IActionResult> PutEmployeeCourse(string employeeId, [FromBody] EmployeeCourseDAO employeeCourses)
         {
-            if (id != employeeCourses.CourseID)
+            var employee = _context.Employees.Find(employeeId);
+            var emidsCourse = _context.EmidsCourses.Find(employeeCourses.EmidsCourseId);
+            var employeeCourseAvailable = _context.EmployeeCourses.Where(employeecourse => employeecourse.EmployeeId == employeeId
+                                                                 && employeecourse.EmidsCourseId == employeeCourses.EmidsCourseId)
+                                                                .FirstOrDefault();
+            if (employee == null)
             {
-                return BadRequest();
+                return NotFound();
             }
+            if (emidsCourse == null)
+            {
+                return NotFound();
+            }
+            if (employeeCourseAvailable == null)
+            {
+                return NotFound("EmployeeCourse not found");
 
-            _context.Entry(employeeCourses).State = EntityState.Modified;
-
+            }
+            if (employeeCourses.EmidsCourseId != null)
+            {
+                employeeCourseAvailable.EmidsCourseId = (int)employeeCourses.EmidsCourseId;
+            }
+            if (employeeCourses.CourseCompletionDate != null)
+            {
+                employeeCourseAvailable.CourseCompletionDate = (DateTime)employeeCourses.CourseCompletionDate;
+            }
+            if (employeeCourses.NonEmidsCourseName != null)
+            {
+                employeeCourseAvailable.NonEmidsCourseName = employeeCourses.NonEmidsCourseName;
+            }
+            if (employeeCourses.NonEmidsCoursePlatform != null)
+            {
+                employeeCourseAvailable.NonEmidsCoursePlatform = employeeCourses.NonEmidsCoursePlatform;
+            }
+            if (employeeCourses.NonEmidsCourseType != null)
+            {
+                employeeCourseAvailable.NonEmidsCourseType = (byte)employeeCourses.NonEmidsCourseType;
+            }
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeCoursesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
-        }*/
+        }
+
+
+        
 
         // POST: api/EmployeeCourses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       /* [HttpPost]
-        public async Task<ActionResult<EmployeeCourses>> PostEmployeeCourses(EmployeeCourses employeeCourses)
+        [HttpPost("{employeeId}")]
+        public async Task<ActionResult<EmployeeCourse>> PostEmployeeCourse(string employeeId, EmployeeCourseDAO employeeCourses)
         {
-            if (_context.EmployeeCourses == null)
+
+            var employee = _context.Employees.Find(employeeCourses.EmployeeId);
+            var emidsCourse = _context.EmidsCourses.Find(employeeCourses.EmidsCourseId);
+            var employeeCourseAvailable = _context.EmployeeCourses.Where(employeecourse => employeecourse.EmployeeId == employeeId
+                                                                 && employeecourse.EmidsCourseId == employeeCourses.EmidsCourseId)
+                                                                .FirstOrDefault();
+            if (employee == null)
             {
-                return Problem("Entity set 'MarketplaceContext.EmployeeCourses'  is null.");
+                return NotFound();
             }
-            _context.EmployeeCourses.Add(employeeCourses);
+            if (emidsCourse == null)
+            {
+                return NotFound();
+            }
+            if (employeeCourseAvailable != null)
+            {
+                return Conflict("This Course is already added");
+
+            }
+            var employeeCourse = new EmployeeCourse
+            {
+                Employee = employee,
+                EmidsCourse = emidsCourse,
+                EmployeeId = employeeCourses.EmployeeId,
+                IsEmidsCourse = employeeCourses.IsEmidsCourse,
+                EmidsCourseId = (int)employeeCourses.EmidsCourseId,
+                CourseCompletionDate = (DateTime)employeeCourses.CourseCompletionDate,
+                NonEmidsCourseName = employeeCourses.NonEmidsCourseName,
+                NonEmidsCoursePlatform = employeeCourses.NonEmidsCoursePlatform,
+                NonEmidsCourseType = (byte)employeeCourses.NonEmidsCourseType
+            };
+
+            _context.EmployeeCourses.Add(employeeCourse);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (EmployeeCoursesExists(employeeCourses.CourseID))
+                if (EmployeeCoursesExists(employeeCourse.EmidsCourseId.ToString()))
                 {
                     return Conflict();
                 }
@@ -113,32 +169,34 @@ namespace Marketplace.Controllers
                 }
             }
 
-            return CreatedAtAction("GetEmployeeCourses", new { id = employeeCourses.CourseID }, employeeCourses);
-        }*/
+            return CreatedAtAction("GetEmployeeCourse", employeeCourses);
+        }
+
+
 
         // DELETE: api/EmployeeCourses/5
-       /* [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployeeCourses(int id)
+        /* [HttpDelete("{id}")]
+         public async Task<IActionResult> DeleteEmployeeCourses(int id)
+         {
+             if (_context.EmployeeCourses == null)
+             {
+                 return NotFound();
+             }
+             var employeeCourses = await _context.EmployeeCourses.FindAsync(id);
+             if (employeeCourses == null)
+             {
+                 return NotFound();
+             }
+
+             _context.EmployeeCourses.Remove(employeeCourses);
+             await _context.SaveChangesAsync();
+
+             return NoContent();
+         }*/
+
+        private bool EmployeeCoursesExists(string Id)
         {
-            if (_context.EmployeeCourses == null)
-            {
-                return NotFound();
-            }
-            var employeeCourses = await _context.EmployeeCourses.FindAsync(id);
-            if (employeeCourses == null)
-            {
-                return NotFound();
-            }
-
-            _context.EmployeeCourses.Remove(employeeCourses);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }*/
-
-        private bool EmployeeCoursesExists(string id)
-        {
-            return (_context.EmployeeCourses?.Any(e => e.EmployeeId == id)).GetValueOrDefault();
+            return (_context.EmployeeCourses?.Any(e => e.EmployeeId == Id)).GetValueOrDefault();
         }
     }
 }
