@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Marketplace.DTO;
 using MarketplaceAPI.Data;
 using MarketplaceAPI.Models;
+using MarketplaceAPI.DAO;
 
 namespace Marketplace.Controllers
 {
@@ -42,31 +43,65 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            var data = await (from t1 in _context.EmployeeCertifications
-                              join t2 in _context.StandardCertificates on t1.StandardCertificateId equals t2.CertificateId
-                              where t1.EmployeeId == id
+            var data = await (from employeeCertification in _context.EmployeeCertifications
+                              join standardCertification in _context.StandardCertificates on employeeCertification.StandardCertificateId equals standardCertification.CertificateId
+                              where employeeCertification.EmployeeId == id
                               select new EmployeeCertificationDTO
                               {
-                                  CertificationID = t1.StandardCertificateId,
-                                  CertificationsName = t2.CertificateName,
-                                  CertificationsCompletionDate = t1.CertificationsCompletionDate,
-                                  CertificationsFrom = t2.Issuer,
-                                  CertificationsType = t2.CertificateType
+                                  CertificationID = employeeCertification.StandardCertificateId,
+                                  CertificationsName = standardCertification.CertificateName,
+                                  CertificationsCompletionDate = employeeCertification.CertificationsCompletionDate,
+                                  CertificationsFrom = standardCertification.Issuer,
+                                  CertificationsType = standardCertification.CertificateType
                               }).ToListAsync();
             return data;
         }
 
         // PUT: api/EmployeeCertifications/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       /* [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployeeCertification(int id, EmployeeCertification employeeCertification)
+        [HttpPut("{employeeId}")]
+        public async Task<IActionResult> PutEmployeeSkills(string employeeId, [FromBody] EmployeesCertificationDAO employeeCertifications)
         {
-            if (id != employeeCertification.CertificationID)
+            var employee = _context.Employees.Find(employeeId);
+            var certification = _context.StandardCertificates.Find(employeeCertifications.StandardCertificateId);
+            var employeeCertificationAvailable = _context.EmployeeCertifications.Where(employeecertification => employeecertification.EmployeeId == employeeId
+                                                                 && employeecertification.StandardCertificateId == employeeCertifications.StandardCertificateId)
+                                                                .FirstOrDefault();
+            if (employee == null)
             {
-                return BadRequest();
+                return NotFound();
+            }
+            if (certification == null)
+            {
+                return NotFound();
+            }
+            if (employeeCertificationAvailable == null)
+            {
+                return NotFound("EmployeeCertification not found");
+
             }
 
-            _context.Entry(employeeCertification).State = EntityState.Modified;
+            if (employeeCertifications.StandardCertificateId != null)
+            {
+                employeeCertificationAvailable.StandardCertificateId = (int)employeeCertifications.StandardCertificateId;
+            }
+            if (employeeCertifications.CertificationsCompletionDate != null)
+            {
+                employeeCertificationAvailable.CertificationsCompletionDate = (DateTime)employeeCertifications.CertificationsCompletionDate;
+            }
+            if (employeeCertifications.NonStandardCertificateName != null)
+            {
+                employeeCertificationAvailable.NonStandardCertificateName = employeeCertifications.NonStandardCertificateName;
+            }
+            if (employeeCertifications.NonStandardIssuer != null)
+            {
+                employeeCertificationAvailable.NonStandardIssuer = employeeCertifications.NonStandardIssuer;
+            }
+            if (employeeCertifications.NonStandardCertificateType != null)
+            {
+                employeeCertificationAvailable.NonStandardCertificateType = (byte)employeeCertifications.NonStandardCertificateType;
+            }
+            
 
             try
             {
@@ -74,28 +109,54 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeCertificationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
-        }*/
+        }
+
 
         // POST: api/EmployeeCertifications
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-       /* [HttpPost]
-        public async Task<ActionResult<EmployeeCertification>> PostEmployeeCertification(EmployeeCertification employeeCertification)
+        [HttpPost("{employeeId}")]
+        public async Task<ActionResult<EmployeeCertification>> PostEmployeeCertification(string employeeId, EmployeesCertificationDAO employeeCertifications)
         {
             if (_context.EmployeeCertifications == null)
             {
                 return Problem("Entity set 'MarketplaceContext.EmployeeCertifications'  is null.");
             }
+            var employee = _context.Employees.Find(employeeCertifications.EmployeeId);
+            var standardCertification = _context.StandardCertificates.Find(employeeCertifications.StandardCertificateId);
+            var employeeCertificationAvailable = _context.EmployeeCertifications.Where(employeecertificate => employeecertificate.EmployeeId == employeeId
+                                                                 && employeecertificate.StandardCertificateId == employeeCertifications.StandardCertificateId)
+                                                                .FirstOrDefault();
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            if(standardCertification == null)
+            {
+                return NotFound();
+            }
+            if (employeeCertificationAvailable != null)
+            {
+                return Conflict("This Certification is already added");
+
+            }
+            var employeeCertification = new EmployeeCertification
+            {
+                Employee = employee,
+                StandardCertificate = standardCertification,
+                EmployeeId = employeeId,
+                StandardCertificateId = (int)employeeCertifications.StandardCertificateId,
+                IsStandardCertificate=employeeCertifications.IsStandardCertificate,
+                CertificationsCompletionDate= (DateTime)employeeCertifications.CertificationsCompletionDate,
+                NonStandardCertificateName=employeeCertifications.NonStandardCertificateName,
+                NonStandardIssuer=employeeCertifications.NonStandardIssuer,
+                NonStandardCertificateType= (byte)employeeCertifications.NonStandardCertificateType,
+
+    };
             _context.EmployeeCertifications.Add(employeeCertification);
             try
             {
@@ -103,7 +164,7 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EmployeeCertificationExists(employeeCertification.CertificationID))
+                if (EmployeeCertificationExists(employeeCertifications.StandardCertificateId.ToString()))
                 {
                     return Conflict();
                 }
@@ -112,9 +173,8 @@ namespace Marketplace.Controllers
                     throw;
                 }
             }
-
-            return CreatedAtAction("GetEmployeeCertification", new { id = employeeCertification.CertificationID }, employeeCertification);
-        }*/
+            return CreatedAtAction("GetEmployeeCertification", new { id = employeeCertifications.StandardCertificateId}, employeeCertification);
+        }
 
         // DELETE: api/EmployeeCertifications/5
 /*        [HttpDelete("{id}")]
