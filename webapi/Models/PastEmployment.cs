@@ -6,7 +6,7 @@ namespace MarketplaceAPI.Models;
 public partial class PastEmployment
 {
 
-
+    public string EmployeeId { get; set; } = null!;
     public int XemployeerId { get; set; }
 
     public string XemployeerCompanyName { get; set; } = null!;

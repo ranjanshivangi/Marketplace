@@ -148,7 +148,7 @@ namespace Marketplace.Controllers
                 Skill=skill,
                 EmployeeId= employeeId,
                 SkillId=employeeSkills.SkillId,
-                LastUsed=employeeSkills.LastUsed,
+                LastUsed= (DateTime)employeeSkills.LastUsed,
                 ExperienceInMonths=employeeSkills.ExperienceInMonths,
                 Proficience=employeeSkills.Proficience,
                 SkillSource=employeeSkills.SkillSource,
