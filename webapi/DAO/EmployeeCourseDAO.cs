@@ -2,9 +2,7 @@
 {
     public class EmployeeCourseDAO
     {
-        public string EmployeeId { get; set; } = null!;
-
-        public byte IsEmidsCourse { get; set; }
+       public byte IsEmidsCourse { get; set; }
 
 
         public int? EmidsCourseId { get; set; }
