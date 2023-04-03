@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MarketplaceAPI.Data;
 using MarketplaceAPI.Models;
 using Marketplace.DTO;
+using MarketplaceAPI.DAO;
 
 namespace Marketplace.Controllers
 {
@@ -41,31 +42,64 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            var data = await (from t1 in _context.EmployeesSkills
-                              join t2 in _context.Skills on t1.SkillId equals t2.SkillId
-                              where t1.EmployeeId == id
+            var data = await (from employeesSkills in _context.EmployeesSkills
+                              join skills in _context.Skills on employeesSkills.SkillId equals skills.SkillId
+                              where employeesSkills.EmployeeId == id
                               select new EmployeeSkillsDTO
                               {
-                                  skillId = t1.SkillId,
-                                  SkillName = t2.SkillName,
-                                  Proficiency = t1.Proficience,
-                                  LastUsed = t1.LastUsed,
-                                  Experience = t1.ExperienceInMonths
+                                  SkillId = employeesSkills.SkillId,
+                                  SkillName = skills.SkillName,
+                                  Proficiency = employeesSkills.Proficience,
+                                  LastUsed = (DateTime)employeesSkills.LastUsed,
+                                  ExperienceInMonths = employeesSkills.ExperienceInMonths
                               }).ToListAsync();
             return data;
         }
 
         // PUT: api/EmployeeSkills/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*[HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployeeSkills(string id, EmployeeSkills employeeSkills)
+        [HttpPut("{employeeId}")]
+        public async Task<IActionResult> PutEmployeeSkills(string employeeId, [FromBody] EmployeeSkillUpdateDAO employeeSkills)
         {
-            if (id != employeeSkills.skillId)
+            var employee = _context.Employees.Find(employeeId);
+            var skill = _context.Skills.Find(employeeSkills.SkillId);
+            var employeeSkillAvailable = _context.EmployeesSkills.Where(employeeskill => employeeskill.EmployeeId == employeeId
+                                                                 && employeeskill.SkillId == employeeSkills.SkillId)
+                                                                .FirstOrDefault();
+            if (employee == null)
             {
-                return BadRequest();
+                return NotFound();
             }
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            if (employeeSkillAvailable == null)
+            {
+                return NotFound("EmployeeSKill not found");
 
-            _context.Entry(employeeSkills).State = EntityState.Modified;
+            }
+           
+            if (employeeSkills.ExperienceInMonths != null)
+            {
+                employeeSkillAvailable.ExperienceInMonths = (int)employeeSkills.ExperienceInMonths;
+            }
+            if (employeeSkills.Proficience != null)
+            {
+                employeeSkillAvailable.Proficience = employeeSkills.Proficience;
+            }
+            if (employeeSkills.LastUsed != null)
+            {
+                employeeSkillAvailable.LastUsed= (DateTime)employeeSkills.LastUsed;
+            }
+            if (employeeSkills.SkillSource != null)
+            {
+                employeeSkillAvailable.SkillSource = (byte)employeeSkills.SkillSource;
+            }
+            if (employeeSkills.SkillSourceId != null)
+            {
+                employeeSkillAvailable.SkillSourceId = (int)employeeSkills.SkillSourceId;
+            }
 
             try
             {
@@ -73,71 +107,70 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EmployeeSkillsExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
-        }*/
+        }
 
         // POST: api/EmployeeSkills
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-      /*  [HttpPost]
-        public async Task<ActionResult<EmployeeSkills>> PostEmployeeSkills(EmployeeSkills employeeSkills)
+        [HttpPost("{employeeId}")]
+        public async Task<ActionResult<EmployeesSkill>> PostEmployeeSkills( string employeeId, [FromBody]EmployeesSkillDAO employeeSkills)
         {
-            if (_context.EmployeeSkills == null)
+            if (_context.EmployeesSkills == null)
             {
                 return Problem("Entity set 'MarketplaceContext.EmployeeSkills'  is null.");
             }
-            _context.EmployeeSkills.Add(employeeSkills);
+
+            var employee = _context.Employees.Find(employeeId);
+            var skill = _context.Skills.Find(employeeSkills.SkillId);
+            var employeeSkillAvailable = _context.EmployeesSkills.Where(employeeskill => employeeskill.EmployeeId == employeeId 
+                                                                 && employeeskill.SkillId== employeeSkills.SkillId)
+                                                                .FirstOrDefault();
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            if (skill == null)
+            {
+                return NotFound();
+            }
+            if (employeeSkillAvailable != null)
+            {
+                return Conflict();
+
+            }
+            var employeeSkill = new EmployeesSkill
+            {
+                Employee = employee,
+                Skill=skill,
+                EmployeeId= employeeId,
+                SkillId=employeeSkills.SkillId,
+                LastUsed=employeeSkills.LastUsed,
+                ExperienceInMonths=employeeSkills.ExperienceInMonths,
+                Proficience=employeeSkills.Proficience,
+                SkillSource=employeeSkills.SkillSource,
+                SkillSourceId=employeeSkills.SkillSourceId
+            };
+
+            _context.EmployeesSkills.Add(employeeSkill);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (EmployeeSkillsExists(employeeSkills.skillId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                
+                throw;
             }
 
-            return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.skillId }, employeeSkills);
-        }*/
-
-        // DELETE: api/EmployeeSkills/5
-        /*[HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmployeeSkills(string id)
-        {
-            if (_context.EmployeeSkills == null)
-            {
-                return NotFound();
-            }
-            var employeeSkills = await _context.EmployeeSkills.FindAsync(id);
-            if (employeeSkills == null)
-            {
-                return NotFound();
-            }
-
-            _context.EmployeeSkills.Remove(employeeSkills);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }*/
-
-        private bool EmployeeSkillsExists(int id)
-        {
-            return (_context.EmployeesSkills?.Any(e => e.SkillId == id)).GetValueOrDefault();
+            return CreatedAtAction("GetEmployeeSkills", new { id = employeeSkills.SkillId }, employeeSkills);
         }
+
+      
+
+      
     }
 }

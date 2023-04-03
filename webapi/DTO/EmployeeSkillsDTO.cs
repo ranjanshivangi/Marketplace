@@ -2,11 +2,11 @@
 {
     public class EmployeeSkillsDTO
     {
-        public int skillId { get; set; }
+        public int SkillId { get; set; }
         public string SkillName { get; set; }
       
         public DateTime LastUsed { get; set; }
-        public int Experience { get; set; }
+        public int ExperienceInMonths { get; set; }
         public string Proficiency { get; set; }
     }
 }

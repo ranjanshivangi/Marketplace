@@ -98,9 +98,9 @@ public partial class MarketplaceContext : DbContext
 
         modelBuilder.Entity<EmployeeCourse>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("EmployeeCourses", "Profiles");
+
+            entity.HasKey(e => e.EmidsCourseId);
+            entity.ToTable("EmployeeCourses", "Profiles");
 
             entity.Property(e => e.CourseCompletionDate).HasColumnType("date");
             entity.Property(e => e.EmployeeId).HasMaxLength(12);
@@ -258,14 +258,15 @@ public partial class MarketplaceContext : DbContext
 
         modelBuilder.Entity<ShortlistedSkill>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("ShortlistedSkills", "Assignments");
+            entity.HasKey(e => e.Id);
+            entity.ToTable("ShortlistedSkills", "Assignments");
 
-            entity.Property(e => e.ShortlistedEmployeeId).HasMaxLength(12);
+            //entity.Property(e => e.ShortlistedEmployeeId).HasMaxLength(12);
+            entity.Property(e => e.ShortlistsId);
+            entity.Property(e => e.EmployeeSkillId);           
 
-            entity.HasOne(d => d.ShortlistedSkillNavigation).WithMany()
-                .HasForeignKey(d => d.ShortlistedSkillId)
+            entity.HasOne(d => d.EmployeesSkill).WithMany()
+                .HasForeignKey(d => d.EmployeeSkillId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ShortlistedSkills_EmployeesSkills");
 
