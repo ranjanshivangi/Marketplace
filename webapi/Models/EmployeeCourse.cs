@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MarketplaceAPI.Models;
 
@@ -19,7 +22,9 @@ public partial class EmployeeCourse
 
     public byte NonEmidsCourseType { get; set; }
 
+    [JsonIgnore]
     public virtual EmidsCourse EmidsCourse { get; set; } = null!;
 
+    [JsonIgnore]
     public virtual Employee Employee { get; set; } = null!;
 }
