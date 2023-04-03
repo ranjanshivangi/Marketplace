@@ -1,0 +1,73 @@
+[
+    {
+        "rrNumber" : "RR/20/2022",
+        "DMEmployeeId" : "INEMP1256",
+        "AccountName" : "ClarisHealth",
+        "ProjectName" : "Data Engineering Launchpad",
+        "LoggedTime" : "2022-09-12",
+        "Employee" : [
+            {
+                "empName" : "Shivangi Ranjan",
+                "status" : "Proposed"
+            },
+            {
+                "empName" : "Shuthin Sateesh",
+                "status" : "Shortlist"
+            },
+            {
+                "empName" : "Subham Das",
+                "status" : "Shortlist"
+            }
+        ]
+    },
+    {
+        "rrNumber" : "RR/21/2022",
+        "DMEmployeeId" : "INEMP1256",
+        "AccountName" : "ClarisHealth",
+        "ProjectName" : "Data Engineering Launchpad",
+        "LoggedTime" : "2022-09-12",
+        "Employee" : [
+            {
+                "empName" : "Ranjana Singh",
+                "status" : "Proposed"
+            },
+            {
+                "empName" : "Sagar Sahay",
+                "status" : "Proposed"
+            }            
+        ]
+    },
+    {
+        "rrNumber" : "RR/22/2022",
+        "DMEmployeeId" : "INEMP1256",
+        "AccountName" : "ClarisHealth",
+        "ProjectName" : "Data Engineering Launchpad",
+        "LoggedTime" : "2022-09-12",
+        "Employee" : [
+            {
+                "empName" : "Ankur Mishra",
+                "status" : "Allocated"
+            }           
+        ]
+    },
+    {
+        "rrNumber" : "RR/23/2022",
+        "DMEmployeeId" : "INEMP1256",
+        "AccountName" : "Blue Health Intelligence",
+        "ProjectName" : "HC Automation Launchpad",
+        "LoggedTime" : "2023-10-12",
+        "Employee" : [
+                 
+        ]
+    },
+    {
+        "rrNumber" : "RR/24/2022",
+        "DMEmployeeId" : "INEMP1256",
+        "AccountName" : "Blue Health Intelligence",
+        "ProjectName" : "HC Automation Launchpad",
+        "LoggedTime" : "2023-10-12",
+        "Employee" : [                   
+        ]
+    }
+    
+]

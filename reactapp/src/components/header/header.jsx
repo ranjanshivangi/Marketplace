@@ -7,6 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import InventoryOutlinedIcon from '@mui/icons-material/InventoryOutlined';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router";
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
@@ -28,6 +29,9 @@ const Header = () => {
 
     const onClickingProfile =()=>{
         navigate(`/profile/${id}`);
+    }
+    const onClickingMyRR = () => {
+        navigate('/myrr');
     }
     return (
         <AppBar className="header">
@@ -54,6 +58,10 @@ const Header = () => {
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingEmployees}>
                         <PeopleAltIcon htmlColor="grey" fontSize="large" />
                         <span className="iconstext">Employees</span>
+                    </IconButton>
+                    <IconButton size="medium" color="inherit" className="icon" onClick={onClickingMyRR}>
+                        <InventoryOutlinedIcon htmlColor="grey" fontSize="large" />
+                        <span className="iconstext">My RRs</span>
                     </IconButton>
                     <IconButton size="medium" color="inherit" className="icon" onClick={onClickingShortlist}>
                         <CreditScoreIcon htmlColor="grey" fontSize="large" />

@@ -1,0 +1,15 @@
+.rr-card {
+  width: 70%;
+  height: auto;
+  .rr-tree-account {
+    color: #03286d;
+    .rr-tree-box{
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;        
+    }
+    .rr-tree-details {
+      color: gray;
+    }
+  }
+}
