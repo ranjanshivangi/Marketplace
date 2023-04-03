@@ -118,10 +118,10 @@ namespace Marketplace.Controllers
         // POST: api/EmployeeCourses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("{employeeId}")]
-        public async Task<ActionResult<EmployeeCourse>> PostEmployeeCourse(string employeeId, EmployeeCourseDAO employeeCourses)
+        public async Task<ActionResult<EmployeeCourse>> PostEmployeeCourse(string employeeId, [FromBody] EmployeeCourseDAO employeeCourses)
         {
 
-            var employee = _context.Employees.Find(employeeCourses.EmployeeId);
+            var employee = _context.Employees.Find(employeeId);
             var emidsCourse = _context.EmidsCourses.Find(employeeCourses.EmidsCourseId);
             var employeeCourseAvailable = _context.EmployeeCourses.Where(employeecourse => employeecourse.EmployeeId == employeeId
                                                                  && employeecourse.EmidsCourseId == employeeCourses.EmidsCourseId)
@@ -143,7 +143,7 @@ namespace Marketplace.Controllers
             {
                 Employee = employee,
                 EmidsCourse = emidsCourse,
-                EmployeeId = employeeCourses.EmployeeId,
+                EmployeeId = employeeId,
                 IsEmidsCourse = employeeCourses.IsEmidsCourse,
                 EmidsCourseId = (int)employeeCourses.EmidsCourseId,
                 CourseCompletionDate = (DateTime)employeeCourses.CourseCompletionDate,
