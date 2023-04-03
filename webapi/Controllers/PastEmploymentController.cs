@@ -24,7 +24,7 @@ namespace Marketplace.Controllers
 
         // GET: api/EmployementHistories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PastEmployment>>> GetEmployementHistories()
+        public async Task<ActionResult<IEnumerable<PastEmployment>>> GetPastEmployment()
         {
             if (_context.PastEmployments == null)
             {
@@ -32,10 +32,9 @@ namespace Marketplace.Controllers
             }
             return await _context.PastEmployments.ToListAsync();
         }
-
         // GET: api/EmployementHistories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<PastEmployment>>> GetEmployementHistory(string id)
+        public async Task<ActionResult<IEnumerable<PastEmployment>>> GetPastEmployment(string id)
         {
             if (_context.PastEmployments == null)
             {
@@ -49,15 +48,14 @@ namespace Marketplace.Controllers
             return employementHistory;
         }
 
-       
 
         // POST: api/EmployementHistories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<PastEmployment>> PostEmployementHistory(PastEmploymentDAO pastEmployment)
+        [HttpPost("{employeeId}")]
+        public async Task<ActionResult<PastEmployment>> PostPastEmployment(string employeeId,[FromBody]PastEmploymentDAO pastEmployment)
         {
            
-            var employee = _context.Employees.Find(pastEmployment.EmployeeId);
+            var employee = _context.Employees.Find(employeeId);
             if (employee == null)
             {
                 return NotFound();
@@ -65,7 +63,7 @@ namespace Marketplace.Controllers
             var pastEmploymentHistory = new PastEmployment
             {
                 Employee = employee,
-                EmployeeId = pastEmployment.EmployeeId,
+                EmployeeId = employeeId,
                 XemployeerId = pastEmployment.XemployeerId,
                 XemployeerCompanyName = pastEmployment.XemployeerCompanyName,
                 XstartDesignation = pastEmployment.XstartDesignation,
@@ -83,24 +81,10 @@ namespace Marketplace.Controllers
             }
             catch (DbUpdateException)
             {
-                if (EmployementHistoryExists(pastEmployment.XemployeerId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
-            return CreatedAtAction("GetEmployementHistory", new { id = pastEmployment.XemployeerId }, pastEmployment);
-        }
-
-    
-
-        private bool EmployementHistoryExists(int id)
-        {
-            return (_context.PastEmployments?.Any(e => e.XemployeerId == id)).GetValueOrDefault();
+            return CreatedAtAction("PostPastEmployment", new { id = pastEmployment.EmployeeId }, pastEmployment);
         }
     }
 }
