@@ -161,6 +161,7 @@ const Profile = () => {
     const getSkills = () => {
         getEmployeeSkills(id)
             .then((res) => {
+                console.log(res);
                 setSkills(res.data);
             })
             .catch((err) => {
@@ -264,19 +265,21 @@ const Profile = () => {
 
     let value;
     const ratings = (skills) => {
-        if (skills.proficiency === "Beginner") {
-            return 1;
+        switch (skills){
+            case "Beginner": return 1;
+            case "Intermediate": return 2;
+            case "Advance": return 3;
+            case "Expert": return 4;
         }
-        else if (skills.proficiency === "Intermediate") {
-            return 2;
-        }
-        else if (skills.proficiency === "Advance") {
-            return 3;
-        }
-        else if (skills.proficiency === "Expert") {
-            return 4;
-        }
+        
     }    
+    const status = (value) => {
+        switch (value){
+            case 1: return "Available";
+            case 2: return "Proposed";            
+        }
+        
+    }  
     
     const handleEditSkill = () => {
         navigate(`/profile/skill/${id}`);
@@ -320,7 +323,7 @@ const Profile = () => {
                                 }</div>
                                 <div className="des">{profile.designation} | {profile.employeeId}</div>
                                 <div className="para-containter para-containte">
-                                    <div className="para"><span className="p1" >Status:</span> <span className="p2" >{profile.status}</span></div>
+                                    <div className="para"><span className="p1" >Status:</span> <span className="p2" >{status(profile.status)}</span></div>
                                     <div className="para"><span className="p1" >Manager:</span><span className="p2"> {profile.currentManager
                                     }</span></div>
                                     <div className="para"><span className="p1" >Project:</span><span className="p2" > {profile.currentProject}</span></div>
@@ -376,12 +379,11 @@ const Profile = () => {
 
                         <List dense={true} disablePadding={true}>
                             {skills.map((skill) => (
-                                value = ratings(skill),
+                                value = ratings(skill.proficiency),
                                 <ListItem secondaryAction={
                                     <Rating name="read-only" size="small" value={value
                                     } readOnly max={4} />}>
-                                    <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
-                                        } yrs, ${skill.lastUsed
+                                    <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experienceInMonths} months, ${new Date(skill.lastUsed).toLocaleDateString()
                                         })`}</span>} />
                                 </ListItem>
                             ))}
