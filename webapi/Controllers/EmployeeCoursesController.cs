@@ -48,11 +48,13 @@ namespace Marketplace.Controllers
                               where employeeCourses.EmployeeId == id
                               select new EmployeeCourseDTO
                               {
-                                  CourseID = employeeCourses.EmidsCourseId,
+                                  EmidsCourseId = employeeCourses.EmidsCourseId,
+                                  IsEmidsCourse= employeeCourses.IsEmidsCourse,
                                   CourseName = emidsCourses.CourseName,
                                   CourseCompletionDate = employeeCourses.CourseCompletionDate,
-                                  CoursePlatform = emidsCourses.CoursePlatform,
-                                  CourseType = emidsCourses.CourseType
+                                  NonEmidsCourseName= employeeCourses.NonEmidsCourseName,
+                                  NonEmidsCoursePlatform = employeeCourses.NonEmidsCoursePlatform,
+                                  NonEmidsCourseType = employeeCourses.NonEmidsCourseType
                               }).ToListAsync();
             return data;
         }

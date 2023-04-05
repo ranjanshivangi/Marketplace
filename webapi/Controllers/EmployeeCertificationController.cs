@@ -48,11 +48,12 @@ namespace Marketplace.Controllers
                               where employeeCertification.EmployeeId == id
                               select new EmployeeCertificationDTO
                               {
-                                  CertificationID = employeeCertification.StandardCertificateId,
-                                  CertificationsName = standardCertification.CertificateName,
+                                  StandardCertificateId = employeeCertification.StandardCertificateId,
+                                  CertificateName = standardCertification.CertificateName,
                                   CertificationsCompletionDate = employeeCertification.CertificationsCompletionDate,
-                                  CertificationsFrom = standardCertification.Issuer,
-                                  CertificationsType = standardCertification.CertificateType
+                                  NonStandardCertificateName = employeeCertification.NonStandardCertificateName,
+                                  NonStandardIssuer = employeeCertification.NonStandardIssuer,
+                                  NonStandardCertificateType = employeeCertification.NonStandardCertificateType
                               }).ToListAsync();
             return data;
         }
