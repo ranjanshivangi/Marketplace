@@ -314,7 +314,7 @@ const Profile = () => {
                         </Grid>
                         <Grid item xs={12} sm={6} md={6} style={{ height: 'auto' }}>
                             <div className="Name">
-                                <div className='name-header'>{profile.name
+                                <div className='name-header'>{profile.employeeName
                                 }</div>
                                 <div className="des">{profile.designation} | {profile.employeeId}</div>
                                 <div className="para-containter para-containte">
