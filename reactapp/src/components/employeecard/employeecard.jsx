@@ -16,7 +16,6 @@ import { getEmployeeSkills } from "../../services/skillService";
 
 
 const EmployeeCard = (props) => {
-    const { id } = useParams();
     const [skills, setSkill] = React.useState([]);
 
     React.useEffect(() => {
@@ -25,8 +24,7 @@ const EmployeeCard = (props) => {
     const getSkill = () => {
         getEmployeeSkills(props.employeeObj.employeeId)
             .then((res) => {
-                setSkill(res.data);
-                console.log(res.data)
+                setSkill(res.data);                
             })
             .catch((err) => {
                 console.log(err);

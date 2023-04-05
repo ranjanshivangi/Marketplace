@@ -161,11 +161,9 @@ const Profile = () => {
     const getSkills = () => {
         getEmployeeSkills(id)
             .then((res) => {
-                console.log(res);
                 setSkills(res.data);
             })
             .catch((err) => {
-                console.log(err);
                 const errObj = {
                     message: err.message,
                     code: err.code,
@@ -182,7 +180,6 @@ const Profile = () => {
                 setCertificates(res.data);
             })
             .catch((err) => {
-                console.log(err);
                 const errObj = {
                     message: err.message,
                     code: err.code,
@@ -196,7 +193,6 @@ const Profile = () => {
     const getCourses = () => {
         getEmployeeCourses(id)
             .then((res) => {
-                console.log(res);
                 setCourses(res.data);
             })
             .catch((err) => {
