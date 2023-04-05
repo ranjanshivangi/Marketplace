@@ -195,6 +195,7 @@ const Profile = () => {
     const getCourses = () => {
         getEmployeeCourses(id)
             .then((res) => {
+                console.log(res);
                 setCourses(res.data);
             })
             .catch((err) => {
@@ -222,7 +223,7 @@ const Profile = () => {
                     url: err.config.url
                 }
                 setErrorList([...errorList, errObj]);
-               
+
             })
     }
 
@@ -275,7 +276,8 @@ const Profile = () => {
         else if (skills.proficiency === "Expert") {
             return 4;
         }
-    }
+    }    
+    
     const handleEditSkill = () => {
         navigate(`/profile/skill/${id}`);
     }
@@ -395,12 +397,26 @@ const Profile = () => {
                         </div>
 
                         <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
-                            {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
-                                <ListItemText primary={course.courseName} />{openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit><List component="div" disablePadding > <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
-                                    }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseCompletionDate
-                                        }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- from ${course.courseFrom
-                                            }`} /></List>
-                                </Collapse></>))}
+                            {courses.map((course, index) => (
+                                <>
+                                    <ListItemButton onClick={() => handleCourse(index)}>
+                                        <ListItemText primary={course.isEmidsCourse === 1 ? `${course.courseName}` : `${course.nonEmidsCourseName}`} />
+                                        {openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}
+                                    </ListItemButton>
+                                    <Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit>
+                                        <List component="div" disablePadding >
+                                            {course.isEmidsCourse === 1 ? <>
+                                                <ListItemText sx={{ pl: 4 }} secondary="Internal"/>
+                                                <ListItemText sx={{ pl: 4 }} secondary={new Date(course.courseCompletionDate).toLocaleDateString()} />
+                                            </> : <>
+                                                <ListItemText sx={{ pl: 4 }} secondary="External" />
+                                                <ListItemText sx={{ pl: 4 }} secondary={new Date(course.courseCompletionDate).toLocaleDateString()} />
+                                                <ListItemText sx={{ pl: 4 }} secondary={`from ${course.nonEmidsCoursePlatform}`} />
+                                            </>}
+
+                                        </List>
+                                    </Collapse>
+                                </>))}
                         </List>
 
                     </Grid>
