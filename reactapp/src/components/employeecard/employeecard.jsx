@@ -16,7 +16,6 @@ import { getEmployeeSkills } from "../../services/skillService";
 
 
 const EmployeeCard = (props) => {
-    const { id } = useParams();
     const [skills, setSkill] = React.useState([]);
 
     React.useEffect(() => {
@@ -25,8 +24,7 @@ const EmployeeCard = (props) => {
     const getSkill = () => {
         getEmployeeSkills(props.employeeObj.employeeId)
             .then((res) => {
-                setSkill(res.data);
-                console.log(res.data)
+                setSkill(res.data);                
             })
             .catch((err) => {
                 console.log(err);
@@ -38,9 +36,16 @@ const EmployeeCard = (props) => {
     const handleKnowMore = () => {
         navigate(`/profile/${props.employeeObj.employeeId}`);
     }
+    const status = (value) => {
+        switch (value) {
+            case 1: return "Available";
+            case 2: return "Proposed";
+        }
+
+    }
 
     return (
-        <Card sx={{ ':hover': { boxShadow: 10 }, height: '400px', width: '300px', borderRadius: '10px' }}>
+        <Card sx={{ ':hover': { boxShadow: 10 }, height: '370px', width: '300px', borderRadius: '10px' }}>
             <Box className="cardheader">
                 <Avatar alt={props.employeeObj.employeeName} src={empProfileImgPath} sx={{ width: 100, height: 100 }} />
 
@@ -51,29 +56,20 @@ const EmployeeCard = (props) => {
                 </div>
             </Box>
             <CardContent className="empcontent">
+
                 <Typography color="text.secondary" variant="body2" component="div">
-                    {props.employeeObj.emailId}
+                    Status : {status(props.employeeObj.status)}
                 </Typography>
+               
                 <Typography color="text.secondary" variant="body2" component="div">
                     Location: {props.employeeObj.location}
                 </Typography>
-                <Typography color="text.secondary" variant="body2" component="div">
-                    Status : {(() => {
-                        switch (props.employeeObj.status) {
-                            case 0: return "Available";
-                            case 1: return "Not available";
-                            case 2: return "Proposed";
-                            default: return "";
-                        }
-                    })()}
-
-                </Typography>
                 <Typography color="text.secondary" variant="body2" component="div" style={{ display: 'flex', flexDirection: 'row' }}>
-                    Skills:<List dense={true} disableGutters={true} disablePadding={true} style={{ display: 'flex', flexDirection: 'row' }}>
+                    Skills: &nbsp; <List dense={true} disableGutters={true} disablePadding={true} style={{ display: 'flex', flexDirection: 'row' }}>
                         {skills.map((skill, index) => (<React.Fragment key={index}>
                             {index !== 0 && ", "}
                             <ListItemText primary={skill.skillName} style={{ fontSize: '10px', marginTop: '0px' }} />
-                           
+
                         </React.Fragment>
                         ))}
                     </List>

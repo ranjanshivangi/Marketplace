@@ -164,7 +164,6 @@ const Profile = () => {
                 setSkills(res.data);
             })
             .catch((err) => {
-                console.log(err);
                 const errObj = {
                     message: err.message,
                     code: err.code,
@@ -181,7 +180,6 @@ const Profile = () => {
                 setCertificates(res.data);
             })
             .catch((err) => {
-                console.log(err);
                 const errObj = {
                     message: err.message,
                     code: err.code,
@@ -222,7 +220,7 @@ const Profile = () => {
                     url: err.config.url
                 }
                 setErrorList([...errorList, errObj]);
-               
+
             })
     }
 
@@ -263,19 +261,22 @@ const Profile = () => {
 
     let value;
     const ratings = (skills) => {
-        if (skills.proficiency === "Beginner") {
-            return 1;
+        switch (skills){
+            case "Beginner": return 1;
+            case "Intermediate": return 2;
+            case "Advance": return 3;
+            case "Expert": return 4;
         }
-        else if (skills.proficiency === "Intermediate") {
-            return 2;
+        
+    }    
+    const status = (value) => {
+        switch (value){
+            case 1: return "Available";
+            case 2: return "Proposed";            
         }
-        else if (skills.proficiency === "Advance") {
-            return 3;
-        }
-        else if (skills.proficiency === "Expert") {
-            return 4;
-        }
-    }
+        
+    }  
+    
     const handleEditSkill = () => {
         navigate(`/profile/skill/${id}`);
     }
@@ -318,7 +319,7 @@ const Profile = () => {
                                 }</div>
                                 <div className="des">{profile.designation} | {profile.employeeId}</div>
                                 <div className="para-containter para-containte">
-                                    <div className="para"><span className="p1" >Status:</span> <span className="p2" >{profile.status}</span></div>
+                                    <div className="para"><span className="p1" >Status:</span> <span className="p2" >{status(profile.status)}</span></div>
                                     <div className="para"><span className="p1" >Manager:</span><span className="p2"> {profile.currentManager
                                     }</span></div>
                                     <div className="para"><span className="p1" >Project:</span><span className="p2" > {profile.currentProject}</span></div>
@@ -374,12 +375,11 @@ const Profile = () => {
 
                         <List dense={true} disablePadding={true}>
                             {skills.map((skill) => (
-                                value = ratings(skill),
+                                value = ratings(skill.proficiency),
                                 <ListItem secondaryAction={
                                     <Rating name="read-only" size="small" value={value
                                     } readOnly max={4} />}>
-                                    <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experience
-                                        } yrs, ${skill.lastUsed
+                                    <ListItemText primary={skill.skillName} secondary={<span className="skilldetail">{` (${skill.experienceInMonths} months, ${new Date(skill.lastUsed).toLocaleDateString()
                                         })`}</span>} />
                                 </ListItem>
                             ))}
@@ -395,12 +395,26 @@ const Profile = () => {
                         </div>
 
                         <List style={{ fontSize: '12px' }} dense={true} disableGutters={true} disablePadding={true} >
-                            {courses.map((course, index) => (<><ListItemButton onClick={() => handleCourse(index)}>
-                                <ListItemText primary={course.courseName} />{openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}</ListItemButton><Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit><List component="div" disablePadding > <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseType
-                                    }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- ${course.courseCompletionDate
-                                        }`} /> <ListItemText sx={{ pl: 4 }} secondary={`- from ${course.courseFrom
-                                            }`} /></List>
-                                </Collapse></>))}
+                            {courses.map((course, index) => (
+                                <>
+                                    <ListItemButton onClick={() => handleCourse(index)}>
+                                        <ListItemText primary={course.isEmidsCourse === 1 ? `${course.courseName}` : `${course.nonEmidsCourseName}`} />
+                                        {openForCourse.includes(index) ? <ExpandLess /> : <ExpandMore />}
+                                    </ListItemButton>
+                                    <Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit>
+                                        <List component="div" disablePadding >
+                                            {course.isEmidsCourse === 1 ? <>
+                                                <ListItemText sx={{ pl: 4 }} secondary="Internal"/>
+                                                <ListItemText sx={{ pl: 4 }} secondary={new Date(course.courseCompletionDate).toLocaleDateString()} />
+                                            </> : <>
+                                                <ListItemText sx={{ pl: 4 }} secondary="External" />
+                                                <ListItemText sx={{ pl: 4 }} secondary={new Date(course.courseCompletionDate).toLocaleDateString()} />
+                                                <ListItemText sx={{ pl: 4 }} secondary={`from ${course.nonEmidsCoursePlatform}`} />
+                                            </>}
+
+                                        </List>
+                                    </Collapse>
+                                </>))}
                         </List>
 
                     </Grid>
