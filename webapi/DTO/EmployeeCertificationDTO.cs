@@ -6,6 +6,7 @@
 
         public byte IsStandardCertificate { get; set; }
         public int StandardCertificateId { get; set; }
+        public string? StandardIssuer { get; set; }
         public DateTime CertificationsCompletionDate { get; set; }
         public string NonStandardCertificateName { get; set; }
         public string NonStandardIssuer{ get; set; }

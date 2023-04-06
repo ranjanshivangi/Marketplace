@@ -177,9 +177,11 @@ const Profile = () => {
     const getCertificates = () => {
         getEmployeeCertificates(id)
             .then((res) => {
+                console.log("-------", res);
                 setCertificates(res.data);
             })
             .catch((err) => {
+                console.log("-------", err);
                 const errObj = {
                     message: err.message,
                     code: err.code,
@@ -209,6 +211,7 @@ const Profile = () => {
     const experience = () => {
         getEmployeeHistory(id)
             .then((res) => {
+                console.log("--------", res);
                 setHistory(res.data);
             })
             .catch((err) => {
@@ -261,22 +264,23 @@ const Profile = () => {
 
     let value;
     const ratings = (skills) => {
-        switch (skills){
+        switch (skills) {
             case "Beginner": return 1;
             case "Intermediate": return 2;
             case "Advance": return 3;
             case "Expert": return 4;
         }
-        
-    }    
+
+    }
     const status = (value) => {
-        switch (value){
+        switch (value) {
+            case 0: return "Unavailable";
             case 1: return "Available";
-            case 2: return "Proposed";            
+            case 2: return "Proposed";
         }
-        
-    }  
-    
+
+    }
+
     const handleEditSkill = () => {
         navigate(`/profile/skill/${id}`);
     }
@@ -404,7 +408,7 @@ const Profile = () => {
                                     <Collapse in={openForCourse.includes(index)} timeout="auto" unmountOnExit>
                                         <List component="div" disablePadding >
                                             {course.isEmidsCourse === 1 ? <>
-                                                <ListItemText sx={{ pl: 4 }} secondary="Internal"/>
+                                                <ListItemText sx={{ pl: 4 }} secondary="Internal" />
                                                 <ListItemText sx={{ pl: 4 }} secondary={new Date(course.courseCompletionDate).toLocaleDateString()} />
                                             </> : <>
                                                 <ListItemText sx={{ pl: 4 }} secondary="External" />
@@ -429,17 +433,20 @@ const Profile = () => {
                         <List dense={true} disableGutters disablePadding>
                             {certificates.map((certificate, index) => (<>
                                 <ListItemButton onClick={() => handleCertificate(index)}>
-                                    <ListItemText primary={certificate.certificationsName
-                                    } />
+                                    <ListItemText primary={certificate.isStandardCertificate === 1 ? `${certificate.certificateName}` : `${certificate.nonStandardCertificateName}`} />
                                     {openForCertificate.includes(index) ? <ExpandLess /> : <ExpandMore />}
                                 </ListItemButton>
                                 <Collapse in={openForCertificate.includes(index)} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding>
-                                        <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsType
-                                            }`} />
-                                        <ListItemText sx={{ pl: 4 }} secondary={`- ${certificate.certificationsCompletionDate}`} />
-                                        <ListItemText sx={{ pl: 4 }} secondary={`- from ${certificate.certificationsFrom
-                                            }`} />
+                                        {certificate.isStandardCertificate === 1 ? <>
+                                            <ListItemText sx={{ pl: 4 }} secondary="Internal" />
+                                            <ListItemText sx={{ pl: 4 }} secondary={new Date(certificate.certificationsCompletionDate).toLocaleDateString()} />
+                                            <ListItemText sx={{ pl: 4 }} secondary={`from ${certificate.standardIssuer}`} />
+                                        </> : <>
+                                            <ListItemText sx={{ pl: 4 }} secondary="External" />
+                                            <ListItemText sx={{ pl: 4 }} secondary={new Date(certificate.certificationsCompletionDate).toLocaleDateString()} />
+                                            <ListItemText sx={{ pl: 4 }} secondary={`from ${certificate.nonStandardIssuer}`} />
+                                        </>}
                                     </List>
                                 </Collapse> </>))}
                         </List>

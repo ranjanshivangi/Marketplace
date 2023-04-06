@@ -38,6 +38,7 @@ const EmployeeCard = (props) => {
     }
     const status = (value) => {
         switch (value) {
+            case 0: return "Unavailable";
             case 1: return "Available";
             case 2: return "Proposed";
         }

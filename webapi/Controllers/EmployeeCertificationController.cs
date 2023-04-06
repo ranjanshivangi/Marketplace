@@ -47,9 +47,10 @@ namespace Marketplace.Controllers
                               join standardCertification in _context.StandardCertificates on employeeCertification.StandardCertificateId equals standardCertification.CertificateId
                               where employeeCertification.EmployeeId == id
                               select new EmployeeCertificationDTO
-                              {
+                              { IsStandardCertificate = employeeCertification.IsStandardCertificate,
                                   StandardCertificateId = employeeCertification.StandardCertificateId,
                                   CertificateName = standardCertification.CertificateName,
+                                  StandardIssuer = standardCertification.Issuer,
                                   CertificationsCompletionDate = employeeCertification.CertificationsCompletionDate,
                                   NonStandardCertificateName = employeeCertification.NonStandardCertificateName,
                                   NonStandardIssuer = employeeCertification.NonStandardIssuer,
