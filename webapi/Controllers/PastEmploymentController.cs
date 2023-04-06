@@ -30,7 +30,9 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            return await _context.PastEmployments.ToListAsync();
+            return await _context.PastEmployments.AsNoTracking()
+               .AsQueryable()
+               .Include(m => m.Projects).ToListAsync();
         }
         // GET: api/EmployementHistories/5
         [HttpGet("{id}")]
@@ -40,8 +42,9 @@ namespace Marketplace.Controllers
             {
                 return NotFound();
             }
-            var employementHistory = await _context.PastEmployments
-            .Where(x => x.EmployeeId == id).ToListAsync(); if (employementHistory == null)
+            var employementHistory = await _context.PastEmployments.Include(m => m.Projects)
+            .Where(x => x.EmployeeId == id).ToListAsync(); 
+            if (employementHistory == null)
             {
                 return NotFound();
             }
@@ -62,7 +65,6 @@ namespace Marketplace.Controllers
             }
             var pastEmploymentHistory = new PastEmployment
             {
-                Employee = employee,
                 EmployeeId = employeeId,
                 XemployeerId = pastEmployment.XemployeerId,
                 XemployeerCompanyName = pastEmployment.XemployeerCompanyName,
