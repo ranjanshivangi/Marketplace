@@ -6,7 +6,7 @@ namespace MarketplaceAPI.DAO
 
 		public byte IsStandardCertificate { get; set; }
 
-		public int? StandardCertificateId { get; set; }
+        public int? StandardCertificateId { get; set; }
 
 		public DateTime? CertificationsCompletionDate { get; set; }
 
