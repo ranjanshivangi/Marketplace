@@ -160,7 +160,7 @@ public partial class MarketplaceContext : DbContext
 
         modelBuilder.Entity<PastEmployment>(entity =>
         {
-            entity.HasKey(e => new { e.EmployeeId, e.XemployeerId });
+            entity.HasKey(e => new { e.EmployeeId, e.XemployeerId }).HasName("PK_PastEmployments_1");
 
             entity.ToTable("PastEmployments", "Master");
 
@@ -171,7 +171,7 @@ public partial class MarketplaceContext : DbContext
             entity.Property(e => e.StartDate).HasColumnType("date");
             entity.Property(e => e.XemployeerCompanyName)
                 .HasMaxLength(50)
-                .HasColumnName("XEmployeerCompanyName");
+                .HasColumnName("XEMployeerCompanyName");
             entity.Property(e => e.XlastDesignation)
                 .HasMaxLength(50)
                 .HasColumnName("XLastDesignation");
@@ -179,18 +179,17 @@ public partial class MarketplaceContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("XStartDesignation");
 
-            entity.HasOne(d => d.Employee).WithMany(p => p.PastEmployments)
-                .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PastEmployments_Employees");
         });
 
         modelBuilder.Entity<Project>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Projects", "Profiles");
+            entity.HasKey(e => new { e.ProjectName, e.StartDate, e.XemployeerId }).HasName("PK_Projects_1");
 
+            entity.ToTable("Projects", "Profiles");
+
+            entity.Property(e => e.ProjectName).HasMaxLength(50);
+            entity.Property(e => e.StartDate).HasColumnType("date");
+            entity.Property(e => e.XemployeerId).HasColumnName("XEmployeerID");
             entity.Property(e => e.EmployeeId).HasMaxLength(12);
             entity.Property(e => e.EndDate).HasColumnType("date");
             entity.Property(e => e.IsXemployeerProject).HasColumnName("IsXEmployeerProject");
@@ -199,10 +198,10 @@ public partial class MarketplaceContext : DbContext
             entity.Property(e => e.Role).HasMaxLength(50);
             entity.Property(e => e.StartDate).HasColumnType("date");
 
-            entity.HasOne(d => d.Employee).WithMany()
-                .HasForeignKey(d => d.EmployeeId)
+            entity.HasOne(d => d.PastEmployment).WithMany(p => p.Projects)
+                .HasForeignKey(d => new { d.EmployeeId, d.XemployeerId })
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Projects_Employees");
+                .HasConstraintName("FK_Projects_PastEmployments");
         });
 
         modelBuilder.Entity<Rr>(entity =>

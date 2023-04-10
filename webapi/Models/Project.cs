@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace MarketplaceAPI.Models;
 
@@ -11,7 +12,7 @@ public partial class Project
 
     public byte IsXemployeerProject { get; set; }
 
-    public string? ProjectName { get; set; }
+    public string ProjectName { get; set; } = null!;
 
     public string Role { get; set; } = null!;
 
@@ -21,5 +22,7 @@ public partial class Project
 
     public string Notes { get; set; } = null!;
 
-    public virtual Employee Employee { get; set; } = null!;
+    public int XemployeerId { get; set; }
+    [JsonIgnore]
+    public virtual PastEmployment PastEmployment { get; set; } = null!;
 }
