@@ -179,10 +179,6 @@ public partial class MarketplaceContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("XStartDesignation");
 
-            entity.HasOne(d => d.Employee).WithMany(p => p.PastEmployments)
-                .HasForeignKey(d => d.EmployeeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_PastEmployments_Employees");
         });
 
         modelBuilder.Entity<Project>(entity =>
