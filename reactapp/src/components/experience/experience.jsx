@@ -7,9 +7,10 @@ import ListItemText from '@mui/material/ListItemText';
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
 import ReactReadMoreReadLess from "react-read-more-read-less";
 import { Divider } from "@mui/material";
-const Experience = ({ companyName, companyData }) => {
+const Experience = ({ companyData }) => {
+    console.log("data", companyData);
 
-    const uniqueRole = companyData.reduce((acc, cur) => {
+    const uniqueRole = companyData.projects.reduce((acc, cur) => {
         if (!acc.includes(cur.role)) {
             acc.push(cur.role);
         }
@@ -17,12 +18,13 @@ const Experience = ({ companyName, companyData }) => {
     }, []);
 
     return (
-        
+
         <div className="expbox">
-             
-            <div className="company">{companyName}</div>
+
+            <div className="company">{companyData.xemployeerCompanyName}</div>
             {uniqueRole.map((role) => {
-                const roleDetails = companyData.filter(item => item.role === role);
+                const roleDetails = companyData.projects.filter(item => item.role === role).sort((a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime());
+                console.log("role", roleDetails);
                 return <>
                     <List dense={true}>
                         <ListItemButton alignItems="flex-start">
@@ -37,18 +39,19 @@ const Experience = ({ companyName, companyData }) => {
                                         <span className="project-name">{details.projectName}</span>
                                         <span className="date">{new Date(details.startDate).toLocaleDateString()}-{new Date(details.endDate).toLocaleDateString()}</span>
                                         <ReactReadMoreReadLess
-                                            charLimit={100}
+                                            charLimit={85}
                                             readMoreText={"..see more"}
                                             readLessText={"..see less"}
                                             readMoreClassName="seemore"
                                             readLessClassName="seemore"
                                         >
-                                            {details.description}
+                                            {details.notes}
                                         </ReactReadMoreReadLess>
-                                        
+
                                     </div>
                                 ))
-                                } />
+                                }
+                            />
                         </ListItemButton>
                     </List>
                 </>

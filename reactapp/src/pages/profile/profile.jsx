@@ -177,11 +177,11 @@ const Profile = () => {
     const getCertificates = () => {
         getEmployeeCertificates(id)
             .then((res) => {
-                console.log("-------", res);
+                
                 setCertificates(res.data);
             })
             .catch((err) => {
-                console.log("-------", err);
+                
                 const errObj = {
                     message: err.message,
                     code: err.code,
@@ -211,8 +211,8 @@ const Profile = () => {
     const experience = () => {
         getEmployeeHistory(id)
             .then((res) => {
-                console.log("--------", res);
-                setHistory(res.data);
+                const sortedHistory = res.data.sort((a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime());
+                setHistory(sortedHistory);
             })
             .catch((err) => {
                 console.log(err);
@@ -254,13 +254,6 @@ const Profile = () => {
         }
 
     };
-
-    const uniqueCompanies = history.reduce((acc, cur) => {
-        if (!acc.includes(cur.companyName)) {
-            acc.push(cur.companyName);
-        }
-        return acc;
-    }, []);
 
     let value;
     const ratings = (skills) => {
@@ -459,12 +452,10 @@ const Profile = () => {
                             </div>
 
                         </Grid>
-                        {uniqueCompanies.map((company) => {
-                            const companyData = history.filter(item => item.companyName === company).sort((a, b) => a.endDate - b.endDate);
+                        {history.map((company) => {                            
                             return <>
                                 <Grid item xs={12} sm={6} md={4} style={{ height: 'auto' }} padding={1}>
-
-                                    <Experience companyName={company} companyData={companyData} />
+                                    <Experience companyData={company} />
                                 </Grid>
                             </>
                         })}
